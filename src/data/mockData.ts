@@ -1,0 +1,882 @@
+import { Product, Lead, AutomationConfig, SipPlan } from '../types';
+
+export const HERO_IMAGE = '/src/assets/images/hero_rudraksha_sacred_1790918119556.jpg';
+export const SIDDH_MALA_IMAGE = '/src/assets/images/product_siddh_mala_1790918137119.jpg';
+export const EK_MUKHI_IMAGE = '/src/assets/images/product_ek_mukhi_1790918154580.jpg';
+export const GAURI_SHANKAR_IMAGE = '/src/assets/images/product_gauri_shankar_1790918171364.jpg';
+export const ASTROLOGY_IMAGE = '/src/assets/images/astrology_kundli_consult_1790918294463.jpg';
+
+// Real user-uploaded photo assets
+export const SOUTH_DANA_IMAGE = '/src/assets/images/ek_mukhi_south_dana_1790919535895.jpg';
+export const RED_CORAL_IMAGE = '/src/assets/images/red_coral_capsule_1790919549818.jpg';
+export const JAPA_MALA_IMAGE = '/src/assets/images/nepali_japa_mala_1790919561952.jpg';
+
+// Helper to determine discount tier based on user rule:
+// < 10,000 -> 10%
+// 10,000 - 100,000 -> 15%
+// >= 100,000 -> 25%
+export function getDiscountTier(price: number): '10%' | '15%' | '25%' {
+  if (price >= 100000) return '25%';
+  if (price >= 10000) return '15%';
+  return '10%';
+}
+
+export function getCouponCode(price: number): string {
+  if (price >= 100000) return 'KANHA25';
+  if (price >= 10000) return 'KANHA15';
+  return 'KANHA10';
+}
+
+export const PRODUCTS: Product[] = [
+  // 1 MUKHI (ROUND NEPALI)
+  {
+    id: 'prod-1-mukhi-nepali',
+    name: '1 Mukhi (Ek Mukhi) Gol Dana Nepali Rudraksha',
+    hindiName: 'एक मुखी नेपाली रुद्राक्ष (प्राकृतिक गोल दाना)',
+    category: 'nepali',
+    price: 35000,
+    originalPrice: 48000,
+    mukhiCount: '1 Mukhi',
+    rulingDeity: 'Lord Shiva (Paramashiva)',
+    rulingPlanet: 'Sun (Surya Dev)',
+    primaryBenefit: 'Supreme cosmic consciousness, ultimate leadership authority & spiritual liberation',
+    mantra: 'Om Hreem Namah',
+    description: 'The holiest and rarest bead in Vedic scriptures. Single prominent furrow with one internal seed compartment verified by X-Ray. Accompanied by official Kanha Asa ISO 9001:2015 report.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday morning during Brahma Muhurta',
+    origin: 'Himalayan Ridge, Nepal',
+    sipAvailable: true,
+    sipMonthly: 2999,
+    certificateNumber: 'KA0102202601F',
+    weightGms: '04.18Gms',
+    dimensionsMm: '22mm',
+    xrayCompartments: '1 Natural Compartment with Seed',
+    discountTier: '15%'
+  },
+
+  // 1 MUKHI (SOUTH DANA IN SILVER TRINETRA CASING)
+  {
+    id: 'prod-1-mukhi-south-dana',
+    name: '1 Mukhi Half-Moon (South Dana) in 925 Silver Trinetra Casing',
+    hindiName: 'एक मुखी अर्धचन्द्राकार (साउथ दाना) त्रिनेत्र रजत पेंडेंट',
+    category: 'nepali',
+    price: 3800,
+    originalPrice: 5500,
+    mukhiCount: '1 Mukhi (Half-Moon)',
+    rulingDeity: 'Lord Shiva (Trinetra)',
+    rulingPlanet: 'Sun (Surya Dev)',
+    primaryBenefit: 'Deep mental focus, concentration, removes past karmic bondages & fear',
+    mantra: 'Om Namah Shivaya',
+    description: 'Natural crescent half-moon shaped Ek Mukhi bead encased in handmade solid 925 sterling silver frame adorned with the sacred Shiva Third Eye (Trinetra) carving. ISO certified.',
+    image: SOUTH_DANA_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday morning',
+    origin: 'Rameshwaram / South Himalayan Foothills',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0102202601S',
+    weightGms: '03.85Gms',
+    dimensionsMm: '26mm',
+    xrayCompartments: '1 Natural Crescent Compartment',
+    discountTier: '10%'
+  },
+
+  // 2 MUKHI
+  {
+    id: 'prod-2-mukhi',
+    name: '2 Mukhi (Do Mukhi) Nepali Rudraksha',
+    hindiName: 'दो मुखी नेपाली रुद्राक्ष (अर्धनारीश्वर)',
+    category: 'nepali',
+    price: 3200,
+    originalPrice: 4800,
+    mukhiCount: '2 Mukhi',
+    rulingDeity: 'Ardhanarishvara (Shiva & Shakti)',
+    rulingPlanet: 'Moon (Chandra Dev)',
+    primaryBenefit: 'Unifies mind & soul, heals relationships, removes emotional mood swings',
+    mantra: 'Om Namah',
+    description: 'Represents the divine union of Lord Shiva and Goddess Parvati. Blessed for peace of mind, marital bonding, and overcoming depression or lunar doshas.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0202202602F',
+    weightGms: '03.50Gms',
+    dimensionsMm: '19mm',
+    xrayCompartments: '2 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 3 MUKHI COMBINATION PENDANT
+  {
+    id: 'prod-3-mukhi-silver',
+    name: '3 Mukhi (Teen Mukhi) Nepali Silver Capped Auspicious Trinetra',
+    hindiName: 'तीन मुखी नेपाली रुद्राक्ष (अग्नि देव) शुद्ध रजत कैपिंग',
+    category: 'combination',
+    price: 2600,
+    originalPrice: 3800,
+    mukhiCount: '3 Mukhi',
+    rulingDeity: 'Lord Agni (Fire God)',
+    rulingPlanet: 'Mars (Mangal Dev)',
+    primaryBenefit: 'Destroys past sins, burns lethargy, boosts self-confidence & cleanses digestive fire',
+    mantra: 'Om Kleem Namah',
+    description: 'Consecrated 3 Mukhi Nepali bead set in 925 sterling silver caps with auspicious red braided thread and golden-red silk tassel. Eliminates inferiority complex and fear.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Tuesday or Sunday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0302202603F',
+    weightGms: '03.90Gms',
+    dimensionsMm: '18mm',
+    xrayCompartments: '3 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 4 MUKHI
+  {
+    id: 'prod-4-mukhi',
+    name: '4 Mukhi (Char Mukhi) Nepali Rudraksha',
+    hindiName: 'चार मुखी नेपाली रुद्राक्ष (ब्रह्मा स्वरूप)',
+    category: 'nepali',
+    price: 1800,
+    originalPrice: 2800,
+    mukhiCount: '4 Mukhi',
+    rulingDeity: 'Lord Brahma',
+    rulingPlanet: 'Mercury (Budh Dev)',
+    primaryBenefit: 'Sharp intellect, memory retention, public speaking mastery & academic excellence',
+    mantra: 'Om Hreem Namah',
+    description: 'Blessed by the four-headed Lord Brahma. Ideal for students, researchers, teachers, and lawyers seeking enhanced intellectual creativity and vocal eloquence.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Wednesday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0402202604F',
+    weightGms: '03.70Gms',
+    dimensionsMm: '18mm',
+    xrayCompartments: '4 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 5 MUKHI (108 JAPA MALA)
+  {
+    id: 'prod-5-mukhi-japa-mala',
+    name: '108+1 Authentic Nepali Rudraksha Japa Mala with Tassel',
+    hindiName: '108+1 मनकों की शुद्ध नेपाली जप माला (लाल-पीली फुंदना)',
+    category: 'mala',
+    price: 3400,
+    originalPrice: 5000,
+    mukhiCount: '5 Mukhi (108 Beads)',
+    rulingDeity: 'Kalagni Rudra',
+    rulingPlanet: 'Jupiter (Brihaspati)',
+    primaryBenefit: 'Lowers blood pressure, controls anxiety, profound meditation & Mahamrityunjaya Japa',
+    mantra: 'Om Hreem Namah',
+    description: 'Traditional 108+1 hand-selected Nepali Rudraksha beads (8mm-10mm) individually hand-knotted in red sacred thread with auspicious yellow-red tassel. 100% genuine.',
+    image: JAPA_MALA_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Any day after morning bath',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0502202605M',
+    weightGms: '38.40Gms',
+    dimensionsMm: '8-10mm each',
+    xrayCompartments: '5 Natural Compartments in Beads',
+    discountTier: '10%'
+  },
+
+  // 6 MUKHI
+  {
+    id: 'prod-6-mukhi',
+    name: '6 Mukhi (Chheh Mukhi) Nepali Rudraksha',
+    hindiName: 'छह मुखी नेपाली रुद्राक्ष (भगवान कार्तिकेय)',
+    category: 'nepali',
+    price: 2200,
+    originalPrice: 3200,
+    mukhiCount: '6 Mukhi',
+    rulingDeity: 'Lord Kartikeya',
+    rulingPlanet: 'Venus (Shukra Dev)',
+    primaryBenefit: 'Willpower, fearlessness, removes lethargy, emotional balance and physical stamina',
+    mantra: 'Om Hreem Hoom Namah',
+    description: 'Governed by the commander of divine forces, Lord Kartikeya. Bestows focus, athletic prowess, and charm.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday or Tuesday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0602202606F',
+    weightGms: '04.10Gms',
+    dimensionsMm: '20mm',
+    xrayCompartments: '6 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 7 MUKHI
+  {
+    id: 'prod-7-mukhi',
+    name: '7 Mukhi (Saat Mukhi) Nepali Mahalakshmi Rudraksha',
+    hindiName: 'सात मुखी महालक्ष्मी नेपाली रुद्राक्ष (कनहा आशा प्रमाण पत्र युक्त)',
+    category: 'nepali',
+    price: 4500,
+    originalPrice: 6500,
+    mukhiCount: '7 Mukhi',
+    rulingDeity: 'Goddess Mahalakshmi',
+    rulingPlanet: 'Venus & Shani Balancer',
+    primaryBenefit: 'Wealth accumulation, business cashflow recovery, dissolves Saturn adversity',
+    mantra: 'Om Hum Namah',
+    description: 'Exact specimen featured in Kanha Asa official ISO 9001:2015 report C NO: KA0302202507F. 7 deep natural clefts, heavy grain density, verified by X-Ray magnification.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Friday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0302202507F',
+    weightGms: '04.12Gms',
+    dimensionsMm: '20mm',
+    xrayCompartments: '7 Natural Compartment Observed',
+    discountTier: '10%'
+  },
+
+  // 8 MUKHI
+  {
+    id: 'prod-8-mukhi',
+    name: '8 Mukhi (Aath Mukhi) Nepali Rudraksha',
+    hindiName: 'आठ मुखी नेपाली रुद्राक्ष (विघ्नहर्ता गणेश)',
+    category: 'nepali',
+    price: 6800,
+    originalPrice: 9500,
+    mukhiCount: '8 Mukhi',
+    rulingDeity: 'Lord Ganesha (Vighnaharta)',
+    rulingPlanet: 'Rahu Balancer',
+    primaryBenefit: 'Destroys persistent obstacles, neutralizes Rahu dosha, brings unexpected success',
+    mantra: 'Om Hoom Namah',
+    description: 'Directly removes hurdles in career and legal matters. Bestows intellect and divine protection.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Wednesday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA0802202608F',
+    weightGms: '04.30Gms',
+    dimensionsMm: '21mm',
+    xrayCompartments: '8 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 9 MUKHI
+  {
+    id: 'prod-9-mukhi',
+    name: '9 Mukhi (Nau Mukhi) Nepali Rudraksha',
+    hindiName: 'नौ मुखी नेपाली रुद्राक्ष (मां नवदुर्गा स्वरूप)',
+    category: 'nepali',
+    price: 8500,
+    originalPrice: 12000,
+    mukhiCount: '9 Mukhi',
+    rulingDeity: 'Maa Durga (9 Forms)',
+    rulingPlanet: 'Ketu Balancer',
+    primaryBenefit: 'Supreme courage, eliminates fear of ghosts/black magic, removes Ketu affliction',
+    mantra: 'Om Hreem Hoom Namah',
+    description: 'Blessed with the energy of the nine manifestations of Goddess Durga. Creates an impenetrable auric shield.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Friday or Monday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 1499,
+    certificateNumber: 'KA0902202609F',
+    weightGms: '04.45Gms',
+    dimensionsMm: '22mm',
+    xrayCompartments: '9 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 10 MUKHI
+  {
+    id: 'prod-10-mukhi',
+    name: '10 Mukhi (Dus Mukhi) Nepali Rudraksha',
+    hindiName: 'दस मुखी नेपाली रुद्राक्ष (भगवान विष्णु स्वरूप)',
+    category: 'nepali',
+    price: 9800,
+    originalPrice: 14000,
+    mukhiCount: '10 Mukhi',
+    rulingDeity: 'Lord Vishnu (Dashavatara)',
+    rulingPlanet: 'All 9 Planets Balancer',
+    primaryBenefit: 'Shields against evil eye, bhoot-pret, legal disputes & planetary curses',
+    mantra: 'Om Hreem Namah',
+    description: 'Carries the protective grace of Lord Vishnu across the 10 directions. Protects property and family lineage.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Thursday or Sunday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 1499,
+    certificateNumber: 'KA1002202610F',
+    weightGms: '04.50Gms',
+    dimensionsMm: '23mm',
+    xrayCompartments: '10 Natural Compartments',
+    discountTier: '10%'
+  },
+
+  // 11 MUKHI
+  {
+    id: 'prod-11-mukhi',
+    name: '11 Mukhi (Gyarah Mukhi) Nepali Rudraksha',
+    hindiName: 'ग्यारह मुखी नेपाली रुद्राक्ष (हनुमान जी स्वरूप)',
+    category: 'nepali',
+    price: 11500,
+    originalPrice: 16000,
+    mukhiCount: '11 Mukhi',
+    rulingDeity: '11 Rudras & Lord Hanuman',
+    rulingPlanet: 'Mars & Saturn Balancer',
+    primaryBenefit: 'Invincible courage, flawless oratorical skills, protects travelers & traders',
+    mantra: 'Om Hreem Hoom Namah',
+    description: 'Direct blessing of Bajrangbali. Removes accidents, untimely death fear, and enhances yogic physical power.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Tuesday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 1999,
+    certificateNumber: 'KA1102202611F',
+    weightGms: '04.60Gms',
+    dimensionsMm: '23mm',
+    xrayCompartments: '11 Natural Compartments',
+    discountTier: '15%'
+  },
+
+  // 12 MUKHI
+  {
+    id: 'prod-12-mukhi',
+    name: '12 Mukhi (Barah Mukhi) Nepali Rudraksha',
+    hindiName: 'बारह मुखी नेपाली रुद्राक्ष (सूर्य देव स्वरूप)',
+    category: 'nepali',
+    price: 14500,
+    originalPrice: 20000,
+    mukhiCount: '12 Mukhi',
+    rulingDeity: 'Surya Dev (12 Adityas)',
+    rulingPlanet: 'Sun (Surya)',
+    primaryBenefit: 'Radiant political authority, government job success, high vitality & charisma',
+    mantra: 'Om Kraum Kshaum Raum Namah',
+    description: 'Blessed by Lord Surya. Bestows administrative prowess, leadership recognition, and cures chronic fatigue.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Sunday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 1999,
+    certificateNumber: 'KA1202202612F',
+    weightGms: '04.80Gms',
+    dimensionsMm: '24mm',
+    xrayCompartments: '12 Natural Compartments',
+    discountTier: '15%'
+  },
+
+  // 13 MUKHI
+  {
+    id: 'prod-13-mukhi',
+    name: '13 Mukhi (Terah Mukhi) Nepali Rudraksha',
+    hindiName: 'तेरह मुखी नेपाली रुद्राक्ष (कामदेव स्वरूप)',
+    category: 'nepali',
+    price: 19500,
+    originalPrice: 27000,
+    mukhiCount: '13 Mukhi',
+    rulingDeity: 'Lord Kamadeva & Lord Indra',
+    rulingPlanet: 'Venus (Shukra)',
+    primaryBenefit: 'Magnetic personal attraction, luxury living, charisma, fulfilling desires',
+    mantra: 'Om Hreem Namah',
+    description: 'Imparts immense allure, persuasive speech, and royal fortune. Favored by artists, executives, and public figures.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Friday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 2499,
+    certificateNumber: 'KA1302202613F',
+    weightGms: '04.90Gms',
+    dimensionsMm: '24mm',
+    xrayCompartments: '13 Natural Compartments',
+    discountTier: '15%'
+  },
+
+  // 14 MUKHI
+  {
+    id: 'prod-14-mukhi',
+    name: '14 Mukhi (Chaudah Mukhi) Devamani Nepali Rudraksha',
+    hindiName: 'चौदह मुखी देवमणि नेपाली रुद्राक्ष (दुर्लभ)',
+    category: 'nepali',
+    price: 48000,
+    originalPrice: 62000,
+    mukhiCount: '14 Mukhi',
+    rulingDeity: 'Lord Shiva & Lord Hanuman',
+    rulingPlanet: 'Mars & Saturn (Shani Sade Sati)',
+    primaryBenefit: 'Awakens Ajna Third Eye Chakra, visionary decision-making, cures chronic Shani dosha',
+    mantra: 'Om Namah',
+    description: 'Called the Deva Mani (Divine Gem). Consecrated with Rudrabhishek.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Tuesday or Saturday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 3999,
+    certificateNumber: 'KA1402202614F',
+    weightGms: '05.10Gms',
+    dimensionsMm: '25mm',
+    xrayCompartments: '14 Natural Compartments',
+    discountTier: '15%'
+  },
+
+  // 17 MUKHI
+  {
+    id: 'prod-17-mukhi',
+    name: '17 Mukhi (Satrah Mukhi) Katyayani Vishwakarma Rudraksha',
+    hindiName: 'सत्रह मुखी नेपाली रुद्राक्ष (मां कात्यायनी व विश्वकर्मा)',
+    category: 'nepali',
+    price: 84000,
+    originalPrice: 110000,
+    mukhiCount: '17 Mukhi',
+    rulingDeity: 'Maa Katyayani & Vishwakarma',
+    rulingPlanet: 'Saturn (Shani)',
+    primaryBenefit: 'Sudden unexpected wealth windfall, real estate gains, architectural genius',
+    mantra: 'Om Hreem Namah',
+    description: 'Brings spontaneous luck, royal property ownership, and architectural genius. Blessed by Vishwakarma.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Saturday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 6999,
+    certificateNumber: 'KA1702202617F',
+    weightGms: '05.55Gms',
+    dimensionsMm: '27mm',
+    xrayCompartments: '17 Natural Compartments',
+    discountTier: '15%'
+  },
+
+  // 18 MUKHI (₹1 Lakh+ -> 25% Discount)
+  {
+    id: 'prod-18-mukhi',
+    name: '18 Mukhi (Atharah Mukhi) Bhumi Devi Nepali Rudraksha',
+    hindiName: 'अठारह मुखी नेपाली रुद्राक्ष (भूमि देवी स्वरूप)',
+    category: 'nepali',
+    price: 110000,
+    originalPrice: 145000,
+    mukhiCount: '18 Mukhi',
+    rulingDeity: 'Mother Earth (Bhumi Devi)',
+    rulingPlanet: 'Earth & Mars',
+    primaryBenefit: 'Blessings for land acquisition, real estate empire, construction & mining abundance',
+    mantra: 'Om Hreem Shreem Vasudhaye Swaha',
+    description: 'Directly linked to Mother Earth. Essential for developers, builders, and investors seeking vast land ownership.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Tuesday or Thursday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 8999,
+    certificateNumber: 'KA1802202618F',
+    weightGms: '05.80Gms',
+    dimensionsMm: '28mm',
+    xrayCompartments: '18 Natural Compartments',
+    discountTier: '25%'
+  },
+
+  // 19 MUKHI (₹1 Lakh+ -> 25% Discount)
+  {
+    id: 'prod-19-mukhi',
+    name: '19 Mukhi (Unnis Mukhi) Narayana Nepali Rudraksha',
+    hindiName: 'उन्नीस मुखी नेपाली रुद्राक्ष (श्री नारायण स्वरूप)',
+    category: 'nepali',
+    price: 140000,
+    originalPrice: 180000,
+    mukhiCount: '19 Mukhi',
+    rulingDeity: 'Lord Narayana (Maha Vishnu)',
+    rulingPlanet: 'Sun & Mercury',
+    primaryBenefit: 'Fulfillment of all 4 Purusharthas (Dharma, Artha, Kama, Moksha) & stress-free abundance',
+    mantra: 'Om Namo Narayanaya',
+    description: 'Imparts effortless abundance. The wearer never suffers financial want and lives with peace and dignity.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Thursday morning',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 11999,
+    certificateNumber: 'KA1902202619F',
+    weightGms: '06.00Gms',
+    dimensionsMm: '28mm',
+    xrayCompartments: '19 Natural Compartments',
+    discountTier: '25%'
+  },
+
+  // 21 MUKHI (₹1 Lakh+ -> 25% Discount)
+  {
+    id: 'prod-21-mukhi',
+    name: '21 Mukhi (Ek-kees Mukhi) Kuber Dev Nepali Rudraksha',
+    hindiName: 'इक्कीस मुखी नेपाली रुद्राक्ष (धनपति कुबेर स्वरूप - महादुर्लभ)',
+    category: 'nepali',
+    price: 250000,
+    originalPrice: 320000,
+    mukhiCount: '21 Mukhi',
+    rulingDeity: 'Lord Kuber (Treasurer of Gods)',
+    rulingPlanet: 'Venus & Earth',
+    primaryBenefit: 'Infinite wealth treasury, boundless prosperity, protected ancestral generational fortune',
+    mantra: 'Om Yakshaya Kuberaya Vaishravanaya Dhanadhanyadhipataye Dhanadhanyasamriddhim Me Dehi Dapaya Swaha',
+    description: 'The pinnacle of all Rudrakshas. Blessed by Lord Kuber. Generates perennial wealth for generations and removes any possibility of poverty.',
+    image: EK_MUKHI_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday or Dhanteras',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 19999,
+    certificateNumber: 'KA2102202621F',
+    weightGms: '06.50Gms',
+    dimensionsMm: '30mm',
+    xrayCompartments: '21 Natural Compartment Observed',
+    discountTier: '25%'
+  },
+
+  // SARVA SIDDH MALA
+  {
+    id: 'prod-siddh-mala',
+    name: 'Sarva Siddh Nepali Mala (1 to 14 Mukhi + Gauri Shankar + Ganesh)',
+    hindiName: 'सर्व सिद्ध नेपाली रुद्राक्ष माला (1 से 14 मुखी)',
+    category: 'mala',
+    price: 68500,
+    originalPrice: 89000,
+    mukhiCount: '1 to 14 Mukhi + GS + Ganesh',
+    rulingDeity: 'All Trideva & Navgrahas',
+    rulingPlanet: 'All 9 Planets',
+    primaryBenefit: 'Complete chakra alignment, financial breakthrough, multidirectional planetary protection',
+    mantra: 'Om Namah Shivaya',
+    description: 'Contains genuine Nepali beads from 1 to 14 Mukhi with Gauri Shankar and Ganesh, strung in pure silver capping. Consecrated with 1,008 Rudrabhishek mantras.',
+    image: SIDDH_MALA_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday or Shravan Nakshatra',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 5999,
+    certificateNumber: 'KA14022026SM',
+    weightGms: '72.50Gms',
+    dimensionsMm: '22-26mm beads',
+    xrayCompartments: 'All 1-14 Natural Chambers',
+    discountTier: '15%'
+  },
+
+  // GAURI SHANKAR
+  {
+    id: 'prod-gauri-shankar',
+    name: 'Authentic Nepali Gauri Shankar Rudraksha',
+    hindiName: 'गौरी शंकर नेपाली रुद्राक्ष (प्राकृतिक जुड़ा हुआ)',
+    category: 'combination',
+    price: 18500,
+    originalPrice: 24000,
+    mukhiCount: 'Joined Natural Beads',
+    rulingDeity: 'Lord Shiva & Goddess Parvati',
+    rulingPlanet: 'Moon & Venus',
+    primaryBenefit: 'Harmonious marriage, finding ideal life partner, emotional healing & fertility blessings',
+    mantra: 'Om Gauri Shankaraya Namah',
+    description: 'Two naturally conjoined Rudraksha beads representing the unified consciousness of Shiva and Shakti. Essential for couples and matrimonial peace.',
+    image: GAURI_SHANKAR_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Monday or Friday',
+    origin: 'Nepal',
+    sipAvailable: true,
+    sipMonthly: 1999,
+    certificateNumber: 'KA02022026GS',
+    weightGms: '05.30Gms',
+    dimensionsMm: '28mm',
+    xrayCompartments: 'Naturally Conjoined Double Seeds',
+    discountTier: '15%'
+  },
+
+  // GEMSTONES: NATURAL ITALIAN RED CORAL (MOONGA CAPSULE BEADS)
+  {
+    id: 'prod-red-coral-moonga',
+    name: 'Certified Natural Italian Red Coral (Capsule Moonga)',
+    hindiName: 'प्राकृतिक इटालियन लाल मूंगा (कैप्सूल दाने) लैब प्रमाणित',
+    category: 'gemstone',
+    price: 8900,
+    originalPrice: 12500,
+    rulingDeity: 'Lord Kartikeya & Lord Hanuman',
+    rulingPlanet: 'Mars (Mangal Dev)',
+    primaryBenefit: 'Cures Mangal Dosha, boosts physical vitality, blood circulation, real estate success',
+    mantra: 'Om Kram Kreem Kroum Sah Bhaumaya Namah',
+    description: 'Untreated, unheated vibrant Italian red coral (Moonga) in natural cylindrical capsule shape. Directly imported and tested by National Gemological Laboratory.',
+    image: RED_CORAL_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Tuesday morning during Shukla Paksha',
+    origin: 'Mediterranean Sea, Italy',
+    sipAvailable: true,
+    sipMonthly: 999,
+    certificateNumber: 'KA09022026MC',
+    weightGms: '07.20Carats',
+    dimensionsMm: '14mm x 6mm',
+    xrayCompartments: 'Organic Corallium Rubrum',
+    discountTier: '10%'
+  },
+
+  // GEMSTONES: CEYLON YELLOW SAPPHIRE (PUKHRAJ)
+  {
+    id: 'prod-yellow-sapphire',
+    name: 'Govt Certified Natural Ceylon Yellow Sapphire (Pukhraj)',
+    hindiName: 'प्राकृतिक सिलोनी पीला पुखराज रत्न (बृहस्पति देव)',
+    category: 'gemstone',
+    price: 24500,
+    originalPrice: 32000,
+    rulingDeity: 'Devguru Brihaspati',
+    rulingPlanet: 'Jupiter',
+    primaryBenefit: 'Higher wisdom, academic success, delayed marriage solution, divine grace & luck',
+    mantra: 'Om Gram Greem Groom Sah Gurave Namah',
+    description: 'Unheated, untreated Ceylon Yellow Sapphire (Pukhraj) tested by National Gemological Laboratory. Set in sacred Panchdhatu or Silver according to Vedic dimensions.',
+    image: ASTROLOGY_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Thursday morning in Shukla Paksha',
+    origin: 'Ratnapura, Sri Lanka',
+    sipAvailable: true,
+    sipMonthly: 2499,
+    certificateNumber: 'KA05022026YS',
+    weightGms: '05.25Carats',
+    dimensionsMm: '11mm x 9mm',
+    xrayCompartments: 'Natural Corundum Mineral',
+    discountTier: '15%'
+  },
+
+  // GEMSTONES: NATURAL BURMESE RUBY (MANIK)
+  {
+    id: 'prod-burmese-ruby',
+    name: 'Certified Natural Burmese Unheated Ruby (Manik)',
+    hindiName: 'प्राकृतिक बर्मी माणिक्य रत्न (सूर्य देव)',
+    category: 'gemstone',
+    price: 38000,
+    originalPrice: 52000,
+    rulingDeity: 'Lord Surya',
+    rulingPlanet: 'Sun',
+    primaryBenefit: 'High leadership authority, government relations, vitality, removes heart weakness',
+    mantra: 'Om Hram Hreem Hroum Sah Suryaya Namah',
+    description: 'Pigeon blood red untreated Burmese Ruby. Blessed by Lord Surya to instill magnetic charisma and unyielding executive power.',
+    image: RED_CORAL_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Sunday morning in gold ring',
+    origin: 'Mogok, Myanmar (Burma)',
+    sipAvailable: true,
+    sipMonthly: 3499,
+    certificateNumber: 'KA01022026MR',
+    weightGms: '04.80Carats',
+    dimensionsMm: '9mm x 7mm',
+    xrayCompartments: 'Natural Corundum Al2O3:Cr',
+    discountTier: '15%'
+  },
+
+  // GEMSTONES: NATURAL ZAMBIAN EMERALD (PANNA)
+  {
+    id: 'prod-zambian-emerald',
+    name: 'Certified Natural Zambian Green Emerald (Panna)',
+    hindiName: 'प्राकृतिक जाम्बियन पन्ना रत्न (बुध देव)',
+    category: 'gemstone',
+    price: 19500,
+    originalPrice: 28000,
+    rulingDeity: 'Lord Vishnu & Budh Dev',
+    rulingPlanet: 'Mercury',
+    primaryBenefit: 'Exceptional communication, financial trading success, intellect and nervous healing',
+    mantra: 'Om Bram Breem Broum Sah Budhaya Namah',
+    description: 'Lush green transparent emerald from Zambia with rich oil clarity. Tested and certified for businessmen and scholars.',
+    image: HERO_IMAGE,
+    certified: true,
+    inStock: true,
+    wearDay: 'Wednesday morning',
+    origin: 'Kagem, Zambia',
+    sipAvailable: true,
+    sipMonthly: 1999,
+    certificateNumber: 'KA04022026ZE',
+    weightGms: '04.10Carats',
+    dimensionsMm: '10mm x 8mm',
+    xrayCompartments: 'Natural Beryl Be3Al2(SiO3)6',
+    discountTier: '15%'
+  }
+];
+
+export const SIP_PLANS: SipPlan[] = [
+  {
+    id: 'sip-monthly',
+    title: 'Monthly Sacred Siddh SIP',
+    frequency: 'monthly',
+    amount: 1499,
+    originalAmount: 2200,
+    durationMonths: 12,
+    popular: true,
+    description: 'Receive 1 energized lab-certified Nepali Mukhi every month. Complete your 1 to 14 Mukhi Sarva Siddh collection step-by-step with monthly personalized Kundli transit audio reports.',
+    benefits: [
+      '1 Consecrated Nepali Rudraksha bead delivered every month',
+      'Official Kanha Asa ISO 9001:2015 Lab Certificate with every delivery',
+      'Free Ganga Jal Energization & pure silver capping on milestone beads',
+      'Monthly audio transit horoscope report from Acharya Ji',
+      '100% Free Pan-India Insured Express Shipping'
+    ]
+  },
+  {
+    id: 'sip-quarterly',
+    title: 'Quarterly High-Energy SIP',
+    frequency: 'quarterly',
+    amount: 3999,
+    originalAmount: 5500,
+    durationMonths: 12,
+    description: 'For seekers focused on rare higher Mukhis (7 Mukhi to 14 Mukhi, Gauri Shankar). Includes quarterly Siddh Havan consecration on your Gotra and family.',
+    benefits: [
+      '1 Premium high-rarity Nepali bead delivered every 3 months',
+      'Dedicated personal Havan conducted on your Gotra with video prasad',
+      'Priority consultation with senior astrologer',
+      'Official ISO 9001:2015 Identification Card & QR verification',
+      'Zero Shipping & Free Vedic Consecration kit included'
+    ]
+  },
+  {
+    id: 'sip-half-yearly',
+    title: 'Half-Yearly Mahalakshmi Heirloom SIP',
+    frequency: 'half_yearly',
+    amount: 7499,
+    originalAmount: 11000,
+    durationMonths: 24,
+    description: 'Build an extraordinary heirloom collection of rare Himalayan beads (including 1 Mukhi, 14 Mukhi, Gauri Shankar, or Navratna Malas) with pure 925 sterling silver settings.',
+    benefits: [
+      'High-tier Himalayan specimen delivered every 6 months in pure silver casing',
+      'Full Janam Kundli 30-page Vedic Horoscope Dossier prepared by Acharya',
+      'Lifetime free re-energization & Rudrabhishek service on Mahashivratri',
+      'Dedicated VIP assistance directly with Kanha Asa master astrologer',
+      '10% extra discount code valid across all catalog orders'
+    ]
+  }
+];
+
+export const INITIAL_LEADS: Lead[] = [
+  {
+    id: 'lead-101',
+    name: 'Rajesh Sharma',
+    phone: '+91 98290 84721',
+    city: 'Jaipur',
+    concern: 'Career & Business Growth',
+    birthDate: '1988-04-14',
+    rashi: 'Aries (Mesh)',
+    productInterest: '7 Mukhi Mahalakshmi Rudraksha',
+    utmSource: 'facebook',
+    utmMedium: 'cpc',
+    utmCampaign: 'jaipur_astrology_rudraksha',
+    createdAt: '2026-10-01 19:42',
+    status: 'new',
+    unlockedCoupon: 'KANHA10',
+    notes: 'Inquired from Meta Lead Ad. Coupon KANHA10 unlocked.'
+  },
+  {
+    id: 'lead-102',
+    name: 'Sunita Aggarwal',
+    phone: '+91 98114 39201',
+    city: 'Delhi NCR',
+    concern: 'Marriage Discord & Relationship Harmony',
+    birthDate: '1992-09-22',
+    rashi: 'Virgo (Kanya)',
+    productInterest: 'Gauri Shankar Rudraksha',
+    utmSource: 'instagram',
+    utmMedium: 'feed_ad',
+    utmCampaign: 'festive_marital_bliss',
+    createdAt: '2026-10-01 21:10',
+    status: 'contacted',
+    unlockedCoupon: 'KANHA15',
+    notes: 'Sent recommendation report for Gauri Shankar (₹18,500). 15% code KANHA15 applied.'
+  },
+  {
+    id: 'lead-103',
+    name: 'Vikramaditya Rathore',
+    phone: '+91 94140 22918',
+    city: 'Jodhpur',
+    concern: 'Shani Sade Sati Protection & Peace',
+    birthDate: '1984-11-05',
+    rashi: 'Scorpio (Vrishchik)',
+    productInterest: '14 Mukhi Devamani Rudraksha',
+    utmSource: 'meta_lead_form',
+    utmMedium: 'paid',
+    utmCampaign: 'shani_remedies_2026',
+    createdAt: '2026-10-01 21:55',
+    status: 'converted',
+    unlockedCoupon: 'KANHA15',
+    notes: 'Bought online on www.kanhaasa.com. Shipped with ISO 9001:2015 report.'
+  }
+];
+
+export const DEFAULT_AUTOMATION_CONFIG: AutomationConfig = {
+  merchantPhone: '9131805622',
+  metaPixelId: '182930491029384',
+  webhookUrl: 'https://hooks.zapier.com/hooks/catch/sample/kanhaasa_lead_sync',
+  enableAutoWelcome: true,
+  enableCartRecovery: true,
+  welcomeTemplate: 'Namaste {{name}} ji! 🕉️ Thank you for choosing Kanha Asa (www.kanhaasa.com). Your discount voucher has been generated: KANHA10 (10% off under ₹10k) or KANHA15 (15% off above ₹10k). Free shipping pan-India. Need guidance? Reply here or use our AI Astrologer on www.kanhaasa.com!',
+  cartRecoveryTemplate: 'Pranam {{name}} ji, your energized {{product}} is reserved in your cart on www.kanhaasa.com. Complete your order online with Free Shipping: {{link}}',
+  codCharge: 150,
+  showCertificate: true
+};
+
+export const MUKHI_RECOMMENDATION_MATRIX: Record<string, { mukhi: string; reason: string; deity: string; planet: string; recommendedProductId: string }> = {
+  'career': {
+    mukhi: '7 Mukhi & 10 Mukhi Nepali Rudraksha',
+    reason: 'Removes financial blockages, unlocks leadership recognition and protects investments under Goddess Mahalakshmi and Lord Krishna.',
+    deity: 'Goddess Mahalakshmi',
+    planet: 'Venus & Navgrahas',
+    recommendedProductId: 'prod-7-mukhi'
+  },
+  'marriage': {
+    mukhi: 'Gauri Shankar Rudraksha',
+    reason: 'Infuses cosmic harmony of Shiva and Shakti into relationships, removes Kuja/Manglik dosha tension, and blessed for matrimonial peace.',
+    deity: 'Lord Shiva & Devi Parvati',
+    planet: 'Moon & Venus',
+    recommendedProductId: 'prod-gauri-shankar'
+  },
+  'health': {
+    mukhi: '3 Mukhi & 5 Mukhi Rudraksha',
+    reason: 'Regulates blood pressure, cleanses chronic fatigue, balances the fire element (Agni), and relieves lingering psychosomatic anxiety.',
+    deity: 'Lord Agni & Kalagni Rudra',
+    planet: 'Mars & Jupiter',
+    recommendedProductId: 'prod-5-mukhi-japa-mala'
+  },
+  'protection': {
+    mukhi: '14 Mukhi Devamani & 11 Mukhi Rudraksha',
+    reason: 'Direct shield against evil eye (Buri Nazar), psychic disturbances, and acute planetary debility like Rahu, Ketu or Shani Sade Sati.',
+    deity: 'Lord Hanuman & Lord Shiva',
+    planet: 'Saturn & Mars',
+    recommendedProductId: 'prod-14-mukhi'
+  },
+  'spiritual': {
+    mukhi: '1 Mukhi (Ek Mukhi) Gol Dana & Sarva Siddh Mala',
+    reason: 'Awakens Sahasrara crown chakra, establishes deep meditative stillness and frees the consciousness from karmic entrapment.',
+    deity: 'Paramashiva',
+    planet: 'Sun',
+    recommendedProductId: 'prod-1-mukhi-nepali'
+  }
+};
