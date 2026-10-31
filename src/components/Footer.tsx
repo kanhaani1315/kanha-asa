@@ -293,7 +293,7 @@ export const Footer: React.FC<FooterProps> = ({
               <a href="/refund-policy" className="hover:text-white">Refund & Cancellation</a>
               <a href="/contact-us" className="hover:text-white">Contact Us</a>
             </nav>
-            <p>© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (kanhaasa.com) · ISO 9001:2015. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (rudrakshkanhaasa.shop) · ISO 9001:2015. All rights reserved.</p>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-emerald-400">Free Pan-India Shipping</span>
