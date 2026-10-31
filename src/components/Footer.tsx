@@ -286,7 +286,15 @@ export const Footer: React.FC<FooterProps> = ({
 
         {/* Quiet Bottom Strip */}
         <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[11px]">
-          <p>© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (kanhaasa.com) · ISO 9001:2015. All rights reserved.</p>
+          <div className="flex flex-col gap-2 items-center sm:items-start">
+            <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-stone-300">
+              <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
+              <a href="/terms-and-conditions" className="hover:text-white">Terms & Conditions</a>
+              <a href="/refund-policy" className="hover:text-white">Refund & Cancellation</a>
+              <a href="/contact-us" className="hover:text-white">Contact Us</a>
+            </nav>
+            <p>© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (kanhaasa.com) · ISO 9001:2015. All rights reserved.</p>
+          </div>
           <div className="flex items-center gap-4">
             <span className="text-emerald-400">Free Pan-India Shipping</span>
             <span aria-hidden="true">·</span>

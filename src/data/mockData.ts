@@ -1,15 +1,15 @@
 import { Product, Lead, AutomationConfig, SipPlan } from '../types';
 
-export const HERO_IMAGE = '/src/assets/images/hero_rudraksha_sacred_1790918119556.jpg';
-export const SIDDH_MALA_IMAGE = '/src/assets/images/product_siddh_mala_1790918137119.jpg';
-export const EK_MUKHI_IMAGE = '/src/assets/images/product_ek_mukhi_1790918154580.jpg';
-export const GAURI_SHANKAR_IMAGE = '/src/assets/images/product_gauri_shankar_1790918171364.jpg';
-export const ASTROLOGY_IMAGE = '/src/assets/images/astrology_kundli_consult_1790918294463.jpg';
+export const HERO_IMAGE = '/images/hero_rudraksha_sacred_1790918119556.jpg';
+export const SIDDH_MALA_IMAGE = '/images/product_siddh_mala_1790918137119.jpg';
+export const EK_MUKHI_IMAGE = '/images/product_ek_mukhi_1790918154580.jpg';
+export const GAURI_SHANKAR_IMAGE = '/images/product_gauri_shankar_1790918171364.jpg';
+export const ASTROLOGY_IMAGE = '/images/astrology_kundli_consult_1790918294463.jpg';
 
 // Real user-uploaded photo assets
-export const SOUTH_DANA_IMAGE = '/src/assets/images/ek_mukhi_south_dana_1790919535895.jpg';
-export const RED_CORAL_IMAGE = '/src/assets/images/red_coral_capsule_1790919549818.jpg';
-export const JAPA_MALA_IMAGE = '/src/assets/images/nepali_japa_mala_1790919561952.jpg';
+export const SOUTH_DANA_IMAGE = '/images/ek_mukhi_south_dana_1790919535895.jpg';
+export const RED_CORAL_IMAGE = '/images/red_coral_capsule_1790919549818.jpg';
+export const JAPA_MALA_IMAGE = '/images/nepali_japa_mala_1790919561952.jpg';
 
 // Helper to determine discount tier based on user rule:
 // < 10,000 -> 10%

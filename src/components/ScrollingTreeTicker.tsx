@@ -1,8 +1,8 @@
 import React from 'react';
 import { Sparkles, MapPin } from 'lucide-react';
 
-const NEPAL_TREE_1 = '/src/assets/images/nepal_rudraksha_tree_1790920222059.jpg';
-const NEPAL_TREE_2 = '/src/assets/images/nepal_sacred_grove_1790920237187.jpg';
+const NEPAL_TREE_1 = '/images/nepal_rudraksha_tree_1790920222059.jpg';
+const NEPAL_TREE_2 = '/images/nepal_sacred_grove_1790920237187.jpg';
 
 export const ScrollingTreeTicker: React.FC = () => {
   const treeSlides = [
