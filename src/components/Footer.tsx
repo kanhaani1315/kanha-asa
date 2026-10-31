@@ -29,9 +29,9 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="g-blue bg-stone-950 text-stone-300 border-t border-stone-800 text-xs font-sans">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+    <footer className="bg-stone-900 text-stone-300 border-t border-stone-800 text-sm font-sans">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12 leading-relaxed">
           {/* Col 1: Brand Lineage & Official Socials */}
           <div className="space-y-3">
             <KanhaLogo size={52} showText={true} />
@@ -284,23 +284,26 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Quiet Bottom Strip */}
-        <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[13px]">
-          <div className="flex flex-col gap-2 items-center sm:items-start">
-            <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-stone-300">
-              <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
-              <a href="/terms-and-conditions" className="hover:text-white">Terms & Conditions</a>
-              <a href="/refund-policy" className="hover:text-white">Refund & Cancellation</a>
-              <a href="/contact-us" className="hover:text-white">Contact Us</a>
+      </div>
+
+      {/* Google-blue bottom bar: policies + copyright */}
+      <div className="g-blue">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col lg:flex-row items-center justify-between gap-5 text-[15px]">
+          <div className="flex flex-col gap-3 items-center lg:items-start">
+            <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2 font-medium">
+              <a href="/privacy-policy" className="text-white hover:underline underline-offset-4">Privacy Policy</a>
+              <a href="/terms-and-conditions" className="text-white hover:underline underline-offset-4">Terms & Conditions</a>
+              <a href="/refund-policy" className="text-white hover:underline underline-offset-4">Refund & Cancellation</a>
+              <a href="/contact-us" className="text-white hover:underline underline-offset-4">Contact Us</a>
             </nav>
-            <p>© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (rudrakshkanhaasa.shop) · ISO 9001:2015. All rights reserved.</p>
+            <p className="text-[#d2e3fc] text-sm text-center lg:text-left">© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (rudrakshkanhaasa.shop) · ISO 9001:2015. All rights reserved.</p>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-emerald-400">Free Pan-India Shipping</span>
-            <span aria-hidden="true">·</span>
-            <span className="text-stone-300">COD ₹150 Handling</span>
-            <span aria-hidden="true">·</span>
-            <span className="text-amber-300 font-mono">10% Code: KANHA10</span>
+          <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-sm">
+            <span className="text-white">Free Pan-India Shipping</span>
+            <span aria-hidden="true" className="text-[#8ab4f8]">•</span>
+            <span className="text-white">COD ₹150 Handling</span>
+            <span aria-hidden="true" className="text-[#8ab4f8]">•</span>
+            <span className="text-[#fde293] font-semibold">10% Code: KANHA10</span>
           </div>
         </div>
       </div>
