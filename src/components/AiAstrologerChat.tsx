@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { AiChatMessage, MobileAnalysisResult, NameNumerologyResult } from '../types';
 import { KanhaLogo } from './KanhaLogo';
 import { KanhaAiChatIcon } from './AiIcons';
-import { CreditPaymentModal } from './CreditPaymentModal';
+import { AstroWalletModal, WalletChip, useAstroWallet } from './AstroWallet';
+import { askAstrologer, reasonText } from '../utils/kanhaApi';
 import { calculateNameNumerology, analyzeMobileNumber, calculateLoShuGrid, PLANET_MAP } from '../utils/numerology';
 import { 
   Send, 
@@ -45,12 +46,14 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     {
       id: 'msg-1',
       sender: 'ai',
-      text: 'प्रणाम! 🕉️ मैं कान्हा एआई ज्योतिषाचार्य हूँ। वैदिक परामर्श, नाम न्यूमरोलॉजी, लो-शू ग्रिड एवं मोबाइल नंबर जांच के लिए क्रेडिट्स लेना आवश्यक है (क्रेडिट्स लेना पड़ेगा, फ्री नहीं रहेगा)।\n\nआप न्यूनतम ₹19 से क्रेडिट्स रिचार्ज करके पूछ सकते हैं:\n• नाम वाइज नंबर चेक (Name Numerology) व मिसिंग नंबर सुधार\n• 3x3 लो-शू ग्रिड (Lo Shu Grid), मूलांक व भाग्यांक संतुलन\n• 10 अंकों का मोबाइल नंबर विश्लेषण (शुभ व हानिकारक जोड़े)\n• 1 से 21 मुखी रुद्राक्ष एवं वैदिक रत्न चयन',
+      text: 'प्रणाम! 🕉️ मैं कान्हा एआई ज्योतिषाचार्य हूँ। रुद्राक्ष चयन, रत्न, राशि, मूलांक-भाग्यांक, लो-शू ग्रिड या मोबाइल नंबर के बारे में कुछ भी पूछिए।\n\n✨ पहले 3 सवाल बिल्कुल फ्री। उसके बाद हर सवाल ₹10 (क्रेडिट्स से)। मोबाइल नंबर से लॉगिन करके शुरू करें।',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [inputText, setInputText] = useState('');
-  const [credits, setCredits] = useState<number>(0); // Credit lena padega, free nahi rahega
+  const wallet = useAstroWallet();
+  const [walletReason, setWalletReason] = useState<string | null>(null);
+  const needCredits = !!wallet && wallet.free_questions_left <= 0 && wallet.balance < wallet.chat_price;
   const [isTyping, setIsTyping] = useState(false);
   const [showCreditModal, setShowCreditModal] = useState(false);
   const [creditNotice, setCreditNotice] = useState<string | null>(null);
@@ -74,13 +77,6 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     if (e) e.preventDefault();
     if (!dobInput) return;
 
-    if (credits <= 0) {
-      setCreditNotice('नाम वाइज नंबर चेक, न्यूमरोलॉजी व लो-शू ग्रिड जांच के लिए क्रेडिट्स लेना आवश्यक है (फ्री नहीं रहेगा)। कृपया क्रेडिट पैक चुनें।');
-      setShowCreditModal(true);
-      return;
-    }
-
-    setCredits((prev) => Math.max(0, prev - 1));
     const result = calculateLoShuGrid(dobInput);
     setCalculatedLoShu(result);
 
@@ -108,13 +104,6 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     const clean = mobileInput.replace(/\D/g, '');
     if (clean.length < 10) return;
 
-    if (credits <= 0) {
-      setCreditNotice('10 अंकों के मोबाइल नंबर की न्यूमरोलॉजी जांच के लिए क्रेडिट्स लेना आवश्यक है (फ्री नहीं रहेगा)। कृपया क्रेडिट पैक चुनें।');
-      setShowCreditModal(true);
-      return;
-    }
-
-    setCredits((prev) => Math.max(0, prev - 1));
     const result = analyzeMobileNumber(clean, calculatedLoShu?.mulank);
     setMobileAnalysis(result);
 
@@ -125,38 +114,17 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     });
   };
 
-  const generateAiTextResponse = (userPrompt: string): string => {
-    const p = userPrompt.toLowerCase();
+  const handleSendMessage = async (textToSend?: string) => {
+    const text = (textToSend || inputText).trim();
+    if (!text || isTyping) return;
 
-    // Mobile Number Query
-    if (p.includes('mobile') || p.includes('phone') || p.includes('नंबर') || p.includes('हानिकारक') || p.includes('कॉम्बिनेशन') || p.includes('मोबाइल')) {
-      return `मोबाइल नंबर न्यूमरोलॉजी जांच रिपोर्ट (Kanha AI Analysis):\n\n• हानिकारक कॉम्बिनेशन (Harmful Pairs):\n  - 2-4 या 4-2: चन्द्र-राहु ग्रहण दोष (अचानक मानसिक व धन हानि)\n  - 1-8 या 8-1: सूर्य-शनि संघर्ष (सरकारी अड़चनें, पिता से मतभेद)\n  - 4-8 या 8-4: राहु-शनि महासंघर्ष (दुर्घटना व कर्ज की चिंता)\n  - 3-6 या 6-3: गुरु-शुक्र विवाद (दांपत्य कलह, व्यर्थ खर्च)\n\n• शुभ व भाग्यशाली कॉम्बिनेशन (Lucky Pairs):\n  - 1-5 / 5-1: बुधादित्य योग (व्यापार में तीव्र वृद्धि)\n  - 5-6 / 6-5: महालक्ष्मी योग (धन-संपदा व ऐश्वर्य)\n  - 3-7 / 7-3: गुरु-केतु ज्ञान योग\n\nअपने 10 अंकों के मोबाइल नंबर की तुरंत जांच करने के लिए ऊपर "मोबाइल नंबर जांच" टैब पर जाएं!`;
+    if (!wallet) {
+      setWalletReason('login_required');
+      setShowCreditModal(true);
+      return;
     }
-
-    // Lo Shu & Name Missing Number Query
-    if (p.includes('loshu') || p.includes('lo shu') || p.includes('grid') || p.includes('मिसिंग') || p.includes('नाम') || p.includes('name') || p.includes('नियो ग्रिड')) {
-      return `नियो ग्रिड एवं नाम न्यूमरोलॉजी (Lo Shu Grid Name Balancing):\n\n• जन्मतिथि से कई बार ग्रिड में 4, 3, 8 या 7 जैसे महत्वपूर्ण नंबर मिसिंग हो जाते हैं।\n• कान्हा एआई का नया फीचर: अब आप अपना नाम (Name) डालकर भी मिसिंग नंबर की भरपाई कर सकते हैं (चेल्डियन न्यूमरोलॉजी के अनुसार A=1, B=2, C=3, D=4, E=5 आदि)।\n• साथ ही, जो नंबर नाम से भी न भरें, उन्हें 7 मुखी, 8 मुखी, 14 मुखी रुद्राक्ष या पुखराज/नीलम रत्न पहनकर ग्रिड में एक्टिव किया जा सकता है।\n\nऊपर "नियो ग्रिड (मिसिंग नंबर)" टैब खोलकर अपना नाम और जन्मतिथि दर्ज करके लाइव ग्रिड देखें!`;
-    }
-
-    // Which Rudraksha / Gemstone combination to take
-    if (p.includes('kaun sa') || p.includes('konsa') || p.includes('stone') || p.includes('rudraksha') || p.includes('gemstone') || p.includes('रत्न') || p.includes('रुद्राक्ष')) {
-      return `कान्हा असा प्रामाणिक रुद्राक्ष एवं रत्न संयोजन (Prescription Guide):\n\n1. व्यापार व महालक्ष्मी धन प्राप्ति: 7 मुखी नेपाली रुद्राक्ष (₹4,500) + इटालियन लाल मूंगा कैप्सूल (₹8,900)। (10% छूट के साथ कुल पर विशेष बचत!)\n2. शनि साढ़ेसाती व करियर स्थायित्व: 14 मुखी देवमणि रुद्राक्ष (₹48,000) या रॉयल ब्लू नीलम रत्न।\n3. एकाग्रता व सर्वसिद्धि: 1 मुखी नेपाली गोल दाना (₹35,000) या साउथ दाना रजत त्रिनेत्र (₹3,800)।\n4. वैवाहिक सुख व दांपत्य शांति: प्राकृतिक गौरी शंकर रुद्राक्ष (₹18,500) + सच्चा मोती।\n\nसभी प्रोडक्ट 100% कान्हा असा ISO 9001:2015 लैब सर्टिफिकेट और फ्री पैन-इंडिया शिपिंग के साथ www.kanhaasa.com पर उपलब्ध हैं।`;
-    }
-
-    // Cost / Pricing query
-    if (p.includes('price') || p.includes('cost') || p.includes('kitne') || p.includes('rupaye') || p.includes('discount') || p.includes('voucher') || p.includes('coupon') || p.includes('दाम')) {
-      return `कान्हा असा का 3-स्तरीय आधिकारिक डिस्काउंट स्लैब:\n\n• 10% छूट (कोड: KANHA10): ₹10,000 से कम के सभी ऑर्डर पर (जैसे 1 मुखी साउथ दाना ₹3,800 -> मात्र ₹3,420; 7 मुखी महालक्ष्मी ₹4,500 -> मात्र ₹4,050)।\n• 15% छूट (कोड: KANHA15): ₹10,000 से ₹1,00,000 के ऑर्डर पर (जैसे गौरी शंकर ₹18,500 -> ₹15,725; 14 मुखी देवमणि ₹48,000 -> ₹40,800)।\n• 25% बम्पर छूट (कोड: KANHA25): ₹1,00,000 और उससे अधिक के आर्डर पर।\n\nपूरे भारत में शिपिंग बिल्कुल FREE है! कैश ऑन डिलीवरी (COD) केवल ₹150 चार्ज में उपलब्ध है। सीधा www.kanhaasa.com से ऑनलाइन ऑर्डर करें।`;
-    }
-
-    return `वैदिक विश्लेषण के अनुसार आपके ग्रहों का ऊर्जा संतुलन अत्यंत महत्वपूर्ण है। कान्हा असा पर प्रत्येक 1 से 21 मुखी नेपाली रुद्राक्ष एवं रत्न आपके गोत्र से 1,008 वैदिक बीजोक्त मंत्रों से अभिमंत्रित करके भेजा जाता है।\n\nविशेष छूट:\n• ₹10,000 के नीचे: 10% OFF (KANHA10)\n• ₹10,000 के ऊपर: 15% OFF (KANHA15)\n• ₹1 लाख+: 25% OFF (KANHA25)\n\nसीधे www.kanhaasa.com से ऑनलाइन सुरक्षित चेकआउट करें!`;
-  };
-
-  const handleSendMessage = (textToSend?: string) => {
-    const text = textToSend || inputText;
-    if (!text.trim()) return;
-
-    if (credits <= 0) {
-      setCreditNotice('ज्योतिष परामर्श व सवाल पूछने के लिए क्रेडिट्स लेना आवश्यक है (क्रेडिट्स लेना पड़ेगा, फ्री नहीं रहेगा)। कृपया क्रेडिट पैक रिचार्ज करें।');
+    if (needCredits) {
+      setWalletReason('need_credits');
       setShowCreditModal(true);
       return;
     }
@@ -164,37 +132,36 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     const userMsg: AiChatMessage = {
       id: `msg-${Date.now()}`,
       sender: 'user',
-      text: text,
+      text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-
+    const history = messages.slice(1).map((m) => ({ role: (m.sender === 'user' ? 'user' : 'ai') as 'user' | 'ai', text: m.text }));
     setMessages((prev) => [...prev, userMsg]);
     setInputText('');
-    setCredits((prev) => Math.max(0, prev - 1));
     setIsTyping(true);
+    setCreditNotice(null);
 
-    trackMetaEvent('Contact', {
-      action: 'ai_chatbot_question',
-      question: text.slice(0, 50),
-      remaining_credits: credits - 1
-    });
+    trackMetaEvent('Contact', { action: 'ai_chatbot_question', question: text.slice(0, 50) });
 
-    setTimeout(() => {
-      const response = generateAiTextResponse(text);
-      const aiMsg: AiChatMessage = {
+    const r = await askAstrologer(text, history);
+    setIsTyping(false);
+    if (r.ok && r.answer) {
+      setMessages((prev) => [...prev, {
         id: `msg-${Date.now() + 1}`,
         sender: 'ai',
-        text: response,
+        text: String(r.answer),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      setMessages((prev) => [...prev, aiMsg]);
-      setIsTyping(false);
-    }, 800);
-  };
-
-  const handleAddCreditsFromModal = (newCredits: number, price: number) => {
-    setCredits((prev) => prev + newCredits);
-    setCreditNotice(null);
+      }]);
+    } else {
+      setMessages((prev) => prev.filter((m) => m.id !== userMsg.id));
+      setInputText(text);
+      if (r.reason === 'need_credits' || r.reason === 'login_required') {
+        setWalletReason(r.reason);
+        setShowCreditModal(true);
+      } else {
+        setCreditNotice(reasonText(r.reason));
+      }
+    }
   };
 
   useEffect(() => {
@@ -238,15 +205,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setShowCreditModal(true)}
-                className="flex items-center gap-1.5 px-3 py-1 bg-amber-950/80 border border-amber-600/70 rounded-full text-xs text-amber-300 font-semibold hover:bg-amber-900/60 transition-colors cursor-pointer"
-                title="Click to recharge credits"
-              >
-                <Coins className="w-3.5 h-3.5 text-amber-400" />
-                <span className="tabular-nums font-mono font-bold">{credits} Credits</span>
-                <PlusCircle className="w-3 h-3 text-amber-400" />
-              </button>
+              <WalletChip wallet={wallet} onClick={() => { setWalletReason(null); setShowCreditModal(true); }} />
 
               <button
                 onClick={onClose}
@@ -338,15 +297,19 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   </div>
                 )}
 
-                {/* Credit Required Notice */}
-                {credits <= 0 && (
+                {creditNotice && (
+                  <div className="p-3 bg-red-950/40 border border-red-800 rounded-xl text-xs text-red-300">{creditNotice}</div>
+                )}
+                {(!wallet || needCredits) && (
                   <div className="p-3 bg-amber-950/60 border border-amber-500 rounded-xl text-xs text-amber-200 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg">
-                    <span className="font-semibold">परामर्श व सवाल पूछने के लिए क्रेडिट्स लेना आवश्यक है (क्रेडिट्स लेना पड़ेगा, फ्री नहीं रहेगा)।</span>
+                    <span className="font-semibold">
+                      {!wallet ? 'सवाल पूछने के लिए मोबाइल नंबर से लॉगिन करें — पहले 3 सवाल फ्री।' : 'आपके फ्री सवाल और क्रेडिट्स खत्म हो गए। हर सवाल ₹10 — रिचार्ज करें।'}
+                    </span>
                     <button
-                      onClick={() => setShowCreditModal(true)}
+                      onClick={() => { setWalletReason(!wallet ? 'login_required' : 'need_credits'); setShowCreditModal(true); }}
                       className="px-4 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-lg cursor-pointer whitespace-nowrap shadow shrink-0"
                     >
-                      ⚡ क्रेडिट्स लें (₹19 से शुरू)
+                      {!wallet ? 'लॉगिन करें' : '⚡ क्रेडिट्स लें (₹99 से)'}
                     </button>
                   </div>
                 )}
@@ -360,10 +323,10 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                 {[
                   'कौन सा रुद्राक्ष लेना है?',
                   'कौन सा रुद्राक्ष स्टोन सही रहेगा?',
-                  'कितने का पड़ेगा (Prices & 10%-25% OFF)?',
+                  'मेरी राशि के अनुसार कौन सा रत्न?',
                   'मोबाइल में हानिकारक नंबर कैसे देखें?',
                   'नाम से मिसिंग नंबर कैसे जोड़ें?',
-                  '1 Mukhi Gol Dana vs South Dana price?'
+                  'रुद्राक्ष धारण करने की विधि क्या है?'
                 ].map((q, idx) => (
                   <button
                     key={idx}
@@ -386,9 +349,11 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                 <input
                   type="text"
                   placeholder={
-                    credits > 0
-                      ? `प्रश्न पूछें (${credits} क्रेडिट्स बाकी)... रुद्राक्ष, रत्न, मिसिंग नंबर या मोबाइल जांच`
-                      : 'क्रेडिट्स समाप्त! सवाल पूछने के लिए रिचार्ज करें (Recharge Credits).'
+                    !wallet
+                      ? 'लॉगिन करके सवाल पूछें (पहले 3 सवाल फ्री)...'
+                      : wallet.free_questions_left > 0
+                        ? `प्रश्न पूछें (${wallet.free_questions_left} फ्री सवाल बाकी)... रुद्राक्ष, रत्न, राशि, न्यूमरोलॉजी`
+                        : `प्रश्न पूछें (₹10/सवाल, बैलेंस ₹${wallet.balance})...`
                   }
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
@@ -396,7 +361,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                 />
                 <button
                   type="submit"
-                  disabled={!inputText.trim()}
+                  disabled={!inputText.trim() || isTyping}
                   className="p-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 disabled:opacity-40 text-stone-950 font-bold transition-colors cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
@@ -408,8 +373,8 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
           {/* TAB 2: LO SHU & NAME NUMEROLOGY MISSING NUMBER BALANCER */}
           {activeMode === 'loshu' && (
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5 bg-stone-950">
-              {/* Credit Notice Banner for Lo Shu */}
-              {credits <= 0 && (
+              {/* Lo Shu tool is free */}
+              {false && (
                 <div className="p-3 bg-amber-950/60 border border-amber-500 rounded-xl text-xs text-amber-200 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg">
                   <div className="flex items-center gap-2">
                     <Lock className="w-4 h-4 text-amber-400 shrink-0" />
@@ -651,8 +616,8 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
           {/* TAB 3: MOBILE NUMBER NUMEROLOGY ANALYZER */}
           {activeMode === 'mobile' && (
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5 bg-stone-950">
-              {/* Credit Notice Banner for Mobile Numerology */}
-              {credits <= 0 && (
+              {/* Mobile numerology tool is free */}
+              {false && (
                 <div className="p-3 bg-amber-950/60 border border-amber-500 rounded-xl text-xs text-amber-200 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg">
                   <div className="flex items-center gap-2">
                     <Lock className="w-4 h-4 text-amber-400 shrink-0" />
@@ -822,13 +787,8 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
         </div>
       </div>
 
-      {/* Credit Payment & Recharge Modal */}
-      <CreditPaymentModal
-        isOpen={showCreditModal}
-        onClose={() => setShowCreditModal(false)}
-        onAddCredits={handleAddCreditsFromModal}
-        merchantPhone={merchantPhone}
-      />
+      {/* Login / Recharge Modal */}
+      <AstroWalletModal isOpen={showCreditModal} reason={walletReason} onClose={() => setShowCreditModal(false)} />
     </>
   );
 };
