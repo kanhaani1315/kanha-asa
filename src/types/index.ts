@@ -19,6 +19,7 @@ export interface Product {
   sipAvailable?: boolean;
   sipMonthly?: number;
   certificateNumber?: string;
+  certificateImage?: string;
   weightGms?: string;
   dimensionsMm?: string;
   xrayCompartments?: string;

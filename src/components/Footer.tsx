@@ -286,7 +286,7 @@ export const Footer: React.FC<FooterProps> = ({
 
       </div>
 
-      {/* Google-blue bottom bar: policies + copyright */}
+      {/* Black bottom bar: policies + copyright */}
       <div className="g-blue">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col lg:flex-row items-center justify-between gap-5 text-[15px]">
           <div className="flex flex-col gap-3 items-center lg:items-start">
@@ -296,13 +296,13 @@ export const Footer: React.FC<FooterProps> = ({
               <a href="/refund-policy" className="text-white hover:underline underline-offset-4">Refund & Cancellation</a>
               <a href="/contact-us" className="text-white hover:underline underline-offset-4">Contact Us</a>
             </nav>
-            <p className="text-[#d2e3fc] text-sm text-center lg:text-left">© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (rudrakshkanhaasa.shop) · ISO 9001:2015. All rights reserved.</p>
+            <p className="text-[#bdbdbd] text-sm text-center lg:text-left">© {new Date().getFullYear()} Kanha Asa Astro & Rudraksha (rudrakshkanhaasa.shop) · ISO 9001:2015. All rights reserved.</p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-sm">
             <span className="text-white">Free Pan-India Shipping</span>
-            <span aria-hidden="true" className="text-[#8ab4f8]">•</span>
+            <span aria-hidden="true" className="text-[#777]">•</span>
             <span className="text-white">COD ₹150 Handling</span>
-            <span aria-hidden="true" className="text-[#8ab4f8]">•</span>
+            <span aria-hidden="true" className="text-[#777]">•</span>
             <span className="text-[#fde293] font-semibold">10% Code: KANHA10</span>
           </div>
         </div>

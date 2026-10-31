@@ -171,6 +171,46 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                 className="group bg-stone-900/90 border border-stone-800/80 rounded-xl overflow-hidden flex flex-col hover:border-amber-900/60 transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl cursor-pointer"
               >
                 {/* Product Image */}
+                {product.certificateImage && (
+                  <div className="flex items-center justify-between gap-2 px-3 py-2 bg-white border-b border-stone-800">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingPhotoProduct(product);
+                      }}
+                      className="flex items-center gap-1 text-[12px] font-semibold text-stone-400 hover:text-stone-200 cursor-pointer"
+                    >
+                      <Camera className="w-3 h-3" />
+                      <span>Change Photo</span>
+                    </button>
+                    <div className="text-[12px] font-extrabold text-stone-950 bg-amber-400 px-2 py-0.5 rounded shadow">
+                      {tier} OFF · {coupon}
+                    </div>
+                  </div>
+                )}
+                {product.certificateImage ? (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCertificateProduct(product);
+                    }}
+                    title="Click to open full certificate"
+                    className="relative block w-full aspect-[17/10] bg-white overflow-hidden cursor-zoom-in"
+                  >
+                    <img
+                      src={product.image}
+                      alt={`${product.name} - Kanha Asa Certificate`}
+                      loading="lazy"
+                      className="w-full h-full object-contain p-1.5"
+                    />
+                    <span className="absolute bottom-2 right-2 flex items-center gap-1.5 text-[12px] font-semibold text-white bg-black/80 px-2.5 py-1 rounded-full">
+                      <FileText className="w-3.5 h-3.5" />
+                      Certificate खोलें
+                    </span>
+                  </button>
+                ) : (
                 <div className="relative aspect-[4/3] bg-stone-950 overflow-hidden">
                   <img
                     src={product.image}
@@ -212,6 +252,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     {tier} OFF · {coupon}
                   </div>
                 </div>
+                )}
 
                 {/* Card Body */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">

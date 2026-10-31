@@ -17,7 +17,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
   canToggleVisibility = true,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [customCertImage, setCustomCertImage] = useState<string | null>(null);
+  const [customCertImage, setCustomCertImage] = useState<string | null>(product.certificateImage || null);
   const [showUploadInput, setShowUploadInput] = useState(false);
   const [inputUrl, setInputUrl] = useState('');
 
@@ -61,7 +61,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
           <KanhaLogo size={36} />
           <div>
             <h4 className="font-bold text-red-600 font-display text-sm leading-none">KANHA ASA TM</h4>
-            <p className="text-[12px] text-stone-600">Official Uploaded Lab Certificate</p>
+            <p className="text-[12px] text-stone-600">Official Rudraksha Identification Report</p>
           </div>
         </div>
         <button
@@ -73,7 +73,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
         </button>
       </div>
 
-      <div className="mt-3 aspect-[4/3] rounded overflow-hidden border border-stone-300 bg-stone-100 flex items-center justify-center">
+      <div className="mt-3 aspect-[17/10] rounded overflow-hidden border border-stone-300 bg-white flex items-center justify-center">
         <img
           src={customCertImage}
           alt="Custom Kanha Asa Certificate"
