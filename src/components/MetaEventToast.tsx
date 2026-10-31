@@ -29,11 +29,11 @@ export const MetaEventToast: React.FC = () => {
         <div className="text-xs">
           <p className="font-semibold text-emerald-300 flex items-center gap-1.5">
             <span>Meta Pixel Event Fired:</span>
-            <span className="font-mono text-white bg-stone-800 px-1.5 py-0.5 rounded text-[11px]">
+            <span className="font-mono text-white bg-stone-800 px-1.5 py-0.5 rounded text-[13px]">
               {activeEvent.eventName}
             </span>
           </p>
-          <p className="text-[11px] text-stone-400 mt-0.5 truncate">
+          <p className="text-[13px] text-stone-400 mt-0.5 truncate">
             {activeEvent.payload?.content_name || activeEvent.payload?.concern || 'Event logged successfully'}
           </p>
         </div>

@@ -198,7 +198,7 @@ export const KanhaSocialHub: React.FC = () => {
                 <div className="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/40 flex items-center justify-center text-red-500 group-hover:bg-red-600 group-hover:text-white transition-colors">
                   <YouTubeIcon size={26} className="fill-current" />
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-red-400 bg-red-950/60 px-2.5 py-1 rounded-full border border-red-800/60">
+                <span className="text-[13px] font-bold uppercase tracking-wider text-red-400 bg-red-950/60 px-2.5 py-1 rounded-full border border-red-800/60">
                   Official Channel
                 </span>
               </div>
@@ -210,7 +210,7 @@ export const KanhaSocialHub: React.FC = () => {
                   कान्हा असा का आधिकारिक यूट्यूब चैनल। 1-21 मुखी रुद्राक्ष पहचान, प्राण प्रतिष्ठा एवं कस्टमर रिव्यू वीडियो।
                 </p>
               </div>
-              <div className="space-y-1 text-[11px] text-stone-300 pt-1">
+              <div className="space-y-1 text-[13px] text-stone-300 pt-1">
                 <p className="flex items-center gap-1.5 text-stone-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>लाइव रुद्राक्ष एक्स-रे व लैब टेस्टिंग</span>
@@ -239,7 +239,7 @@ export const KanhaSocialHub: React.FC = () => {
                 <div className="w-12 h-12 rounded-xl bg-pink-600/20 border border-pink-500/40 flex items-center justify-center text-pink-500 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-pink-500 group-hover:to-purple-600 group-hover:text-white transition-colors">
                   <InstagramIcon size={26} className="fill-current" />
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-pink-400 bg-pink-950/60 px-2.5 py-1 rounded-full border border-pink-800/60">
+                <span className="text-[13px] font-bold uppercase tracking-wider text-pink-400 bg-pink-950/60 px-2.5 py-1 rounded-full border border-pink-800/60">
                   Reels & Daily Darshan
                 </span>
               </div>
@@ -251,7 +251,7 @@ export const KanhaSocialHub: React.FC = () => {
                   इंस्टाग्राम पर प्रतिदिन सिद्ध रुद्राक्ष दर्शन, दैनिक पंचांग, दुर्लभ रील्स एवं भक्तों के अनुभव देखें।
                 </p>
               </div>
-              <div className="space-y-1 text-[11px] text-stone-300 pt-1">
+              <div className="space-y-1 text-[13px] text-stone-300 pt-1">
                 <p className="flex items-center gap-1.5 text-stone-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>दैनिक दुर्लभ रुद्राक्ष रील्स व स्टोरी</span>
@@ -280,7 +280,7 @@ export const KanhaSocialHub: React.FC = () => {
                 <div className="w-12 h-12 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                   <FacebookIcon size={26} className="fill-current" />
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded-full border border-blue-800/60">
+                <span className="text-[13px] font-bold uppercase tracking-wider text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded-full border border-blue-800/60">
                   Vedic Community
                 </span>
               </div>
@@ -292,7 +292,7 @@ export const KanhaSocialHub: React.FC = () => {
                   कान्हा असा का आधिकारिक फेसबुक पेज। वैदिक ज्योतिष, रुद्राक्ष महत्व एवं विशेष पूजा आयोजनों की जानकारी।
                 </p>
               </div>
-              <div className="space-y-1 text-[11px] text-stone-300 pt-1">
+              <div className="space-y-1 text-[13px] text-stone-300 pt-1">
                 <p className="flex items-center gap-1.5 text-stone-300">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>वैदिक लेख व ग्रहों के ज्योतिषीय उपाय</span>
@@ -355,12 +355,12 @@ export const KanhaSocialHub: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent" />
                   
                   {/* Category Pill */}
-                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded bg-stone-950/80 backdrop-blur-sm text-[10px] font-semibold text-amber-300 border border-amber-500/30">
+                  <span className="absolute top-3 left-3 px-2 py-0.5 rounded bg-stone-950/80 backdrop-blur-sm text-[12px] font-semibold text-amber-300 border border-amber-500/30">
                     {video.category}
                   </span>
 
                   {/* Duration Pill */}
-                  <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-stone-950/90 text-[11px] font-mono font-medium text-stone-200">
+                  <span className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-stone-950/90 text-[13px] font-mono font-medium text-stone-200">
                     {video.duration}
                   </span>
 
@@ -383,7 +383,7 @@ export const KanhaSocialHub: React.FC = () => {
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between text-[11px] text-stone-400">
+                  <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between text-[13px] text-stone-400">
                     <span className="flex items-center gap-1 text-emerald-400 font-medium">
                       <Eye className="w-3.5 h-3.5" />
                       {video.views}
@@ -496,7 +496,7 @@ export const KanhaSocialHub: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-stone-400">
+                <div className="pt-3 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-stone-400">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>प्रमाणित ISO 9001:2015 रुद्राक्ष केंद्र रीवा (म.प्र.)</span>

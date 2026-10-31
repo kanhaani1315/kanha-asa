@@ -63,13 +63,13 @@ export const FeedbackNewsTicker: React.FC = () => {
               <div key={idx} className="flex items-center gap-2.5 text-xs text-stone-300 shrink-0">
                 <span className="font-semibold text-white">{item.author}:</span>
                 <span className="text-amber-300 font-medium">"{item.feedback}"</span>
-                <span className="text-stone-400 font-mono text-[11px]">({item.bead})</span>
+                <span className="text-stone-400 font-mono text-[13px]">({item.bead})</span>
                 <div className="flex text-amber-400">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3 h-3 fill-amber-400" />
                   ))}
                 </div>
-                <span className="text-emerald-400 text-[10px] flex items-center gap-0.5">
+                <span className="text-emerald-400 text-[12px] flex items-center gap-0.5">
                   <ShieldCheck className="w-3 h-3" />
                   <span>{item.time}</span>
                 </span>

@@ -61,7 +61,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
           <KanhaLogo size={36} />
           <div>
             <h4 className="font-bold text-red-600 font-display text-sm leading-none">KANHA ASA TM</h4>
-            <p className="text-[10px] text-stone-600">Official Uploaded Lab Certificate</p>
+            <p className="text-[12px] text-stone-600">Official Uploaded Lab Certificate</p>
           </div>
         </div>
         <button
@@ -81,7 +81,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
         />
       </div>
 
-      <div className="mt-3 pt-2 border-t border-stone-300 flex items-center justify-between text-[11px] text-stone-600">
+      <div className="mt-3 pt-2 border-t border-stone-300 flex items-center justify-between text-[13px] text-stone-600">
         <span>C NO: {certNumber}</span>
         <span className="text-emerald-700 font-bold">Kanha Asa Verified Authenticity</span>
       </div>
@@ -97,7 +97,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
 
       {/* Right Edge Vertical URL */}
       <div className="absolute right-1.5 top-0 bottom-0 flex items-center justify-center pointer-events-none">
-        <span className="text-[10px] tracking-widest text-blue-700 font-bold rotate-90 whitespace-nowrap">
+        <span className="text-[12px] tracking-widest text-blue-700 font-bold rotate-90 whitespace-nowrap">
           www.kanhaasa.com
         </span>
       </div>
@@ -107,7 +107,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
         {/* Left Stamp / Logo */}
         <div className="flex flex-col items-center shrink-0">
           <KanhaLogo size={54} />
-          <span className="text-[8px] font-bold text-stone-600 mt-1 font-mono">KANHA ASA TM</span>
+          <span className="text-[13px] font-bold text-stone-600 mt-1 font-mono">KANHA ASA TM</span>
         </div>
 
         {/* Center Title Lockup */}
@@ -115,7 +115,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-wider text-red-600 font-display drop-shadow-sm leading-none">
             KANHA ASA<sup className="text-xs">TM</sup>
           </h2>
-          <p className="text-[11px] font-semibold text-stone-700 mt-0.5">
+          <p className="text-[13px] font-semibold text-stone-700 mt-0.5">
             ISO 9001:2015 certified company
           </p>
           <div className="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 border border-blue-200 rounded">
@@ -206,14 +206,14 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
 
           <div className="grid grid-cols-5 py-0.5">
             <span className="col-span-2 font-bold text-stone-900">X-Ray Results :</span>
-            <span className="col-span-3 text-[11px] leading-tight text-stone-700">
+            <span className="col-span-3 text-[13px] leading-tight text-stone-700">
               X-Ray Shows Natural Seed Inside & {compartments} Compartment Observed
             </span>
           </div>
 
           {/* Genus & Origin Highlight */}
           <div className="pt-2 border-t border-stone-200 space-y-0.5">
-            <p className="text-[11px] font-bold text-stone-900">
+            <p className="text-[13px] font-bold text-stone-900">
               GENUS/TYPE : <span className="font-serif italic font-normal text-stone-700">ELAEOCARPUS/E. GANITRUS</span>
             </p>
             <p className="text-sm font-extrabold text-red-600 tracking-wider">
@@ -249,20 +249,20 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
             <div className="font-serif italic text-sm text-blue-900 font-bold select-none">
               Anima
             </div>
-            <div className="text-[11px] font-extrabold tracking-wider text-red-600 font-display">
+            <div className="text-[13px] font-extrabold tracking-wider text-red-600 font-display">
               KANHA ASA
             </div>
           </div>
 
           {/* Accreditation Seals (EGAC, IAF, TESTED) */}
           <div className="flex items-center justify-center gap-2 pt-1">
-            <div className="border border-stone-400 rounded px-1 py-0.5 text-[8px] font-bold text-stone-800 bg-stone-50">
+            <div className="border border-stone-400 rounded px-1 py-0.5 text-[13px] font-bold text-stone-800 bg-stone-50">
               EGAC
             </div>
-            <div className="w-8 h-8 rounded-full border-2 border-blue-800 bg-blue-900 text-white flex items-center justify-center text-[8px] font-bold">
+            <div className="w-8 h-8 rounded-full border-2 border-blue-800 bg-blue-900 text-white flex items-center justify-center text-[13px] font-bold">
               IAF
             </div>
-            <div className="w-8 h-8 rounded-full border-2 border-red-700 bg-amber-500 text-stone-950 flex flex-col items-center justify-center text-[7px] font-extrabold leading-none shadow-sm">
+            <div className="w-8 h-8 rounded-full border-2 border-red-700 bg-amber-500 text-stone-950 flex flex-col items-center justify-center text-[13px] font-extrabold leading-none shadow-sm">
               <span>TESTED</span>
             </div>
           </div>
@@ -270,7 +270,7 @@ export const OfficialCertificate: React.FC<OfficialCertificateProps> = ({
       </div>
 
       {/* Footer Assurance Banner */}
-      <div className="mt-3 pt-2 border-t-2 border-stone-300 flex items-center justify-between text-[10px] text-stone-600 font-medium">
+      <div className="mt-3 pt-2 border-t-2 border-stone-300 flex items-center justify-between text-[12px] text-stone-600 font-medium">
         <span>ISO 9001:2015 Accredited Gemological Certification</span>
         <span className="text-emerald-700 font-bold">100% Genuine Himalayan Origin Guaranteed</span>
       </div>

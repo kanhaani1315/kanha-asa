@@ -186,7 +186,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
               <BarChart3 className="w-4 h-4 text-amber-400" />
             </div>
             <p className="text-2xl font-bold text-white tabular-nums mt-1">{leads.length}</p>
-            <p className="text-[11px] text-stone-500 mt-1">From Meta Ads, Mukhi Finder & Kundli forms</p>
+            <p className="text-[13px] text-stone-500 mt-1">From Meta Ads, Mukhi Finder & Kundli forms</p>
           </div>
 
           <div className="p-4 bg-stone-950 border border-stone-800 rounded-lg">
@@ -198,7 +198,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
               <span>Active</span>
               <span className="text-xs text-stone-400 font-mono font-normal">ID: {configDraft.metaPixelId}</span>
             </p>
-            <p className="text-[11px] text-stone-500 mt-1">{metaEvents.length} events logged in session</p>
+            <p className="text-[13px] text-stone-500 mt-1">{metaEvents.length} events logged in session</p>
           </div>
 
           <div className="p-4 bg-stone-950 border border-stone-800 rounded-lg">
@@ -209,7 +209,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
             <p className="text-base font-bold text-white mt-1">
               +{configDraft.merchantPhone}
             </p>
-            <p className="text-[11px] text-emerald-400 mt-1">
+            <p className="text-[13px] text-emerald-400 mt-1">
               {configDraft.enableAutoWelcome ? 'Instant Welcome Active' : 'Manual Routing'}
             </p>
           </div>
@@ -280,7 +280,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
             {/* Leads Table */}
             <div className="bg-stone-950 border border-stone-800 rounded-lg overflow-x-auto">
               <table className="w-full text-left text-xs text-stone-300">
-                <thead className="bg-stone-900/90 text-stone-400 text-[11px] uppercase tracking-wider border-b border-stone-800">
+                <thead className="bg-stone-900/90 text-stone-400 text-[13px] uppercase tracking-wider border-b border-stone-800">
                   <tr>
                     <th className="py-3 px-4">Devotee / Customer</th>
                     <th className="py-3 px-4">WhatsApp Contact</th>
@@ -295,16 +295,16 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                     <tr key={lead.id} className="hover:bg-stone-900/50 transition-colors">
                       <td className="py-3.5 px-4">
                         <p className="font-semibold text-white">{lead.name}</p>
-                        <p className="text-[11px] text-stone-500">{lead.city || 'India'} · {lead.createdAt}</p>
+                        <p className="text-[13px] text-stone-500">{lead.city || 'India'} · {lead.createdAt}</p>
                       </td>
                       <td className="py-3.5 px-4 font-mono tabular-nums text-stone-200">
                         {lead.phone}
                       </td>
                       <td className="py-3.5 px-4 max-w-xs">
                         <p className="font-medium text-amber-300 truncate">{lead.concern}</p>
-                        <p className="text-[11px] text-stone-400 truncate">{lead.productInterest}</p>
+                        <p className="text-[13px] text-stone-400 truncate">{lead.productInterest}</p>
                       </td>
-                      <td className="py-3.5 px-4 text-[11px]">
+                      <td className="py-3.5 px-4 text-[13px]">
                         <span className="text-stone-400">{lead.utmSource}</span>
                         <p className="text-stone-500 font-mono">{lead.utmCampaign}</p>
                       </td>
@@ -440,7 +440,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                   <h3 className="text-base font-bold font-display text-white">
                     Meta Pixel Event Tester
                   </h3>
-                  <span className="text-[11px] text-emerald-400 flex items-center gap-1">
+                  <span className="text-[13px] text-emerald-400 flex items-center gap-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                     <span>Conversions API Ready</span>
                   </span>
@@ -500,7 +500,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs text-stone-300">
-                  <thead className="bg-stone-900 text-stone-400 text-[11px] uppercase border-b border-stone-800">
+                  <thead className="bg-stone-900 text-stone-400 text-[13px] uppercase border-b border-stone-800">
                     <tr>
                       <th className="py-2.5 px-3">Event Name</th>
                       <th className="py-2.5 px-3">Time</th>
@@ -508,7 +508,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                       <th className="py-2.5 px-3">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-800/60 font-mono text-[11px]">
+                  <tbody className="divide-y divide-stone-800/60 font-mono text-[13px]">
                     {metaEvents.slice(0, 10).map((evt) => (
                       <tr key={evt.id}>
                         <td className="py-2 px-3 font-semibold text-amber-400">{evt.eventName}</td>
@@ -560,7 +560,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                       onChange={(e) => setConfigDraft({ ...configDraft, merchantPhone: e.target.value })}
                       className="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded text-xs text-stone-100 font-mono"
                     />
-                    <p className="text-[11px] text-stone-500 mt-1">Use format: 91 followed by 10-digit number</p>
+                    <p className="text-[13px] text-stone-500 mt-1">Use format: 91 followed by 10-digit number</p>
                   </div>
 
                   <div>
@@ -673,7 +673,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                     onChange={(e) => setConfigDraft({ ...configDraft, welcomeTemplate: e.target.value })}
                     className="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded text-xs text-stone-100 font-sans"
                   />
-                  <p className="text-[11px] text-stone-500 mt-0.5">Variables available: &#123;&#123;name&#125;&#125;, &#123;&#123;concern&#125;&#125;</p>
+                  <p className="text-[13px] text-stone-500 mt-0.5">Variables available: &#123;&#123;name&#125;&#125;, &#123;&#123;concern&#125;&#125;</p>
                 </div>
 
                 <div>
@@ -686,7 +686,7 @@ export const MetaAdsCenter: React.FC<MetaAdsCenterProps> = ({
                     onChange={(e) => setConfigDraft({ ...configDraft, cartRecoveryTemplate: e.target.value })}
                     className="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded text-xs text-stone-100 font-sans"
                   />
-                  <p className="text-[11px] text-stone-500 mt-0.5">Variables available: &#123;&#123;name&#125;&#125;, &#123;&#123;product&#125;&#125;, &#123;&#123;link&#125;&#125;</p>
+                  <p className="text-[13px] text-stone-500 mt-0.5">Variables available: &#123;&#123;name&#125;&#125;, &#123;&#123;product&#125;&#125;, &#123;&#123;link&#125;&#125;</p>
                 </div>
               </div>
             </div>

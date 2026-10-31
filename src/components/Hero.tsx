@@ -57,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Kanha Asa Astro & Rudraksha · ISO 9001:2015 Certified</span>
               </div>
-              <p className="text-[11px] text-stone-400 font-sans mt-0.5">
+              <p className="text-[13px] text-stone-400 font-sans mt-0.5">
                 Vedic Astro Consultation · 24x7 AI Voice Calling & Live Support
               </p>
             </div>

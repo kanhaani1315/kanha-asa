@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             {/* Official Social Links (YouTube, Instagram, Facebook) */}
             <div className="pt-2">
-              <p className="text-[11px] font-semibold text-stone-300 uppercase tracking-wider mb-2">
+              <p className="text-[13px] font-semibold text-stone-300 uppercase tracking-wider mb-2">
                 Official Channels & Video Darshan:
               </p>
               <div className="flex items-center gap-2">
@@ -193,7 +193,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Phone className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white font-mono font-bold">+91 {merchantPhone}</p>
-                  <p className="text-[11px] text-stone-500">Official Calling & WhatsApp</p>
+                  <p className="text-[13px] text-stone-500">Official Calling & WhatsApp</p>
                 </div>
               </div>
 
@@ -208,7 +208,7 @@ export const Footer: React.FC<FooterProps> = ({
                   >
                     www.kanhaasa.com
                   </a>
-                  <p className="text-[11px] text-stone-500">Official Web Store</p>
+                  <p className="text-[13px] text-stone-500">Official Web Store</p>
                 </div>
               </div>
 
@@ -221,7 +221,7 @@ export const Footer: React.FC<FooterProps> = ({
                     href="https://maps.google.com/?q=Kanha+Asa+Shop+No+BF3/3+Shilpi+Plaza+Rewa+Madhya+Pradesh+486001"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 underline mt-1 font-sans"
+                    className="inline-flex items-center gap-1 text-[13px] text-amber-400 hover:text-amber-300 underline mt-1 font-sans"
                   >
                     📍 Google मैप्स पर देखें (Open in Google Maps)
                   </a>
@@ -244,7 +244,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             <div>
               <p className="text-white font-bold text-xs">कान्हा असा ऑफिशियल सोशल मीडिया एवं वीडियो दर्शन</p>
-              <p className="text-[11px] text-stone-400">असली 1 से 21 मुखी रुद्राक्ष पहचान, वैदिक पूजन व लाइव कस्टमर वीडियो देखें</p>
+              <p className="text-[13px] text-stone-400">असली 1 से 21 मुखी रुद्राक्ष पहचान, वैदिक पूजन व लाइव कस्टमर वीडियो देखें</p>
             </div>
           </div>
 
@@ -285,7 +285,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Quiet Bottom Strip */}
-        <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[11px]">
+        <div className="pt-8 border-t border-stone-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[13px]">
           <div className="flex flex-col gap-2 items-center sm:items-start">
             <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-stone-300">
               <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>

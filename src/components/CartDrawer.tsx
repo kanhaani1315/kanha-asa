@@ -187,7 +187,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <h2 className="text-base font-bold font-display text-white leading-tight">
                   Direct Online Checkout
                 </h2>
-                <span className="text-[10px] text-stone-400 font-mono">www.kanhaasa.com Secure Portal</span>
+                <span className="text-[12px] text-stone-400 font-mono">www.kanhaasa.com Secure Portal</span>
               </div>
             </div>
             <button
@@ -206,7 +206,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <Truck className="w-4 h-4 text-amber-400" />
                 <span>शिपिंग एवं डिलीवरी विकल्प (Delivery Mode):</span>
               </span>
-              <span className="text-[11px] font-mono font-bold text-amber-300">
+              <span className="text-[13px] font-mono font-bold text-amber-300">
                 {paymentMethod === 'cod' ? 'सीओडी (+₹150)' : 'फ्री डिलीवरी (₹0)'}
               </span>
             </div>
@@ -228,8 +228,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <CreditCard className="w-3.5 h-3.5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-bold text-white leading-tight">ऑनलाइन पेमेंट</p>
-                  <p className="text-[10px] text-emerald-400 font-semibold">मुफ़्त शिपिंग (₹0)</p>
+                  <p className="text-[13px] font-bold text-white leading-tight">ऑनलाइन पेमेंट</p>
+                  <p className="text-[12px] text-emerald-400 font-semibold">मुफ़्त शिपिंग (₹0)</p>
                 </div>
               </button>
 
@@ -248,8 +248,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <Banknote className="w-3.5 h-3.5" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-bold text-white leading-tight">कैश ऑन डिलीवरी (COD)</p>
-                  <p className="text-[10px] text-amber-300 font-semibold">+₹150 कूरियर चार्ज</p>
+                  <p className="text-[13px] font-bold text-white leading-tight">कैश ऑन डिलीवरी (COD)</p>
+                  <p className="text-[12px] text-amber-300 font-semibold">+₹150 कूरियर चार्ज</p>
                 </div>
               </button>
             </div>
@@ -315,7 +315,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           <h4 className="text-xs font-semibold text-white line-clamp-1">
                             {product.name}
                           </h4>
-                          <p className="text-[11px] text-amber-400/90 font-serif-luxury">
+                          <p className="text-[13px] text-amber-400/90 font-serif-luxury">
                             {product.hindiName}
                           </p>
                         </div>
@@ -366,7 +366,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     </span>
                   </div>
 
-                  <p className="text-[11px] text-stone-400">
+                  <p className="text-[13px] text-stone-400">
                     {subtotal >= 100000
                       ? '₹1 Lakh+ Milestone reached! 25% VIP Discount applied.'
                       : subtotal >= 10000
@@ -382,7 +382,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <Banknote className="w-4 h-4" />
                       <span>सीओडी (Cash on Delivery) चुना गया है:</span>
                     </div>
-                    <p className="text-[11px] text-stone-300">
+                    <p className="text-[13px] text-stone-300">
                       सीओडी पार्सल के लिए +₹150 कूरियर हैंडलिंग चार्ज जुड़ा है। पार्सल मिलने पर डिलीवरी एजेंट को नकद भुगतान करें।
                     </p>
                   </div>
@@ -392,7 +392,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <CreditCard className="w-4 h-4" />
                       <span>ऑनलाइन भुगतान (Prepaid):</span>
                     </div>
-                    <p className="text-[11px] text-stone-300">
+                    <p className="text-[13px] text-stone-300">
                       ऑनलाइन पेमेंट पर पूरे भारत में 100% मुफ़्त डिलीवरी (₹0 शिपिंग शुल्क) दी जा रही है।
                     </p>
                   </div>
@@ -403,7 +403,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Included with Every Order</span>
                   </div>
-                  <p className="text-stone-400 text-[11px]">
+                  <p className="text-stone-400 text-[13px]">
                     Official Kanha Asa ISO 9001:2015 Identification Card · Ganga Jal Vedic Abhishek Consecration · Sacred Red Silk Thread.
                   </p>
                 </div>
@@ -455,7 +455,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       type="button"
                       onClick={handleDetectLocation}
                       disabled={isLocating}
-                      className="inline-flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 underline cursor-pointer disabled:opacity-50"
+                      className="inline-flex items-center gap-1 text-[13px] text-amber-400 hover:text-amber-300 underline cursor-pointer disabled:opacity-50"
                       title="Google / GPS से लाइव लोकेशन द्वारा सटीक पता भरें"
                     >
                       {isLocating ? (
@@ -472,7 +472,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     </button>
                   </div>
                   {locationSuccessMsg && (
-                    <p className="text-[11px] text-emerald-400 font-semibold mb-1 animate-pulse">
+                    <p className="text-[13px] text-emerald-400 font-semibold mb-1 animate-pulse">
                       {locationSuccessMsg}
                     </p>
                   )}
@@ -502,7 +502,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div>
                   <label className="block text-xs font-medium text-stone-300 mb-1.5 flex items-center justify-between">
                     <span>Payment & Shipping Method (भुगतान विकल्प) *</span>
-                    <span className="text-[10px] text-amber-400">सीओडी: +₹150</span>
+                    <span className="text-[12px] text-amber-400">सीओडी: +₹150</span>
                   </label>
                   <div className="grid grid-cols-2 gap-2">
                     <button
@@ -517,7 +517,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <CreditCard className="w-4 h-4 text-emerald-400 shrink-0" />
                       <div>
                         <p className="text-xs font-bold text-white">ऑनलाइन (Prepaid)</p>
-                        <p className="text-[10px] text-emerald-400 font-semibold">फ्री शिपिंग (₹0)</p>
+                        <p className="text-[12px] text-emerald-400 font-semibold">फ्री शिपिंग (₹0)</p>
                       </div>
                     </button>
 
@@ -533,7 +533,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <Banknote className="w-4 h-4 text-amber-400 shrink-0" />
                       <div>
                         <p className="text-xs font-bold text-white">कैश ऑन डिलीवरी (COD)</p>
-                        <p className="text-[10px] text-amber-300 font-semibold">+₹150 चार्ज</p>
+                        <p className="text-[12px] text-amber-300 font-semibold">+₹150 चार्ज</p>
                       </div>
                     </button>
                   </div>

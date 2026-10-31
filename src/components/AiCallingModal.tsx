@@ -92,11 +92,11 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
             <div>
               <h3 className="text-sm font-bold font-display text-white flex items-center gap-2">
                 <span>Kanha AI Voice Astrologer Calling</span>
-                <span className="px-1.5 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded text-[10px] font-mono font-bold">
+                <span className="px-1.5 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded text-[12px] font-mono font-bold">
                   AI CALLS YOU
                 </span>
               </h3>
-              <p className="text-[11px] text-stone-400">
+              <p className="text-[13px] text-stone-400">
                 Outbound Neural Voice Consultation · 24x7 AI Telephony Astrologer
               </p>
             </div>
@@ -153,7 +153,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
             <div className="py-6 text-center space-y-6">
               <div className="relative mx-auto w-24 h-24 rounded-full bg-emerald-950 border-4 border-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-950/60">
                 <AiCallingIcon size={56} />
-                <span className="absolute -bottom-1 px-2.5 py-0.5 bg-emerald-600 text-[10px] font-bold rounded-full text-white">
+                <span className="absolute -bottom-1 px-2.5 py-0.5 bg-emerald-600 text-[12px] font-bold rounded-full text-white">
                   CALL ACTIVE
                 </span>
               </div>
@@ -271,7 +271,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
                     </select>
                   </div>
 
-                  <div className="p-3 bg-stone-950 border border-stone-800 rounded-lg text-[11px] text-stone-400 space-y-1">
+                  <div className="p-3 bg-stone-950 border border-stone-800 rounded-lg text-[13px] text-stone-400 space-y-1">
                     <p className="text-white font-medium">How AI Calling Works:</p>
                     <p>• AI Astrologer initiates a direct voice call to your entered mobile.</p>
                     <p>• You speak naturally in Hindi or English — AI answers all questions about Mukhis, Gemstones, and Lo Shu Grid.</p>
@@ -344,7 +344,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
                 >
                   <div>
                     <p className="font-bold text-white group-hover:text-amber-300">10 Minutes AI Voice Call</p>
-                    <p className="text-[11px] text-stone-400">Quick Mukhi recommendation & mantra check</p>
+                    <p className="text-[13px] text-stone-400">Quick Mukhi recommendation & mantra check</p>
                   </div>
                   <span className="font-bold text-amber-400 text-base font-mono">₹49</span>
                 </div>
@@ -354,9 +354,9 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
                   className="p-3 bg-stone-950 border-2 border-amber-500 rounded-lg flex items-center justify-between text-xs cursor-pointer transition-colors shadow-md group"
                 >
                   <div>
-                    <span className="text-[9px] uppercase font-bold text-amber-400 tracking-wider">Most Popular</span>
+                    <span className="text-[13px] uppercase font-bold text-amber-400 tracking-wider">Most Popular</span>
                     <p className="font-bold text-white group-hover:text-amber-300">30 Minutes Deep Jyotish Call</p>
-                    <p className="text-[11px] text-stone-400">Complete horoscope reading & Lo Shu Grid remedies</p>
+                    <p className="text-[13px] text-stone-400">Complete horoscope reading & Lo Shu Grid remedies</p>
                   </div>
                   <span className="font-bold text-amber-400 text-base font-mono">₹149</span>
                 </div>
@@ -367,7 +367,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
                 >
                   <div>
                     <p className="font-bold text-white group-hover:text-amber-300">65 Minutes VIP Family Call</p>
-                    <p className="text-[11px] text-stone-400">Extended astrological analysis for entire family</p>
+                    <p className="text-[13px] text-stone-400">Extended astrological analysis for entire family</p>
                   </div>
                   <span className="font-bold text-amber-400 text-base font-mono">₹299</span>
                 </div>
@@ -385,7 +385,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
                     onChange={(e) => setCustomRechargeMins(Math.max(1, parseInt(e.target.value) || 0))}
                     className="w-24 px-3 py-1.5 bg-stone-900 border border-stone-700 rounded text-xs text-white font-mono"
                   />
-                  <span className="text-stone-400 text-[11px]">Mins = ₹{Math.round(customRechargeMins * 4.9)}</span>
+                  <span className="text-stone-400 text-[13px]">Mins = ₹{Math.round(customRechargeMins * 4.9)}</span>
                   <button
                     onClick={() => handleBuyMinutes(customRechargeMins, Math.round(customRechargeMins * 4.9))}
                     className="ml-auto px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs rounded transition-colors cursor-pointer"
@@ -396,7 +396,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({
               </div>
 
               <div className="pt-2 text-center">
-                <p className="text-[11px] text-stone-500">
+                <p className="text-[13px] text-stone-500">
                   Payments processed securely. Free 10% coupon <span className="text-amber-400 font-mono">KANHA10</span> on first order at www.kanhaasa.com.
                 </p>
               </div>

@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Navigation - Strict Top Bar Contract: Zone 1, Zone 2, Zone 3 */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
         {/* Zone 1: Single Brand Lockup with Official Crest Logo */}
         <a
           href="#home"
@@ -55,13 +55,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             setActiveView('store');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="flex items-center gap-2 group cursor-pointer"
+          className="flex items-center gap-2 group cursor-pointer shrink-0"
         >
           <KanhaLogo size={42} showText={true} />
         </a>
 
         {/* Zone 2: Clean text navigation links */}
-        <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-stone-300">
+        <nav className="order-last w-full flex items-center xl:justify-center gap-6 text-sm font-medium text-stone-300 overflow-x-auto whitespace-nowrap py-2.5 border-t border-stone-800 [scrollbar-width:none]">
           <a
             href="#catalog"
             onClick={(e) => {
@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: Primary action icons (AI Astrologer Query, AI Calling, WhatsApp, Cart) */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {/* AI Query Icon (Name Numerology, Mobile Check, Lo Shu Grid) */}
           <button
             onClick={onOpenAiChat}
@@ -169,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="AI ज्योतिषी: नाम न्यूमरोलॉजी, मोबाइल नंबर जांच, लो-शू ग्रिड (क्रेडिट्स द्वारा)"
           >
             <KanhaAiChatIcon size={18} />
-            <span className="hidden xl:inline text-[11px] font-bold">AI ज्योतिषी</span>
+            <span className="hidden xl:inline text-[13px] font-bold">AI ज्योतिषी</span>
           </button>
 
           {/* AI Voice Call Icon */}
@@ -179,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="AI Voice Call Consultation"
           >
             <AiCallingIcon size={18} />
-            <span className="hidden xl:inline text-[11px] font-bold">AI Call</span>
+            <span className="hidden xl:inline text-[13px] font-bold">AI Call</span>
           </button>
 
           {/* Direct Phone Call Icon (No written phone text) */}

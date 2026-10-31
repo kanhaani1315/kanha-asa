@@ -58,7 +58,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
               </div>
               <div>
                 <h4 className="text-xs font-bold text-white font-display">Kanha Asa Astrologer</h4>
-                <p className="text-[11px] text-emerald-300 font-sans">Official Verified Support</p>
+                <p className="text-[13px] text-emerald-300 font-sans">Official Verified Support</p>
               </div>
             </div>
             <button
@@ -78,7 +78,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
                   setIsOpen(false);
                   onOpenAiChat();
                 }}
-                className="p-2 bg-stone-900 hover:bg-stone-800 border border-amber-900/50 rounded flex items-center gap-1.5 text-[11px] font-semibold text-amber-300 transition-colors cursor-pointer"
+                className="p-2 bg-stone-900 hover:bg-stone-800 border border-amber-900/50 rounded flex items-center gap-1.5 text-[13px] font-semibold text-amber-300 transition-colors cursor-pointer"
               >
                 <KanhaAiChatIcon size={16} />
                 <span>AI ज्योतिषी चैट</span>
@@ -89,14 +89,14 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
                   setIsOpen(false);
                   onOpenAiCalling();
                 }}
-                className="p-2 bg-stone-900 hover:bg-stone-800 border border-emerald-900/50 rounded flex items-center gap-1.5 text-[11px] font-semibold text-emerald-300 transition-colors cursor-pointer"
+                className="p-2 bg-stone-900 hover:bg-stone-800 border border-emerald-900/50 rounded flex items-center gap-1.5 text-[13px] font-semibold text-emerald-300 transition-colors cursor-pointer"
               >
                 <AiCallingIcon size={16} />
                 <span>AI Voice Call</span>
               </button>
             </div>
 
-            <p className="text-[11px] text-stone-400 font-medium px-1 pt-1">
+            <p className="text-[13px] text-stone-400 font-medium px-1 pt-1">
               Select inquiry or write below:
             </p>
             {quickPrompts.map((p, idx) => (

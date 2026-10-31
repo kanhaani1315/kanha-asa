@@ -192,12 +192,12 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
                     Razorpay Live Payment Gateway सक्रिय है
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-700/60">
+                  <span className="inline-flex items-center gap-1 text-[12px] font-mono font-semibold bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-700/60">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     Live Active
                   </span>
                 </div>
-                <p className="text-[11px] text-stone-400 mt-0.5">
+                <p className="text-[13px] text-stone-400 mt-0.5">
                   स्वीकृत विकल्प: UPI (Google Pay, PhonePe, Paytm), RuPay, Visa, MasterCard, नेटबैंकिंग एवं आसान EMI
                 </p>
               </div>
@@ -229,7 +229,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
             </div>
             <div>
               <strong className="text-white">वही सेम दाना लॉकर में रिजर्व:</strong>
-              <p className="text-stone-400 text-[11px] mt-0.5">पहली किस्त आते ही उस कोड का दाना आपके नाम से सील कर दिया जाएगा। किसी और को नहीं दिया जाएगा।</p>
+              <p className="text-stone-400 text-[13px] mt-0.5">पहली किस्त आते ही उस कोड का दाना आपके नाम से सील कर दिया जाएगा। किसी और को नहीं दिया जाएगा।</p>
             </div>
           </div>
 
@@ -239,7 +239,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
             </div>
             <div>
               <strong className="text-white">पूर्ण भुगतान पर दाना डिलीवरी:</strong>
-              <p className="text-stone-400 text-[11px] mt-0.5">दाना तभी भेजा जाएगा जब आपकी सभी किस्तें (100% पेमेंट) पूरी हो जाएंगी। अधूरा भुगतान पर नहीं भेजा जाएगा।</p>
+              <p className="text-stone-400 text-[13px] mt-0.5">दाना तभी भेजा जाएगा जब आपकी सभी किस्तें (100% पेमेंट) पूरी हो जाएंगी। अधूरा भुगतान पर नहीं भेजा जाएगा।</p>
             </div>
           </div>
 
@@ -249,7 +249,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
             </div>
             <div>
               <strong className="text-white">0% ब्याज व लैब सर्टिफिकेट:</strong>
-              <p className="text-stone-400 text-[11px] mt-0.5">कोई ब्याज या गुप्त शुल्क नहीं। अंतिम भुगतान पर 1,008 मंत्रों से प्राण-प्रतिष्ठा व ISO सर्टिफिकेट संग स्पीड पोस्ट।</p>
+              <p className="text-stone-400 text-[13px] mt-0.5">कोई ब्याज या गुप्त शुल्क नहीं। अंतिम भुगतान पर 1,008 मंत्रों से प्राण-प्रतिष्ठा व ISO सर्टिफिकेट संग स्पीड पोस्ट।</p>
             </div>
           </div>
         </div>
@@ -271,7 +271,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-amber-500 text-stone-950 font-bold text-[11px] uppercase tracking-wider rounded-full shadow-md whitespace-nowrap">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-amber-500 text-stone-950 font-bold text-[13px] uppercase tracking-wider rounded-full shadow-md whitespace-nowrap">
                     सर्वाधिक लोकप्रिय किस्त (Most Popular)
                   </div>
                 )}
@@ -305,11 +305,11 @@ export const SipPlans: React.FC<SipPlansProps> = ({
 
                   {/* Bead Reservation Highlight */}
                   <div className="p-2.5 bg-stone-950/90 border border-amber-900/50 rounded-lg text-xs space-y-1 text-amber-300">
-                    <span className="font-bold flex items-center gap-1 text-[11px] text-amber-400">
+                    <span className="font-bold flex items-center gap-1 text-[13px] text-amber-400">
                       <Lock className="w-3.5 h-3.5" />
                       <span>आरक्षण नियम:</span>
                     </span>
-                    <p className="text-[11px] text-stone-300">
+                    <p className="text-[13px] text-stone-300">
                       दाना पूर्ण 100% भुगतान के बाद ही भेजा जाएगा। पहली किस्त आते ही वही सेम दाना आपके नाम तिजोरी में कोड सहित रिजर्व रहेगा।
                     </p>
                   </div>
@@ -373,7 +373,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                       setSelectedPlan(plan);
                       setIsCertModalOpen(true);
                     }}
-                    className="w-full py-1 text-[11px] text-amber-400 hover:underline flex items-center justify-center gap-1 cursor-pointer"
+                    className="w-full py-1 text-[13px] text-amber-400 hover:underline flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <Award className="w-3.5 h-3.5" />
                     <span>आरक्षण प्रमाण पत्र व शर्तें देखें</span>
@@ -548,7 +548,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                 <div>
                   <label className="block text-xs font-semibold text-stone-300 mb-1.5 flex items-center justify-between">
                     <span>भुगतान का माध्यम चुनें (Select Payment Option):</span>
-                    <span className="text-[10px] text-amber-400">100% सुरक्षित भुगतान</span>
+                    <span className="text-[12px] text-amber-400">100% सुरक्षित भुगतान</span>
                   </label>
 
                   <div className="grid grid-cols-3 gap-1.5 p-1 bg-stone-950 border border-stone-800 rounded-xl text-xs">
@@ -562,7 +562,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                       }`}
                     >
                       <Zap className="w-4 h-4" />
-                      <span className="text-[11px] leading-tight">Razorpay लाइव</span>
+                      <span className="text-[13px] leading-tight">Razorpay लाइव</span>
                     </button>
 
                     <button
@@ -575,7 +575,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                       }`}
                     >
                       <QrCode className="w-4 h-4" />
-                      <span className="text-[11px] leading-tight">UPI QR कोड</span>
+                      <span className="text-[13px] leading-tight">UPI QR कोड</span>
                     </button>
 
                     <button
@@ -588,7 +588,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                       }`}
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span className="text-[11px] leading-tight">व्हाट्सएप ऑटो</span>
+                      <span className="text-[13px] leading-tight">व्हाट्सएप ऑटो</span>
                     </button>
                   </div>
                 </div>
@@ -658,7 +658,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                         <rect x="78" y="76" width="14" height="12" fill="#000" />
                         <circle cx="50" cy="50" r="9" fill="#F59E0B" />
                       </svg>
-                      <span className="text-[9px] font-bold text-stone-900 mt-1">₹{getPayableAmount().toLocaleString('en-IN')} Scan to Pay</span>
+                      <span className="text-[13px] font-bold text-stone-900 mt-1">₹{getPayableAmount().toLocaleString('en-IN')} Scan to Pay</span>
                     </div>
 
                     <div className="flex items-center justify-center gap-2 text-xs">
@@ -711,7 +711,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
                     <Lock className="w-3.5 h-3.5" />
                     <span>स्पष्ट नियम एवं शर्त (Mandatory Agreement):</span>
                   </div>
-                  <p className="text-[11px] text-stone-400 leading-relaxed">
+                  <p className="text-[13px] text-stone-400 leading-relaxed">
                     1. <strong>सेम दाना तिजोरी में आरक्षित:</strong> पहली किस्त आते ही वही सेम कोड का दाना आपके नाम से तिजोरी में सुरक्षित रख दिया जाएगा।<br />
                     2. <strong>डिलीवरी शर्त:</strong> दाना तभी भेजा जाएगा जब आपकी सभी किस्तें (100% भुगतान) पूर्ण हो जाएंगी।
                   </p>
@@ -750,7 +750,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
 
                 <div className="p-3 bg-amber-950/30 border border-amber-900/60 rounded-xl text-xs text-amber-300 text-left space-y-1 max-w-sm mx-auto">
                   <p className="font-semibold text-white">नियम स्मरण:</p>
-                  <p className="text-[11px] text-stone-300">
+                  <p className="text-[13px] text-stone-300">
                     पूरा भुगतान होने के पश्चात ही दाना ISO 9001:2015 मूल लैब सर्टिफिकेट, एक्स-रे रिपोर्ट एवं गंगाजल सहित स्पीड पोस्ट से भेजा जाएगा।
                   </p>
                 </div>

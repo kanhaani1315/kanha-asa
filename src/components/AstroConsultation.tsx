@@ -256,7 +256,7 @@ export const AstroConsultation: React.FC<AstroConsultationProps> = ({
                   >
                     <span>Request WhatsApp Consultation (+ Unlock 10% Code)</span>
                   </button>
-                  <p className="text-[11px] text-stone-500 text-center mt-2">
+                  <p className="text-[13px] text-stone-500 text-center mt-2">
                     Complimentary initial assessment by Kanha Asa Astrologers.
                   </p>
                 </div>

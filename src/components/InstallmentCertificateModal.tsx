@@ -92,7 +92,7 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
             <div className="flex justify-center mb-1">
               <KanhaLogo size={60} />
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-0.5 bg-amber-950/80 border border-amber-600/60 rounded-full text-[11px] font-mono text-amber-300">
+            <div className="inline-flex items-center gap-2 px-3 py-0.5 bg-amber-950/80 border border-amber-600/60 rounded-full text-[13px] font-mono text-amber-300">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>ISO 9001:2015 Certified Himalayan Research Foundation · Regd. No. KA/030225</span>
             </div>
@@ -107,19 +107,19 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
           {/* Certificate Serial & Date Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-stone-950/80 border border-stone-800 rounded-lg p-2.5 text-center text-xs">
             <div>
-              <span className="text-[10px] text-stone-400 uppercase">प्रमाण पत्र संख्या</span>
+              <span className="text-[12px] text-stone-400 uppercase">प्रमाण पत्र संख्या</span>
               <p className="font-mono font-bold text-amber-300">{certCode}</p>
             </div>
             <div>
-              <span className="text-[10px] text-stone-400 uppercase">आरक्षित दाना कोड (Locker)</span>
+              <span className="text-[12px] text-stone-400 uppercase">आरक्षित दाना कोड (Locker)</span>
               <p className="font-mono font-bold text-emerald-400">{beadVaultCode}</p>
             </div>
             <div>
-              <span className="text-[10px] text-stone-400 uppercase">किस्त योजना प्रकार</span>
+              <span className="text-[12px] text-stone-400 uppercase">किस्त योजना प्रकार</span>
               <p className="font-semibold text-white truncate">{planTitle}</p>
             </div>
             <div>
-              <span className="text-[10px] text-stone-400 uppercase">जारी दिनांक</span>
+              <span className="text-[12px] text-stone-400 uppercase">जारी दिनांक</span>
               <p className="font-mono text-stone-300">{issueDate}</p>
             </div>
           </div>
@@ -156,7 +156,7 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
                 </span>
                 <div>
                   <strong className="text-white">दाना पूर्ण भुगतान के पश्चात ही भेजा जाएगा (Delivery ONLY Post 100% Payment):</strong>
-                  <p className="text-stone-400 text-[11px] mt-0.5">
+                  <p className="text-stone-400 text-[13px] mt-0.5">
                     यह स्पष्ट रूप से अनुबंधित है कि आरक्षित रुद्राक्ष दाना ग्राहक को तभी भेजा (डिस्पैच) किया जाएगा जब किस्त योजना का पूरा (100%) भुगतान सफलतापूर्वक पूरा हो जाएगा। अपूर्ण या बीच में भुगतान अधूरा रहने पर दाना प्रेषित नहीं किया जाएगा।
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
                 </span>
                 <div>
                   <strong className="text-white">वही सेम कोड का दाना पवित्र तिजोरी में आरक्षित (Exact Same Bead Locked in Vault):</strong>
-                  <p className="text-stone-400 text-[11px] mt-0.5">
+                  <p className="text-stone-400 text-[13px] mt-0.5">
                     ग्राहक की प्रथम किस्त प्राप्त होते ही, आवंटित विशिष्ट पहचान कोड (<span className="text-emerald-400 font-mono font-bold">{beadVaultCode}</span>) का असली नेपाली रुद्राक्ष दाना कान्हा असा की पवित्र तिजोरी में ग्राहक के नाम व गोत्र से अभिमंत्रित करके सील कर दिया जाता है। यह दाना किसी अन्य व्यक्ति को नहीं दिया जाएगा। अंतिम किस्त पर ठीक वही सेम दाना ग्राहक को डिलीवर होगा।
                   </p>
                 </div>
@@ -180,7 +180,7 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
                 </span>
                 <div>
                   <strong className="text-white">ISO 9001:2015 मूल लैब सर्टिफिकेट व प्राण-प्रतिष्ठा:</strong>
-                  <p className="text-stone-400 text-[11px] mt-0.5">
+                  <p className="text-stone-400 text-[13px] mt-0.5">
                     अंतिम किस्त आने पर दाने की 1,008 बीजोक्त मंत्रों द्वारा प्राण-प्रतिष्ठा की जाएगी तथा मूल कान्हा असा ISO 9001:2015 पहचान पत्र, डिजिटल एक्स-रे कम्पार्टमेंट रिपोर्ट, पवित्र गंगाजल और लाल रेशमी धागे के साथ स्पीड पोस्ट से घर भेजा जाएगा।
                   </p>
                 </div>
@@ -192,7 +192,7 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
                 </span>
                 <div>
                   <strong className="text-white">शून्य ब्याज (0% Interest) एवं संपूर्ण पारदर्शिता:</strong>
-                  <p className="text-stone-400 text-[11px] mt-0.5">
+                  <p className="text-stone-400 text-[13px] mt-0.5">
                     आसान किस्तों पर कोई ब्याज, चक्रवृद्धि शुल्क या गुप्त प्रभार नहीं है। प्रत्येक किस्त जमा होने पर डिजिटल पावती तुरंत रजिस्टर्ड व्हाट्सएप (+91 {merchantPhone}) पर सुरक्षित रूप से भेजी जाएगी।
                   </p>
                 </div>
@@ -203,21 +203,21 @@ export const InstallmentCertificateModal: React.FC<InstallmentCertificateModalPr
           {/* Official Seals & Signature */}
           <div className="pt-3 border-t border-amber-600/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 rounded-full border-2 border-amber-500/80 bg-amber-950/60 flex items-center justify-center text-center p-1 text-[9px] font-bold text-amber-300 uppercase leading-tight shadow-md">
+              <div className="w-14 h-14 rounded-full border-2 border-amber-500/80 bg-amber-950/60 flex items-center justify-center text-center p-1 text-[13px] font-bold text-amber-300 uppercase leading-tight shadow-md">
                 <span>KANHA ASA SEAL 2026</span>
               </div>
-              <div className="text-[11px] text-stone-400">
+              <div className="text-[13px] text-stone-400">
                 <p className="font-semibold text-white">प्राधिकृत हस्ताक्षर एवं मुद्रा</p>
                 <p>कान्हा असा हिमालयन रुद्राक्ष रिसर्च ट्रस्ट</p>
                 <p className="text-emerald-400 font-mono">ISO 9001:2015 Certified Lab</p>
               </div>
             </div>
 
-            <div className="text-center sm:text-right text-[11px] text-stone-400">
+            <div className="text-center sm:text-right text-[13px] text-stone-400">
               <p className="text-amber-400 font-semibold">हेल्पलाइन व किस्त सत्यापन:</p>
               <p className="font-mono text-white text-xs">+91 {merchantPhone}</p>
-              <p className="text-[10px] text-stone-300">Shop No. BF3/3, Shilpi Plaza, Rewa (MP) - 486001</p>
-              <p className="text-[10px] text-stone-500">आधिकारिक वेबसाइट: www.kanhaasa.com</p>
+              <p className="text-[12px] text-stone-300">Shop No. BF3/3, Shilpi Plaza, Rewa (MP) - 486001</p>
+              <p className="text-[12px] text-stone-500">आधिकारिक वेबसाइट: www.kanhaasa.com</p>
             </div>
           </div>
         </div>

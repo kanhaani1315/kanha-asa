@@ -44,9 +44,9 @@ export const ScrollingTreeTicker: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 mb-2 flex items-center justify-between text-xs text-stone-400">
         <span className="flex items-center gap-2 text-amber-400 font-semibold tracking-wide">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="uppercase text-[11px] font-bold">नेपाल के रुद्राक्ष के पेड़ · Live Himalayan Tree Groves</span>
+          <span className="uppercase text-[13px] font-bold">नेपाल के रुद्राक्ष के पेड़ · Live Himalayan Tree Groves</span>
         </span>
-        <span className="hidden sm:flex items-center gap-1 text-[11px] text-stone-400">
+        <span className="hidden sm:flex items-center gap-1 text-[13px] text-stone-400">
           <MapPin className="w-3.5 h-3.5 text-amber-500" />
           <span>Hand-Harvested at 8,000+ Feet Altitude in Nepal</span>
         </span>
@@ -68,17 +68,17 @@ export const ScrollingTreeTicker: React.FC = () => {
               />
               <div className="space-y-0.5">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase font-bold text-amber-400 font-mono tracking-wider">
+                  <span className="text-[12px] uppercase font-bold text-amber-400 font-mono tracking-wider">
                     {slide.title}
                   </span>
-                  <span className="px-1.5 py-0.2 bg-emerald-950 text-emerald-300 border border-emerald-800 text-[9px] font-semibold rounded">
+                  <span className="px-1.5 py-0.2 bg-emerald-950 text-emerald-300 border border-emerald-800 text-[13px] font-semibold rounded">
                     Nepal
                   </span>
                 </div>
                 <p className="text-xs font-semibold text-white tracking-wide max-w-xs truncate">
                   {slide.caption}
                 </p>
-                <p className="text-[10px] text-stone-400 font-mono">
+                <p className="text-[12px] text-stone-400 font-mono">
                   100% Genuine Himalayan Botanical Tree
                 </p>
               </div>

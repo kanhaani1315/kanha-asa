@@ -73,12 +73,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Kanha Asa ISO 9001:2015 Report</span>
                   </div>
-                  <span className="font-mono text-[11px] text-stone-400">
+                  <span className="font-mono text-[13px] text-stone-400">
                     {product.certificateNumber || 'Verified'}
                   </span>
                 </div>
 
-                <p className="text-stone-400 text-[11px]">
+                <p className="text-stone-400 text-[13px]">
                   Backed by the official Kanha Asa ISO 9001:2015 Rudraksha Identification Report with X-Ray proof, IAF & EGAC accreditation.
                 </p>
 
@@ -137,7 +137,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-stone-400">
+                  <div className="flex items-center justify-between text-[13px] text-stone-400">
                     <span>Prepaid: मुफ़्त डिलीवरी (₹0) | सीओडी: ₹150 हैंडलिंग चार्ज</span>
                     <button
                       type="button"
@@ -155,7 +155,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Vedic Details */}
                 <div className="space-y-2.5 text-xs text-stone-300">
                   <div className="p-3 bg-stone-950/70 border border-stone-800 rounded-md space-y-1">
-                    <span className="text-[11px] text-amber-400 font-semibold uppercase">Sacred Beej Mantra</span>
+                    <span className="text-[13px] text-amber-400 font-semibold uppercase">Sacred Beej Mantra</span>
                     <p className="text-sm font-serif-luxury text-amber-200 font-medium">"{product.mantra}" (108 chants)</p>
                   </div>
 

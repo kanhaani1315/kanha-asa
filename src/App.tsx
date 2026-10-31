@@ -154,7 +154,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans selection:bg-amber-500 selection:text-stone-950">
       {/* Real-time Meta Pixel Notification Toast */}
-      <MetaEventToast />
+      {activeView === 'meta-hub' && <MetaEventToast />}
 
       {/* Topmost Dream Rudraksha in Easy Installments Scrolling Ticker (As Requested) */}
       <TopDreamInstallmentTicker onOpenInstallments={() => scrollToSection('sip-plans')} />

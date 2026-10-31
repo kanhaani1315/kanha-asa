@@ -79,7 +79,7 @@ export const CustomerTestimonials: React.FC = () => {
                   <p className="font-semibold text-stone-200">{rev.name}</p>
                   <p className="text-stone-500">{rev.location}</p>
                 </div>
-                <div className="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                <div className="flex items-center gap-1 text-[13px] text-emerald-400 font-medium">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Verified Devotee</span>
                 </div>

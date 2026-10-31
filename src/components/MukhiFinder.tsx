@@ -361,7 +361,7 @@ Please guide me with the wearing rituals and energized silver capping pricing.`;
                     <p className="text-xs font-semibold text-emerald-300">
                       10% DISCOUNT COUPON UNLOCKED!
                     </p>
-                    <p className="text-[11px] text-stone-300">
+                    <p className="text-[13px] text-stone-300">
                       Use code at checkout for 10% discount across 1 to 21 Mukhi beads.
                     </p>
                   </div>

@@ -178,10 +178,10 @@ export const KanhaLogo: React.FC<KanhaLogoProps> = ({
 
       {showText && (
         <div className="flex flex-col">
-          <span className="font-display font-bold text-lg tracking-wider text-amber-400 leading-tight">
+          <span className="font-display font-bold text-lg tracking-wider text-amber-400 leading-tight whitespace-nowrap">
             KANHA ASA
           </span>
-          <span className="text-[10px] text-amber-200/80 font-serif-luxury tracking-widest uppercase">
+          <span className="text-[12px] text-amber-200/80 font-serif-luxury tracking-wider uppercase whitespace-nowrap">
             Astro & Rudraksha · ISO 9001:2015
           </span>
         </div>

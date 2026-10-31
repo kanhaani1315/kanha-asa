@@ -227,11 +227,11 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
               <div>
                 <h3 className="text-sm font-bold font-display text-white flex items-center gap-2">
                   <span>Kanha AI Acharya</span>
-                  <span className="px-1.5 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-[10px] font-mono">
+                  <span className="px-1.5 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-[12px] font-mono">
                     Lo Shu & Mobile Astro
                   </span>
                 </h3>
-                <p className="text-[11px] text-stone-400">
+                <p className="text-[13px] text-stone-400">
                   1-21 Mukhi, Gemstones & Numerology · Direct Buy on www.kanhaasa.com
                 </p>
               </div>
@@ -321,7 +321,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                         }`}
                       >
                         <p className="whitespace-pre-line">{msg.text}</p>
-                        <span className={`block text-[10px] mt-1.5 font-mono ${isAi ? 'text-stone-500' : 'text-stone-900'}`}>
+                        <span className={`block text-[12px] mt-1.5 font-mono ${isAi ? 'text-stone-500' : 'text-stone-900'}`}>
                           {msg.timestamp}
                         </span>
                       </div>
@@ -334,7 +334,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                     <span className="w-2 h-2 rounded-full bg-amber-400 animate-bounce" />
                     <span className="w-2 h-2 rounded-full bg-amber-400 animate-bounce [animation-delay:0.2s]" />
                     <span className="w-2 h-2 rounded-full bg-amber-400 animate-bounce [animation-delay:0.4s]" />
-                    <span className="text-[11px] text-stone-400">कान्हा एआई विश्लेषण कर रहा है...</span>
+                    <span className="text-[13px] text-stone-400">कान्हा एआई विश्लेषण कर रहा है...</span>
                   </div>
                 )}
 
@@ -356,7 +356,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
 
               {/* Quick Prompts */}
               <div className="p-2.5 bg-stone-900 border-t border-stone-800/80 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-                <span className="text-[11px] text-stone-500 font-medium shrink-0 pl-1">Ask:</span>
+                <span className="text-[13px] text-stone-500 font-medium shrink-0 pl-1">Ask:</span>
                 {[
                   'कौन सा रुद्राक्ष लेना है?',
                   'कौन सा रुद्राक्ष स्टोन सही रहेगा?',
@@ -368,7 +368,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   <button
                     key={idx}
                     onClick={() => handleSendMessage(q)}
-                    className="px-2.5 py-1 text-[11px] bg-stone-950 hover:bg-stone-800 border border-stone-800 text-stone-300 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                    className="px-2.5 py-1 text-[13px] bg-stone-950 hover:bg-stone-800 border border-stone-800 text-stone-300 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
                   >
                     {q}
                   </button>
@@ -443,7 +443,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   <div>
                     <label className="block text-xs font-semibold text-stone-300 mb-1 flex items-center justify-between">
                       <span>पूरा नाम (Full Name) *</span>
-                      <span className="text-[10px] text-amber-400 font-normal">चेल्डियन नाम सुधार</span>
+                      <span className="text-[12px] text-amber-400 font-normal">चेल्डियन नाम सुधार</span>
                     </label>
                     <input
                       type="text"
@@ -456,7 +456,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                 </div>
 
                 <div className="flex items-center justify-between pt-1">
-                  <p className="text-[11px] text-stone-400">
+                  <p className="text-[13px] text-stone-400">
                     नाम के अक्षर ग्रिड में मिसिंग नंबरों की पूर्ति करते हैं।
                   </p>
                   <button
@@ -473,21 +473,21 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   {/* Driver & Conductor Summary */}
                   <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
                     <div className="p-3 bg-stone-900 border border-stone-800 rounded-lg">
-                      <span className="text-[10px] text-stone-400">मूलांक (Driver)</span>
+                      <span className="text-[12px] text-stone-400">मूलांक (Driver)</span>
                       <p className="text-xl font-bold text-amber-400 font-mono mt-0.5">{calculatedLoShu.mulank}</p>
-                      <p className="text-[10px] text-stone-400">{PLANET_MAP[calculatedLoShu.mulank]}</p>
+                      <p className="text-[12px] text-stone-400">{PLANET_MAP[calculatedLoShu.mulank]}</p>
                     </div>
 
                     <div className="p-3 bg-stone-900 border border-stone-800 rounded-lg">
-                      <span className="text-[10px] text-stone-400">भाग्यांक (Conductor)</span>
+                      <span className="text-[12px] text-stone-400">भाग्यांक (Conductor)</span>
                       <p className="text-xl font-bold text-emerald-400 font-mono mt-0.5">{calculatedLoShu.bhagyank}</p>
-                      <p className="text-[10px] text-stone-400">{PLANET_MAP[calculatedLoShu.bhagyank]}</p>
+                      <p className="text-[12px] text-stone-400">{PLANET_MAP[calculatedLoShu.bhagyank]}</p>
                     </div>
 
                     <div className="p-3 bg-stone-900 border border-stone-800 rounded-lg">
-                      <span className="text-[10px] text-stone-400">नामांक (Name Number)</span>
+                      <span className="text-[12px] text-stone-400">नामांक (Name Number)</span>
                       <p className="text-xl font-bold text-blue-400 font-mono mt-0.5">{nameNumerology?.singleDigit || '-'}</p>
-                      <p className="text-[10px] text-stone-400">कुल योग: {nameNumerology?.compoundNumber}</p>
+                      <p className="text-[12px] text-stone-400">कुल योग: {nameNumerology?.compoundNumber}</p>
                     </div>
                   </div>
 
@@ -498,7 +498,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                         <Sparkles className="w-4 h-4 text-amber-400" />
                         <span>3x3 नियो ग्रिड (Neo Lo Shu Grid Matrix)</span>
                       </span>
-                      <div className="flex items-center gap-2 text-[10px]">
+                      <div className="flex items-center gap-2 text-[12px]">
                         <span className="flex items-center gap-1 text-emerald-400">
                           <span className="w-2 h-2 rounded-full bg-emerald-500" />
                           <span>जन्म से उपलब्ध</span>
@@ -543,7 +543,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                               <span className="text-2xl font-bold font-mono">
                                 {isBirth || isNameAdded || isRemedyAdded ? cellNum : '—'}
                               </span>
-                              <span className="text-[10px] font-sans font-medium mt-1">
+                              <span className="text-[12px] font-sans font-medium mt-1">
                                 {isBirth
                                   ? 'उपस्थित'
                                   : isNameAdded
@@ -566,11 +566,11 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                         <UserCheck className="w-4 h-4" />
                         <span>नाम न्यूमरोलॉजी प्रभाव: {nameNumerology.name}</span>
                       </div>
-                      <p className="text-stone-300 text-[11px] leading-relaxed">
+                      <p className="text-stone-300 text-[13px] leading-relaxed">
                         {nameNumerology.recommendation}
                       </p>
                       {nameNumerology.missingNumbersFulfilled.length > 0 && (
-                        <div className="flex items-center gap-1.5 text-emerald-400 font-semibold text-[11px]">
+                        <div className="flex items-center gap-1.5 text-emerald-400 font-semibold text-[13px]">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>नाम द्वारा स्वतः भरे गए नंबर: {nameNumerology.missingNumbersFulfilled.join(', ')}</span>
                         </div>
@@ -603,15 +603,15 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                           >
                             <div className="space-y-0.5">
                               <div className="flex items-center gap-2">
-                                <span className={`w-5 h-5 rounded-full font-bold font-mono text-[11px] flex items-center justify-center ${
+                                <span className={`w-5 h-5 rounded-full font-bold font-mono text-[13px] flex items-center justify-center ${
                                   isFilledByName ? 'bg-amber-500 text-stone-950' : 'bg-red-950 text-red-300 border border-red-800'
                                 }`}>
                                   {rem.number}
                                 </span>
                                 <span className="font-bold text-white">मिसिंग नंबर {rem.number}:</span>
-                                <span className="text-stone-400 text-[11px]">{rem.defect}</span>
+                                <span className="text-stone-400 text-[13px]">{rem.defect}</span>
                               </div>
-                              <p className="text-amber-300 text-[11px] pl-7">
+                              <p className="text-amber-300 text-[13px] pl-7">
                                 उपाय: <strong>{rem.rudraksha}</strong> · रत्न: <strong>{rem.stone}</strong>
                               </p>
                             </div>
@@ -619,7 +619,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                             <div className="flex items-center gap-2 pl-7 sm:pl-0">
                               <button
                                 onClick={() => handleToggleRemedy(rem.number)}
-                                className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors cursor-pointer ${
+                                className={`px-2.5 py-1 rounded text-[13px] font-semibold transition-colors cursor-pointer ${
                                   isRemedyOn
                                     ? 'bg-blue-600 text-white'
                                     : 'bg-stone-800 hover:bg-stone-700 text-stone-200'
@@ -633,7 +633,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                                   onClose();
                                   document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-[11px] transition-colors cursor-pointer"
+                                className="px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-[13px] transition-colors cursor-pointer"
                               >
                                 Buy on Kanhaasa.com
                               </button>
@@ -691,7 +691,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                     </button>
                   </div>
                 </div>
-                <p className="text-[11px] text-stone-400">
+                <p className="text-[13px] text-stone-400">
                   यह टूल आपके मोबाइल नंबर के हानिकारक जोड़े (2-4, 1-8, 4-8) और शुभ योग (1-5, 5-6) की वैदिक गणना करता है।
                 </p>
               </form>
@@ -701,7 +701,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   {/* Rating Card */}
                   <div className="p-4 bg-stone-900 border border-stone-800 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
-                      <span className="text-[11px] text-stone-400">मोबाइल नंबर वैदिक मूल्यांकन:</span>
+                      <span className="text-[13px] text-stone-400">मोबाइल नंबर वैदिक मूल्यांकन:</span>
                       <h4 className="text-lg font-bold text-white flex items-center gap-2">
                         <span>{mobileAnalysis.overallRating}</span>
                       </h4>
@@ -713,7 +713,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                       <p className="text-3xl font-extrabold text-emerald-400 font-mono">
                         {mobileAnalysis.score}<span className="text-xs text-stone-500 font-normal">/100</span>
                       </p>
-                      <span className="text-[11px] text-stone-400 font-mono">
+                      <span className="text-[13px] text-stone-400 font-mono">
                         कुल मूलांक: <strong>{mobileAnalysis.rootNumber}</strong> ({mobileAnalysis.rulingPlanet})
                       </span>
                     </div>
@@ -734,16 +734,16 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                               <span className="font-bold text-red-300 font-mono text-sm bg-red-950 px-2 py-0.5 rounded border border-red-800">
                                 जोड़ा: {hp.pair}
                               </span>
-                              <span className="text-[10px] text-red-400 uppercase font-bold tracking-wider">
+                              <span className="text-[12px] text-red-400 uppercase font-bold tracking-wider">
                                 {hp.name}
                               </span>
                             </div>
 
-                            <p className="text-stone-300 text-[11px] leading-relaxed">
+                            <p className="text-stone-300 text-[13px] leading-relaxed">
                               <strong>हानिकारक प्रभाव:</strong> {hp.effects}
                             </p>
 
-                            <div className="pt-2 border-t border-red-900/40 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                            <div className="pt-2 border-t border-red-900/40 flex flex-wrap items-center justify-between gap-2 text-[13px]">
                               <span className="text-amber-300">
                                 <strong>दोष निवारक उपाय:</strong> {hp.remedyRudraksha} / {hp.remedyGemstone}
                               </span>
@@ -783,11 +783,11 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                               <span className="font-bold text-emerald-300 font-mono text-sm">
                                 योग: {lp.pair}
                               </span>
-                              <span className="text-[10px] text-emerald-400 font-bold">
+                              <span className="text-[12px] text-emerald-400 font-bold">
                                 {lp.name}
                               </span>
                             </div>
-                            <p className="text-stone-300 text-[11px]">{lp.effects}</p>
+                            <p className="text-stone-300 text-[13px]">{lp.effects}</p>
                           </div>
                         ))}
                       </div>
@@ -796,10 +796,10 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
 
                   {/* Recommended Remedy Action */}
                   <div className="p-4 bg-stone-900 border border-amber-900/60 rounded-xl text-xs space-y-2.5">
-                    <span className="font-bold text-white uppercase tracking-wider text-[11px]">
+                    <span className="font-bold text-white uppercase tracking-wider text-[13px]">
                       मोबाइल नंबर दोष निवारण एवं ऊर्जा सुरक्षा कवच:
                     </span>
-                    <p className="text-stone-300 text-[11px] leading-relaxed">
+                    <p className="text-stone-300 text-[13px] leading-relaxed">
                       मोबाइल नंबर की तरंगों को शुद्ध करने के लिए <strong>{mobileAnalysis.recommendedRemedies.rudraksha}</strong> अथवा <strong>{mobileAnalysis.recommendedRemedies.gemstone}</strong> पहनें।
                     </p>
                     <div className="flex items-center justify-between pt-1">

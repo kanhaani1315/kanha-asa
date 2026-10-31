@@ -134,7 +134,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             <span className="w-7 h-7 rounded-full bg-amber-950 text-amber-300 font-bold flex items-center justify-center font-mono">10%</span>
             <div>
               <p className="font-bold text-white">Orders Under ₹10,000</p>
-              <p className="text-[11px] text-stone-400">Coupon: <strong className="text-amber-400 font-mono">KANHA10</strong></p>
+              <p className="text-[13px] text-stone-400">Coupon: <strong className="text-amber-400 font-mono">KANHA10</strong></p>
             </div>
           </div>
 
@@ -142,7 +142,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             <span className="w-7 h-7 rounded-full bg-emerald-950 text-emerald-300 font-bold flex items-center justify-center font-mono">15%</span>
             <div>
               <p className="font-bold text-white">Orders Above ₹10,000</p>
-              <p className="text-[11px] text-stone-400">Coupon: <strong className="text-emerald-400 font-mono">KANHA15</strong></p>
+              <p className="text-[13px] text-stone-400">Coupon: <strong className="text-emerald-400 font-mono">KANHA15</strong></p>
             </div>
           </div>
 
@@ -150,7 +150,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
             <span className="w-7 h-7 rounded-full bg-amber-500 text-stone-950 font-bold flex items-center justify-center font-mono">25%</span>
             <div>
               <p className="font-bold text-white">Orders of ₹1 Lakh & Above</p>
-              <p className="text-[11px] text-stone-400">Coupon: <strong className="text-amber-300 font-mono">KANHA25</strong></p>
+              <p className="text-[13px] text-stone-400">Coupon: <strong className="text-amber-300 font-mono">KANHA25</strong></p>
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                       setEditingPhotoProduct(product);
                     }}
                     title="Upload or change with your original product photo"
-                    className="absolute top-3 left-3 flex items-center gap-1 text-[10px] font-semibold text-stone-200 bg-stone-900/90 hover:bg-amber-500 hover:text-stone-950 border border-stone-700 backdrop-blur-sm px-2 py-0.5 rounded transition-colors cursor-pointer"
+                    className="absolute top-3 left-3 flex items-center gap-1 text-[12px] font-semibold text-stone-200 bg-stone-900/90 hover:bg-amber-500 hover:text-stone-950 border border-stone-700 backdrop-blur-sm px-2 py-0.5 rounded transition-colors cursor-pointer"
                   >
                     <Camera className="w-3 h-3" />
                     <span>Change Photo</span>
@@ -201,14 +201,14 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                       e.stopPropagation();
                       setCertificateProduct(product);
                     }}
-                    className="absolute bottom-3 left-3 flex items-center gap-1.5 text-[11px] font-semibold text-amber-300 bg-stone-950/90 border border-amber-900/60 backdrop-blur-sm px-2.5 py-1 rounded hover:bg-stone-900 transition-colors"
+                    className="absolute bottom-3 left-3 flex items-center gap-1.5 text-[13px] font-semibold text-amber-300 bg-stone-950/90 border border-amber-900/60 backdrop-blur-sm px-2.5 py-1 rounded hover:bg-stone-900 transition-colors"
                   >
                     <FileText className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Kanha Asa Certificate</span>
                   </button>
 
                   {/* Tier Badge on Image */}
-                  <div className="absolute top-3 right-3 text-[10px] font-extrabold text-stone-950 bg-amber-400 px-2 py-0.5 rounded shadow">
+                  <div className="absolute top-3 right-3 text-[12px] font-extrabold text-stone-950 bg-amber-400 px-2 py-0.5 rounded shadow">
                     {tier} OFF · {coupon}
                   </div>
                 </div>
@@ -245,13 +245,13 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                             ₹{product.originalPrice.toLocaleString('en-IN')}
                           </span>
                         </div>
-                        <span className="text-[11px] text-emerald-400 font-semibold">
+                        <span className="text-[13px] text-emerald-400 font-semibold">
                           Free Pan-India Delivery
                         </span>
                       </div>
 
                       {/* Explicit Discount Tier Callout Below Every Product */}
-                      <div className="p-2 bg-stone-950 border border-amber-900/40 rounded flex items-center justify-between text-[11px]">
+                      <div className="p-2 bg-stone-950 border border-amber-900/40 rounded flex items-center justify-between text-[13px]">
                         <span className="text-stone-300">
                           Use <strong className="text-amber-400 font-mono">{coupon}</strong> ({tier} OFF):
                         </span>
@@ -324,7 +324,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
             <div className="space-y-3">
               <div>
-                <label className="block text-[11px] text-stone-400 mb-1">Upload File from Device:</label>
+                <label className="block text-[13px] text-stone-400 mb-1">Upload File from Device:</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -334,7 +334,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               </div>
 
               <div className="relative flex items-center justify-center">
-                <span className="bg-stone-900 px-2 text-[10px] text-stone-500 uppercase">Or via URL</span>
+                <span className="bg-stone-900 px-2 text-[12px] text-stone-500 uppercase">Or via URL</span>
               </div>
 
               <form onSubmit={handleApplyCustomPhoto} className="flex gap-2">

@@ -132,7 +132,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
               <h3 className="text-sm font-bold font-display text-white">
                 Recharge AI Consultation Credits
               </h3>
-              <p className="text-[11px] text-stone-400">
+              <p className="text-[13px] text-stone-400">
                 कान्हा एआई ज्योतिषाचार्य परामर्श क्रेडिट्स
               </p>
             </div>
@@ -141,7 +141,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowOwnerGuide(!showOwnerGuide)}
-              className="text-[11px] text-amber-400 hover:underline flex items-center gap-1 cursor-pointer bg-stone-900 px-2 py-0.5 rounded border border-stone-700"
+              className="text-[13px] text-amber-400 hover:underline flex items-center gap-1 cursor-pointer bg-stone-900 px-2 py-0.5 rounded border border-stone-700"
               title="दुकानदार / ओनर गाइड: पैसा कैसे आएगा?"
             >
               <HelpCircle className="w-3.5 h-3.5" />
@@ -178,7 +178,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                   <span className="font-semibold text-white">क्रेडिट्स लेना अनिवार्य है (Paid AI Consultation)</span>
                   <span className="text-emerald-400 font-mono font-bold">1 Credit = 1 विस्तृत परामर्श / जांच</span>
                 </div>
-                <p className="text-[11px] text-stone-400 leading-relaxed">
+                <p className="text-[13px] text-stone-400 leading-relaxed">
                   नाम वाइज नंबर चेक, न्यूमरोलॉजी, लो-शू ग्रिड एवं ज्योतिष प्रश्नों के लिए किफायती क्रेडिट पैक चुनकर Razorpay द्वारा तुरंत रिचार्ज करें।
                 </p>
               </div>
@@ -199,20 +199,20 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                     >
                       <div className="space-y-0.5">
                         {pack.badge && (
-                          <span className="text-[9px] uppercase font-bold text-amber-400 tracking-wider">
+                          <span className="text-[13px] uppercase font-bold text-amber-400 tracking-wider">
                             {pack.badge}
                           </span>
                         )}
                         <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
                           <span>{pack.credits} AI Questions</span>
-                          <span className="text-stone-400 text-[11px] font-normal">({pack.name})</span>
+                          <span className="text-stone-400 text-[13px] font-normal">({pack.name})</span>
                         </h4>
-                        <p className="text-[11px] text-stone-400">{pack.desc}</p>
+                        <p className="text-[13px] text-stone-400">{pack.desc}</p>
                       </div>
 
                       <div className="text-right pl-3 shrink-0">
                         <span className="text-base font-bold text-amber-400 font-mono">₹{pack.price}</span>
-                        <span className="block text-[10px] text-stone-500 font-mono">₹{(pack.price / pack.credits).toFixed(1)}/Q</span>
+                        <span className="block text-[12px] text-stone-500 font-mono">₹{(pack.price / pack.credits).toFixed(1)}/Q</span>
                       </div>
                     </div>
                   );
@@ -221,7 +221,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
 
               {/* Devotee Mobile Input for Razorpay Receipts */}
               <div className="bg-stone-950 p-3 rounded-xl border border-stone-800 space-y-1 text-xs">
-                <label className="block text-stone-300 font-medium text-[11px]">
+                <label className="block text-stone-300 font-medium text-[13px]">
                   आपका मोबाइल / व्हाट्सएप नंबर (Payment Receipt & SMS):
                 </label>
                 <input
@@ -244,12 +244,12 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                   <span>Pay ₹{selectedPack.price} via Razorpay (Instant Credits Auto-Add)</span>
                 </button>
 
-                <div className="p-2 bg-stone-950 border border-stone-800 rounded-lg flex items-center justify-between text-[11px] text-stone-400">
+                <div className="p-2 bg-stone-950 border border-stone-800 rounded-lg flex items-center justify-between text-[13px] text-stone-400">
                   <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                     <CreditCard className="w-3.5 h-3.5" />
                     <span>UPI (Google Pay/PhonePe), Cards, NetBanking</span>
                   </span>
-                  <span className="text-[10px] text-amber-400 font-mono">Live Gateway Active</span>
+                  <span className="text-[12px] text-amber-400 font-mono">Live Gateway Active</span>
                 </div>
 
                 <button
@@ -312,7 +312,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                     <rect x="78" y="76" width="14" height="12" fill="#000" />
                     <circle cx="50" cy="50" r="10" fill="#F59E0B" />
                   </svg>
-                  <span className="text-[9px] font-bold text-stone-900 mt-1">Scan via Any UPI App</span>
+                  <span className="text-[13px] font-bold text-stone-900 mt-1">Scan via Any UPI App</span>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-xs">
@@ -327,10 +327,10 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                   >
                     <Copy className="w-3.5 h-3.5" />
                   </button>
-                  {copiedUpi && <span className="text-[10px] text-emerald-400">Copied!</span>}
+                  {copiedUpi && <span className="text-[12px] text-emerald-400">Copied!</span>}
                 </div>
 
-                <p className="text-[11px] text-stone-400">
+                <p className="text-[13px] text-stone-400">
                   Supported: PhonePe · Google Pay · Paytm · BHIM · Amazon Pay
                 </p>
               </div>
@@ -376,7 +376,7 @@ export const CreditPaymentModal: React.FC<CreditPaymentModalProps> = ({
                 Payment verified. You can now ask Kanha AI Acharya all your queries regarding Lo Shu Grid, Mobile Numerology, Mukhis and Gemstones!
               </p>
               {lastPaymentId && (
-                <div className="p-2 bg-stone-950 border border-stone-800 rounded font-mono text-[11px] text-stone-400">
+                <div className="p-2 bg-stone-950 border border-stone-800 rounded font-mono text-[13px] text-stone-400">
                   Transaction Ref: <span className="text-emerald-400">{lastPaymentId}</span>
                 </div>
               )}

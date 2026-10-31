@@ -12,7 +12,7 @@ export const TopDreamInstallmentTicker: React.FC<TopDreamInstallmentTickerProps>
     <div className="relative bg-gradient-to-r from-amber-950 via-stone-900 to-amber-950 border-b border-amber-500/40 text-stone-100 overflow-hidden py-2 sm:py-2.5 z-40 shadow-inner">
       <div className="flex items-center">
         {/* Fixed Left Badge */}
-        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-stone-950 font-bold text-[11px] uppercase tracking-wider shrink-0 z-10 shadow-md">
+        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-stone-950 font-bold text-[13px] uppercase tracking-wider shrink-0 z-10 shadow-md">
           <Sparkles className="w-3.5 h-3.5" />
           <span>सपना पूरा करें</span>
         </div>
@@ -51,7 +51,7 @@ export const TopDreamInstallmentTicker: React.FC<TopDreamInstallmentTickerProps>
                     e.stopPropagation();
                     onOpenInstallments();
                   }}
-                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-[11px] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-[13px] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
                 >
                   <span>आसान किस्त प्लान व सर्टिफिकेट देखें</span>
                   <ArrowRight className="w-3 h-3" />
