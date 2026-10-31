@@ -27,13 +27,13 @@ const BUSINESS = {
 };
 
 const H2: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h2 className="text-xl font-semibold text-stone-900 mt-8 mb-3">{children}</h2>
+  <h2 className="text-xl font-semibold text-[#202124] mt-8 mb-3">{children}</h2>
 );
 const P: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <p className="text-stone-700 leading-relaxed mb-3">{children}</p>
+  <p className="text-[#3c4043] leading-relaxed mb-3">{children}</p>
 );
 const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
-  <ul className="list-disc pl-6 space-y-1.5 text-stone-700 mb-3">
+  <ul className="list-disc pl-6 space-y-1.5 text-[#3c4043] mb-3">
     {items.map((it, i) => (
       <li key={i}>{it}</li>
     ))}
@@ -41,8 +41,8 @@ const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
 );
 
 const ContactBlock = () => (
-  <div className="rounded-xl border border-stone-200 bg-white p-5 text-stone-700 space-y-1.5">
-    <p className="font-semibold text-stone-900">{BUSINESS.name}</p>
+  <div className="rounded-xl border border-[#dadce0] bg-white p-5 text-[#3c4043] space-y-1.5">
+    <p className="font-semibold text-[#202124]">{BUSINESS.name}</p>
     <p>{BUSINESS.address}</p>
     <p>
       Phone / WhatsApp:{' '}
@@ -210,13 +210,13 @@ const content: Record<PolicyKey, { title: string; body: React.ReactNode }> = {
           </a>
           <a
             href={BUSINESS.phoneHref}
-            className="inline-flex items-center rounded-full border border-stone-300 px-5 py-2.5 font-semibold text-stone-800"
+            className="inline-flex items-center rounded-full border border-[#dadce0] px-5 py-2.5 font-semibold text-[#202124]"
           >
             Call करें
           </a>
           <a
             href="https://maps.google.com/?q=Kanha+Asa+Shop+No+BF3/3+Shilpi+Plaza+Rewa+Madhya+Pradesh+486001"
-            className="inline-flex items-center rounded-full border border-stone-300 px-5 py-2.5 font-semibold text-stone-800"
+            className="inline-flex items-center rounded-full border border-[#dadce0] px-5 py-2.5 font-semibold text-[#202124]"
           >
             Google Maps
           </a>
@@ -234,8 +234,8 @@ export const PolicyPage: React.FC<{ page: PolicyKey }> = ({ page }) => {
   }, [title]);
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      <header className="bg-stone-950 text-white">
+    <div className="min-h-screen bg-white">
+      <header className="bg-white border-b border-[#dadce0]">
         <div className="max-w-3xl mx-auto px-5 py-5 flex items-center justify-between">
           <a href="/" className="font-semibold tracking-wide text-amber-300">
             KANHA ASA
@@ -246,14 +246,14 @@ export const PolicyPage: React.FC<{ page: PolicyKey }> = ({ page }) => {
         </div>
       </header>
       <main className="max-w-3xl mx-auto px-5 py-10">
-        <h1 className="text-3xl font-bold text-stone-900">{title}</h1>
+        <h1 className="text-3xl font-bold text-[#202124]">{title}</h1>
         {page !== 'contact' && <p className="text-sm text-stone-500 mt-2">Last updated: {LAST_UPDATED}</p>}
         <div className="mt-6">{body}</div>
       </main>
-      <footer className="border-t border-stone-200">
+      <footer className="border-t border-[#dadce0]">
         <div className="max-w-3xl mx-auto px-5 py-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-stone-600">
           {POLICY_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-stone-900">
+            <a key={l.href} href={l.href} className="hover:text-[#202124]">
               {l.label}
             </a>
           ))}
