@@ -94,7 +94,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
   return (
     <section id="catalog" className="py-16 sm:py-20 bg-stone-950 text-stone-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-stone-800">
           <div className="space-y-2">

@@ -86,7 +86,7 @@ export const AstroConsultation: React.FC<AstroConsultationProps> = ({
 
   return (
     <section id="astro-kundli" className="py-16 sm:py-20 bg-stone-900 text-stone-100 border-b border-stone-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Vedic Astrological Context & Image (6 cols) */}
           <div className="lg:col-span-6 space-y-6">

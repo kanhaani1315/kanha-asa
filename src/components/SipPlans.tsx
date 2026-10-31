@@ -143,7 +143,7 @@ export const SipPlans: React.FC<SipPlansProps> = ({
 
   return (
     <section id="sip-plans" className="py-16 sm:py-20 bg-stone-950 text-stone-100 border-b border-stone-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-8">
           <div className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-amber-400 font-semibold bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/40">

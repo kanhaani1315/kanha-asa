@@ -29,8 +29,8 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-stone-950 text-stone-300 border-t border-stone-800 text-xs font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <footer className="g-blue bg-stone-950 text-stone-300 border-t border-stone-800 text-xs font-sans">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Col 1: Brand Lineage & Official Socials */}
           <div className="space-y-3">
@@ -264,7 +264,7 @@ export const Footer: React.FC<FooterProps> = ({
               href="https://www.instagram.com/kanha.asa/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:opacity-90 text-white font-semibold text-xs shadow transition-opacity"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 via-pink-600 to-[#f77737] hover:opacity-90 text-white font-semibold text-xs shadow transition-opacity"
             >
               <InstagramIcon size={15} className="fill-current text-white" />
               <span>Instagram @kanha.asa</span>

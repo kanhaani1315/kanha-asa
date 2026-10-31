@@ -41,7 +41,7 @@ export const ScrollingTreeTicker: React.FC = () => {
   return (
     <div className="relative bg-stone-950 border-b border-amber-900/40 overflow-hidden py-3">
       {/* Title Tag */}
-      <div className="max-w-7xl mx-auto px-4 mb-2 flex items-center justify-between text-xs text-stone-400">
+      <div className="max-w-[1440px] mx-auto px-4 mb-2 flex items-center justify-between text-xs text-stone-400">
         <span className="flex items-center gap-2 text-amber-400 font-semibold tracking-wide">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="uppercase text-[13px] font-bold">नेपाल के रुद्राक्ष के पेड़ · Live Himalayan Tree Groves</span>

@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-stone-950/95 text-stone-100 border-b border-amber-900/40 backdrop-blur-md">
+    <header className="g-blue sticky top-0 z-40 bg-stone-950/95 text-stone-100 border-b border-amber-900/40 backdrop-blur-md">
       {/* Announcement Strip */}
       <div className="bg-stone-900 text-stone-300 text-xs py-1.5 px-4 text-center border-b border-stone-800 font-medium flex items-center justify-center flex-wrap gap-y-1">
         <span className="text-amber-300 font-semibold">100% Himalayan Nepali 1 to 21 Mukhi</span>
@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Navigation - Strict Top Bar Contract: Zone 1, Zone 2, Zone 3 */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
         {/* Zone 1: Single Brand Lockup with Official Crest Logo */}
         <a
           href="#home"
