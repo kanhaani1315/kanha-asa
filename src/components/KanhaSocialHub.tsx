@@ -27,112 +27,82 @@ export const KanhaSocialHub: React.FC = () => {
 
   const videoList: VideoItem[] = [
     {
-      id: 'v1',
-      title: '1 to 21 Mukhi Nepali Rudraksha Identification & X-Ray Testing',
-      titleHi: '1 से 21 मुखी असली नेपाली रुद्राक्ष की पहचान एवं एक्स-रे टेस्ट रिपोर्ट',
-      duration: '14:20',
-      category: 'Lab Verification',
-      views: '48K+ Views',
-      description: 'इस वीडियो में कान्हा असा के विशेषज्ञों द्वारा 1 से 21 मुखी असली नेपाली रुद्राक्ष की पहचान, प्राकृतिक धारियों की जांच और एक्स-रे लैब रिपोर्ट द्वारा आंतरिक बीज (Seeds/Chambers) का लाइव परीक्षण दिखाया गया है।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        'प्राकृतिक नेपाली दानों की पहचान',
-        'लैब एक्स-रे में आंतरिक कक्ष (Chambers) देखना',
-        'नकली और कटे हुए रुद्राक्ष से बचाव',
-        'कान्हा असा ISO 9001:2015 लैब सर्टिफिकेट'
-      ]
+      id: "w29s7XBWz9k",
+      title: "असली रुद्राक्ष की पहचान कैसे करें? | Lab Certified Rudraksha",
+      titleHi: "असली रुद्राक्ष की पहचान कैसे करें? | Lab Certified Rudraksha",
+      duration: "10:02",
+      category: "पहचान (Identification)",
+      views: 'YouTube पर देखें',
+      description: "असली और नकली रुद्राक्ष की पहचान कैसे करें, lab certification क्यों ज़रूरी है — Kanha Asa expert की free सलाह।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/w29s7XBWz9k/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/w29s7XBWz9k?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=w29s7XBWz9k',
+      highlights: []
     },
     {
-      id: 'v2',
-      title: 'Vedic Rudraksha Consecration (Pran Pratishtha) & Abhishek Ritual',
-      titleHi: 'सिद्ध रुद्राक्ष एवं सर्व सिद्ध माला की प्राण-प्रतिष्ठा व वैदिक पूजन',
-      duration: '18:45',
-      category: 'Sacred Ritual',
-      views: '62K+ Views',
-      description: 'हर एक रुद्राक्ष को डिस्पैच करने से पहले वैदिक ब्राह्मणों द्वारा गंगाजल, पंचामृत एवं महामृत्युंजय मंत्रों से विधिपूर्वक सिद्ध व जागृत किया जाता है। देखिए संपूर्ण प्राण-प्रतिष्ठा अनुष्ठान।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        'महामृत्युंजय संपुटित रुद्राभिषेक',
-        'गंगाजल व पंचामृत शुद्धिकरण',
-        'जागृत बीज मंत्रों द्वारा ऊर्जा प्रवाह',
-        'प्राण-प्रतिष्ठा प्रमाणीकरण पत्र'
-      ]
+      id: "w-fN-mzSvBY",
+      title: "रुद्राक्ष को अभिमंत्रित कैसे करें? | Rudraksh Siddh Karne ki Vidhi",
+      titleHi: "रुद्राक्ष को अभिमंत्रित कैसे करें? | Rudraksh Siddh Karne ki Vidhi",
+      duration: "10:58",
+      category: "पूजन विधि",
+      views: 'YouTube पर देखें',
+      description: "रुद्राक्ष को सिद्ध / अभिमंत्रित करने की पूरी विधि, step by step।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/w-fN-mzSvBY/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/w-fN-mzSvBY?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=w-fN-mzSvBY',
+      highlights: []
     },
     {
-      id: 'v3',
-      title: 'Kanha Asa Rewa Kendra Tour & Genuine Himalayan Bead Testing',
-      titleHi: 'कान्हा असा रुद्राक्ष केंद्र (रीवा, म.प्र.) स्टोर व लैब दर्शन',
-      duration: '09:15',
-      category: 'Center Tour',
-      views: '34K+ Views',
-      description: 'शिल्पी प्लाजा, रीवा (मध्य प्रदेश) स्थित कान्हा असा के मुख्य कार्यालय एवं टेस्ट लैब का लाइव वीडियो। जानिए कैसे दूर-दराज के भक्त सीधे दुकान पर आते हैं और ऑनलाइन ऑर्डर करते हैं।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        'दुकान नं. BF3/3 शिल्पी प्लाजा, रीवा दर्शन',
-        'सैकड़ों दुर्लभ रुद्राक्षों का लाइव संग्रह',
-        'गोल्ड व सिल्वर वर्क में जड़ाऊ मालाएं',
-        'हस्तनिर्मित सिद्ध लॉकेट व ब्रेसलेट'
-      ]
+      id: "6rsZTW0kXig",
+      title: "क्या आपको पता है कि हर 1 मुखी रुद्राक्ष असली नहीं होता?",
+      titleHi: "क्या आपको पता है कि हर 1 मुखी रुद्राक्ष असली नहीं होता?",
+      duration: "2:00",
+      category: "1 मुखी",
+      views: 'YouTube पर देखें',
+      description: "1 मुखी रुद्राक्ष खरीदने से पहले ये बातें ज़रूर जानें।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/6rsZTW0kXig/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/6rsZTW0kXig?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=6rsZTW0kXig',
+      highlights: []
     },
     {
-      id: 'v4',
-      title: 'How to Book 1 to 21 Mukhi Rudraksha on Easy Monthly Installments',
-      titleHi: 'आसान मासिक किस्तों (SIP) में अपना मनचाहा रुद्राक्ष कैसे बुक करें?',
-      duration: '07:50',
-      category: 'Easy Installments',
-      views: '29K+ Views',
-      description: 'महंगे और दुर्लभ 1 से 21 मुखी रुद्राक्ष व सिद्ध मालाओं को बिना किसी अतिरिक्त ब्याज के ₹1000 या ₹5000 की मासिक किस्तों में सुरक्षित बुक करने का पूरा डिजिटल तरीका।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        '0% ब्याज व 0% छुपे शुल्क की गारंटी',
-        'तुरंत डिजिटल रिजर्वेशन सर्टिफिकेट',
-        'Razorpay व UPI से सुरक्षित किस्त भुगतान',
-        'पूर्ण होते ही फ्री होम डिलीवरी'
-      ]
+      id: "MfdE-5gPqWg",
+      title: "गौरी शंकर रुद्राक्ष के 5 चमत्कारी प्रभाव और लाभ",
+      titleHi: "गौरी शंकर रुद्राक्ष के 5 चमत्कारी प्रभाव और लाभ",
+      duration: "1:32",
+      category: "गौरी शंकर",
+      views: 'YouTube पर देखें',
+      description: "गौरी शंकर रुद्राक्ष के मुख्य लाभ और किसे धारण करना चाहिए।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/MfdE-5gPqWg/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/MfdE-5gPqWg?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=MfdE-5gPqWg',
+      highlights: []
     },
     {
-      id: 'v5',
-      title: 'Lo Shu Grid & Numerology: Which Rudraksha Suits Your Name & DOB?',
-      titleHi: 'लो-शू ग्रिड व जन्मतिथि अनुसार भाग्यशाली रुद्राक्ष चयन विधि',
-      duration: '12:30',
-      category: 'Numerology & Astro',
-      views: '53K+ Views',
-      description: 'आपके नाम और जन्मतिथि में कौन से अंक लुप्त हैं? किस ग्रह की दशा चल रही है? जानिए अंक ज्योतिष और वैदिक कुंडली के अनुसार सबसे सटीक रुद्राक्ष धारण करने की विधि।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        'नाम व मोबाइल नंबर का न्यूमरोलॉजी योग',
-        'मूलांक एवं भाग्यांक अनुसार रुद्राक्ष',
-        'शनि, राहु-केतु व कालसर्प दोष शमन',
-        'करियर व व्यापार में सफलता के योग'
-      ]
+      id: "l6e9SWX2yZU",
+      title: "How We Pack & Dispatch Your Original Rudraksha | KANHA ASA",
+      titleHi: "How We Pack & Dispatch Your Original Rudraksha | KANHA ASA",
+      duration: "0:37",
+      category: "Packing & Delivery",
+      views: 'YouTube पर देखें',
+      description: "आपका रुद्राक्ष कैसे pack और dispatch होता है — Kanha Asa का process।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/l6e9SWX2yZU/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/l6e9SWX2yZU?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=l6e9SWX2yZU',
+      highlights: []
     },
     {
-      id: 'v6',
-      title: 'Real Devotee Unboxing & Testimonials from Across India',
-      titleHi: 'ग्राहकों का अनुभव एवं असली रुद्राक्ष पार्सल अनबॉक्सिंग वीडियो',
-      duration: '11:10',
-      category: 'Unboxing & Reviews',
-      views: '41K+ Views',
-      description: 'देश भर के भक्तों द्वारा कान्हा असा से प्राप्त किए गए पार्सल की लाइव अनबॉक्सिंग, गंगाजल डिब्बी, सिद्ध प्रमाणपत्र और रुद्राक्ष की दिव्यता पर उनके सच्चे विचार।',
-      thumbnailUrl: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80',
-      embedUrl: 'https://www.youtube-nocookie.com/embed?listType=user_uploads&list=kanhaasaastrorudraksha',
-      youtubeLink: `${officialLinks.youtube}`,
-      highlights: [
-        'सुरक्षित टैम्पर-प्रूफ प्रीमियम पैकेजिंग',
-        'ओरिजिनल लैब एक्स-रे रिपोर्ट व कार्ड',
-        'गंगाजल व पूजन सामग्री साथ में',
-        'भक्तों की सच्ची संतुष्टि व आशीर्वाद'
-      ]
+      id: "jfVXy2RDmec",
+      title: "रुद्राक्ष की खेती कैसे होती है? पेड़ से आप तक का पूरा सफर",
+      titleHi: "रुद्राक्ष की खेती कैसे होती है? पेड़ से आप तक का पूरा सफर",
+      duration: "0:51",
+      category: "रुद्राक्ष की खेती",
+      views: 'YouTube पर देखें',
+      description: "रुद्राक्ष के पेड़ से लेकर आप तक पहुँचने का पूरा सफर।",
+      thumbnailUrl: 'https://i.ytimg.com/vi/jfVXy2RDmec/hqdefault.jpg',
+      embedUrl: 'https://www.youtube-nocookie.com/embed/jfVXy2RDmec?rel=0&modestbranding=1&autoplay=1',
+      youtubeLink: 'https://www.youtube.com/watch?v=jfVXy2RDmec',
+      highlights: []
     }
   ];
 
@@ -428,53 +398,14 @@ export const KanhaSocialHub: React.FC = () => {
               </div>
 
               {/* Video Player Area */}
-              <div className="relative aspect-video bg-black flex items-center justify-center">
-                <img
-                  src={activeVideo.thumbnailUrl}
-                  alt={activeVideo.titleHi}
-                  className="w-full h-full object-cover opacity-60"
+              <div className="relative aspect-video bg-black">
+                <iframe
+                  src={activeVideo.embedUrl}
+                  title={activeVideo.titleHi}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 />
-                
-                {/* Center Action to watch on YouTube or player */}
-                <div className="absolute inset-0 bg-stone-950/70 flex flex-col items-center justify-center p-6 text-center">
-                  <a
-                    href={officialLinks.youtube}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-16 h-16 rounded-full bg-red-600 hover:bg-red-500 hover:scale-110 text-white flex items-center justify-center shadow-2xl transition-all duration-300 group mb-3"
-                  >
-                    <Play className="w-8 h-8 fill-white ml-1" />
-                  </a>
-                  <h4 className="text-base sm:text-lg font-bold text-white max-w-lg mb-2">
-                    {activeVideo.titleHi}
-                  </h4>
-                  <p className="text-xs text-stone-300 max-w-md mb-4 leading-relaxed">
-                    यह संपूर्ण वीडियो और 1 से 21 मुखी रुद्राक्ष के सभी एपिसोड कान्हा असा के आधिकारिक यूट्यूब चैनल <strong className="text-amber-400">@kanhaasaastrorudraksha</strong> पर उपलब्ध हैं।
-                  </p>
-
-                  <div className="flex flex-wrap items-center justify-center gap-3">
-                    <a
-                      href={officialLinks.youtube}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg transition-colors"
-                    >
-                      <YouTubeIcon size={16} className="fill-current text-white" />
-                      <span>यूट्यूब चैनल पर पूरा वीडियो देखें</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-
-                    <a
-                      href={officialLinks.instagram}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white font-semibold text-xs flex items-center gap-1.5 transition-opacity"
-                    >
-                      <InstagramIcon size={14} className="fill-current text-white" />
-                      <span>Instagram रील्स देखें</span>
-                    </a>
-                  </div>
-                </div>
               </div>
 
               {/* Modal Body / Info */}
@@ -484,7 +415,7 @@ export const KanhaSocialHub: React.FC = () => {
                   <p className="text-stone-300 leading-relaxed">{activeVideo.description}</p>
                 </div>
 
-                <div>
+                {activeVideo.highlights.length > 0 && <div>
                   <h5 className="font-semibold text-white mb-2">इस वीडियो में क्या सीखेंगे (Key Highlights):</h5>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {activeVideo.highlights.map((point, i) => (
@@ -494,7 +425,7 @@ export const KanhaSocialHub: React.FC = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </div>}
 
                 <div className="pt-3 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-stone-400">
                   <div className="flex items-center gap-2">
