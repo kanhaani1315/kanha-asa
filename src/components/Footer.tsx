@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({
               </p>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://www.youtube.com/@kanhaasaastrorudraksha"
+                  href="https://www.youtube.com/@kanhaasaastrorudraksha?sub_confirmation=1"
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/40 transition-all"
@@ -250,7 +250,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           <div className="flex flex-wrap items-center justify-center gap-2.5">
             <a
-              href="https://www.youtube.com/@kanhaasaastrorudraksha"
+              href="https://www.youtube.com/@kanhaasaastrorudraksha?sub_confirmation=1"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-semibold text-xs shadow transition-colors"

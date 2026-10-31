@@ -20,7 +20,7 @@ export const KanhaSocialHub: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
 
   const officialLinks = {
-    youtube: 'https://www.youtube.com/@kanhaasaastrorudraksha',
+    youtube: 'https://www.youtube.com/@kanhaasaastrorudraksha?sub_confirmation=1',
     facebook: 'https://www.facebook.com/KanhaASA',
     instagram: 'https://www.instagram.com/kanha.asa/',
   };

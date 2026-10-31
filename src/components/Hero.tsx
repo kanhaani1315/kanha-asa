@@ -105,7 +105,7 @@ export const Hero: React.FC<HeroProps> = ({
             </button>
 
             <a
-              href="https://www.youtube.com/@kanhaasaastrorudraksha"
+              href="https://www.youtube.com/@kanhaasaastrorudraksha?sub_confirmation=1"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-4 py-3.5 text-xs sm:text-sm font-semibold rounded-lg bg-red-950/80 hover:bg-red-900/80 text-red-300 border border-red-800/80 transition-colors whitespace-nowrap"

@@ -202,7 +202,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Official YouTube Channel Link */}
           <a
-            href="https://www.youtube.com/@kanhaasaastrorudraksha"
+            href="https://www.youtube.com/@kanhaasaastrorudraksha?sub_confirmation=1"
             target="_blank"
             rel="noreferrer"
             className="p-2 rounded-lg bg-red-600/15 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/30 transition-all shadow-sm"
