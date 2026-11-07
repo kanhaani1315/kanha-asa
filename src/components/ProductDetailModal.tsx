@@ -14,14 +14,34 @@ interface ProductDetailModalProps {
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
-  product,
+  product: baseProduct,
   onClose,
   onAddToCart,
   onOpenAiChat,
 }) => {
   const [showCertificate, setShowCertificate] = useState(false);
+  const [ratti, setRatti] = useState(5);
+  const [form, setForm] = useState<'loose' | 'silver' | 'panch'>('loose');
+  const [cert, setCert] = useState<'kanha' | 'lab'>('kanha');
 
-  if (!product) return null;
+  if (!baseProduct) return null;
+
+  // Gemstone options: weight (ratti), loose stone/ring, certificate. Base price = 5 ratti loose stone.
+  const isGem = baseProduct.category === 'gemstone';
+  const FORM_OPTS = { loose: { label: 'खुला रत्न (Loose Stone)', add: 0 }, silver: { label: 'चांदी की अंगूठी (Silver Ring)', add: 1200 }, panch: { label: 'पंचधातु/अष्टधातु अंगूठी (Ring)', add: 2500 } };
+  const CERT_OPTS = { kanha: { label: 'Kanha Asa प्रमाणपत्र (साथ में मुफ़्त)', add: 0 }, lab: { label: 'लैब सर्टिफिकेट (Lab Certificate)', add: 800 } };
+  const scale = ratti / 5;
+  const product: Product = isGem
+    ? {
+        ...baseProduct,
+        id: `${baseProduct.id}-r${ratti}-${form}-${cert}`,
+        name: `${baseProduct.name} | ${ratti} Ratti | ${FORM_OPTS[form].label} | ${CERT_OPTS[cert].label}`,
+        price: Math.round(baseProduct.price * scale) + FORM_OPTS[form].add + CERT_OPTS[cert].add,
+        originalPrice: Math.round(baseProduct.originalPrice * scale) + FORM_OPTS[form].add + CERT_OPTS[cert].add,
+        certified: true,
+        weightGms: `${ratti} Ratti`,
+      }
+    : baseProduct;
 
   const tier = getDiscountTier(product.price);
   const coupon = getCouponCode(product.price);
@@ -111,6 +131,38 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     {product.hindiName}
                   </p>
                 </div>
+
+                {isGem && (
+                  <div className="space-y-3 p-3 rounded-lg border border-amber-800/60 bg-stone-950">
+                    <div>
+                      <p className="text-xs font-bold text-amber-300 mb-1.5">वज़न चुनें (रत्ती)</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {[5, 6, 7, 8, 9, 10, 12].map((r) => (
+                          <button key={r} type="button" onClick={() => setRatti(r)}
+                            className={`px-3 py-1.5 rounded-md text-xs font-semibold border cursor-pointer ${ratti === r ? 'bg-amber-500 text-stone-950 border-amber-400' : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-500'}`}>
+                            {r} रत्ती
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-amber-300 mb-1.5">रत्न / अंगूठी</p>
+                      <select value={form} onChange={(e) => setForm(e.target.value as any)} className="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded-md text-xs text-stone-100">
+                        {Object.entries(FORM_OPTS).map(([k, v]) => (
+                          <option key={k} value={k}>{v.label}{v.add ? ` (+₹${v.add})` : ''}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-amber-300 mb-1.5">सर्टिफिकेट</p>
+                      <select value={cert} onChange={(e) => setCert(e.target.value as any)} className="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded-md text-xs text-stone-100">
+                        {Object.entries(CERT_OPTS).map(([k, v]) => (
+                          <option key={k} value={k}>{v.label}{v.add ? ` (+₹${v.add})` : ''}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                )}
 
                 {/* Price & 3-Tier Discount Slab */}
                 <div className="space-y-2 py-2 border-y border-stone-800">
