@@ -21,10 +21,15 @@ export interface ApiResult {
 }
 
 export const CREDIT_PACKS = [
-  { price: 99, credits: 120, label: 'Starter', note: '12 सवाल या 6 मिनट कॉल' },
-  { price: 199, credits: 250, label: 'Popular', note: '25 सवाल या 12 मिनट कॉल', popular: true },
-  { price: 499, credits: 600, label: 'Value', note: '60 सवाल या 30 मिनट कॉल' },
-  { price: 999, credits: 1250, label: 'Family', note: '125 सवाल या 62 मिनट कॉल' },
+  { price: 9, credits: 10, label: 'Mini', note: '1 सवाल' },
+  { price: 15, credits: 20, label: 'Mini', note: '2 सवाल' },
+  { price: 29, credits: 40, label: 'Lite', note: '4 सवाल' },
+  { price: 33, credits: 50, label: 'Lite', note: '5 सवाल' },
+  { price: 50, credits: 80, label: 'Basic', note: '8 सवाल' },
+  { price: 70, credits: 120, label: 'Basic', note: '12 सवाल' },
+  { price: 99, credits: 180, label: 'Popular', note: '18 सवाल', popular: true },
+  { price: 200, credits: 400, label: 'Value', note: '40 सवाल' },
+  { price: 500, credits: 1100, label: 'Family', note: '110 सवाल' },
 ];
 
 export const REASON_TEXT: Record<string, string> = {
@@ -137,7 +142,7 @@ export function buyCredits(price: number): Promise<ApiResult> {
       amount: price,
       description: `Kanha AI Acharya Credits (₹${price})`,
       customerName: w?.name || undefined,
-      customerPhone: w?.phone ? w.phone.replace(/^91/, '') : undefined,
+      customerPhone: w?.phone ? w.phone.replace(/\D/g, '').slice(-10) : undefined,
       notes: { purpose: 'astro_credits', phone: w?.phone || '' },
       onSuccess: async (paymentId: string) => {
         const r = await post('ka-buy-credits', { token: getToken(), razorpay_payment_id: paymentId });

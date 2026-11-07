@@ -168,7 +168,7 @@ const RechargePanel: React.FC<{ wallet: Wallet; reason?: string | null; onDone: 
         <h4 className="text-base font-bold text-white">क्रेडिट्स रिचार्ज करें</h4>
         {reason && <p className="text-xs text-amber-300 mt-1">{reasonText(reason)}</p>}
         <p className="text-xs text-stone-400 mt-1">
-          आपका बैलेंस: <strong className="text-white">₹{wallet.balance}</strong> · हर सवाल ₹{wallet.chat_price} · AI कॉल ₹{wallet.call_price_per_min}/मिनट
+          आपका बैलेंस: <strong className="text-white">₹{wallet.balance}</strong> · हर सवाल = {wallet.chat_price} क्रेडिट (न्यूमरोलॉजी, लो शू, वैदिक ग्रिड, नाम/मोबाइल सब)
         </p>
       </div>
       <div className="grid grid-cols-2 gap-2.5">
