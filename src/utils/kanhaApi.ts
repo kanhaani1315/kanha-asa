@@ -104,6 +104,12 @@ export async function verifyOtp(phone: string, code: string, name: string) {
   return r;
 }
 
+export async function guestLogin(phone: string, name: string) {
+  const r = await post('ka-guest-login', { phone, name });
+  if (r.ok && r.token) saveToken(r.token);
+  return r;
+}
+
 export async function refreshWallet() {
   const token = getToken();
   if (!token) {

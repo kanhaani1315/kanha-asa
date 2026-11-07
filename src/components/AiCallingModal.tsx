@@ -40,6 +40,7 @@ export const AiCallingModal: React.FC<AiCallingModalProps> = ({ isOpen, onClose 
   const handleCall = async () => {
     setError(null);
     if (!wallet) return openWallet('login_required');
+    if (String(wallet.phone).startsWith('guest-')) return setError('AI कॉल अभी उपलब्ध नहीं है। कृपया चैट में सवाल पूछें।');
     if (!canCall) return openWallet('need_credits');
     setBusy(true);
     const r = await requestAiCall(topic);

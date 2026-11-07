@@ -9,6 +9,7 @@ import {
   getToken,
   sendOtp,
   verifyOtp,
+  guestLogin,
   buyCredits,
   logout,
   reasonText,
@@ -56,9 +57,10 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
     setError(null);
     if (phone.replace(/\D/g, '').length < 10) return setError(reasonText('invalid_phone'));
     setBusy(true);
-    const r = await sendOtp(phone);
+    // WhatsApp OTP temporarily disabled -> direct guest login (3 free questions, then paid via Razorpay)
+    const r = await guestLogin(phone, name);
     setBusy(false);
-    if (r.ok) setStep('otp');
+    if (r.ok) onDone();
     else setError(reasonText(r.reason));
   };
 
@@ -77,7 +79,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
       <div>
         <h4 className="text-base font-bold text-white">मोबाइल नंबर से लॉगिन करें</h4>
         <p className="text-xs text-stone-400 mt-1">
-          पहले 3 सवाल फ्री और पहली AI कॉल का 1 मिनट फ्री। OTP आपके WhatsApp पर आएगा।
+          पहले 3 सवाल बिल्कुल फ्री। उसके बाद Razorpay से पेमेंट करके आगे पूछ सकते हैं।
         </p>
       </div>
       {step === 'phone' ? (
@@ -93,7 +95,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
             type="tel"
             required
             inputMode="numeric"
-            placeholder="10 अंकों का WhatsApp नंबर"
+            placeholder="10 अंकों का मोबाइल नंबर"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className="w-full px-3.5 py-2.5 bg-stone-950 border border-stone-700 rounded-lg text-sm text-stone-100 focus:outline-none focus:border-amber-400 font-mono"
@@ -104,7 +106,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
             className="w-full py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
           >
             {busy && <Loader2 className="w-4 h-4 animate-spin" />}
-            WhatsApp पर OTP भेजें
+            आगे बढ़ें (3 सवाल फ्री)
           </button>
         </form>
       ) : (
