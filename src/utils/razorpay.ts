@@ -3,7 +3,7 @@
  * Live Key ID: rzp_live_TixYX0D9CDAz18
  */
 
-export const RAZORPAY_KEY_ID = (import.meta as any).env?.VITE_RAZORPAY_KEY_ID || 'rzp_live_Tuym3QJnUPCw2p';
+export const RAZORPAY_KEY_ID = (import.meta as any).env?.VITE_RAZORPAY_KEY_ID || 'rzp_live_TixYX0D9CDAz18';
 
 declare global {
   interface Window {
