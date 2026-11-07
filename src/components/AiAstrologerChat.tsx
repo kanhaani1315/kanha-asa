@@ -68,6 +68,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     return grid ? calculateNameNumerology('Rahul Sharma', grid.missingNumbers) : null;
   });
   const [activeRemedies, setActiveRemedies] = useState<number[]>([]); // User activated remedy numbers
+  const [gridType, setGridType] = useState<'loshu' | 'vedic'>('loshu'); // Lo Shu (Chinese) vs Vedic (Vaidik) grid layout
 
   // Mobile Numerology State
   const [mobileInput, setMobileInput] = useState('9131805622');
@@ -180,6 +181,16 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     [3, 5, 7],
     [8, 1, 6]
   ];
+  // Vedic (Vaidik) numerology grid layout:
+  // 3  1  9
+  // 6  7  5
+  // 2  8  4
+  const vedicOrder = [
+    [3, 1, 9],
+    [6, 7, 5],
+    [2, 8, 4]
+  ];
+  const gridOrder = gridType === 'vedic' ? vedicOrder : loShuOrder;
 
   if (!isOpen) return null;
 
@@ -461,7 +472,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-bold text-white flex items-center gap-1.5">
                         <Sparkles className="w-4 h-4 text-amber-400" />
-                        <span>3x3 नियो ग्रिड (Neo Lo Shu Grid Matrix)</span>
+                        <span>{gridType === 'vedic' ? '3x3 वैदिक ग्रिड (Vedic / Vaidik Grid)' : '3x3 नियो ग्रिड (Neo Lo Shu Grid Matrix)'}</span>
                       </span>
                       <div className="flex items-center gap-2 text-[12px]">
                         <span className="flex items-center gap-1 text-emerald-400">
@@ -479,9 +490,35 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                       </div>
                     </div>
 
+                    {/* Grid type toggle: Lo Shu / Vedic */}
+                    <div className="flex items-center justify-center gap-2 text-[13px]">
+                      <button
+                        type="button"
+                        onClick={() => setGridType('loshu')}
+                        className={`px-3 py-1.5 rounded-lg border font-semibold cursor-pointer transition-colors ${
+                          gridType === 'loshu'
+                            ? 'bg-amber-600 border-amber-500 text-white'
+                            : 'bg-stone-950 border-stone-700 text-stone-300 hover:border-amber-600'
+                        }`}
+                      >
+                        लो शू ग्रिड (Lo Shu)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setGridType('vedic')}
+                        className={`px-3 py-1.5 rounded-lg border font-semibold cursor-pointer transition-colors ${
+                          gridType === 'vedic'
+                            ? 'bg-amber-600 border-amber-500 text-white'
+                            : 'bg-stone-950 border-stone-700 text-stone-300 hover:border-amber-600'
+                        }`}
+                      >
+                        वैदिक ग्रिड (Vedic)
+                      </button>
+                    </div>
+
                     {/* Matrix */}
                     <div className="grid grid-cols-3 gap-2 sm:gap-3 max-w-sm mx-auto">
-                      {loShuOrder.map((row, rIdx) =>
+                      {gridOrder.map((row, rIdx) =>
                         row.map((cellNum) => {
                           const isBirth = calculatedLoShu.birthNumbers.includes(cellNum);
                           const isNameAdded = nameNumerology?.numbersAddedToGrid.includes(cellNum) && !isBirth;
