@@ -171,13 +171,21 @@ const RechargePanel: React.FC<{ wallet: Wallet; reason?: string | null; onDone: 
           आपका बैलेंस: <strong className="text-white">₹{wallet.balance}</strong> · हर सवाल = {wallet.chat_price} क्रेडिट (न्यूमरोलॉजी, लो शू, वैदिक ग्रिड, नाम/मोबाइल सब)
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="rounded-xl border border-stone-800 bg-stone-950 p-3 space-y-1.5">
+        <p className="text-xs font-bold text-amber-300">इस वॉलेट से क्या-क्या मिलेगा</p>
+        <ul className="text-[12px] text-stone-300 space-y-1">
+          <li>🆓 <b>फ्री:</b> लो शू ग्रिड, वैदिक ग्रिड, नाम व मोबाइल न्यूमरोलॉजी कैलकुलेटर + पहले 3 सवाल</li>
+          <li>💬 <b>AI आचार्य से सवाल-जवाब:</b> अंक ज्योतिष, लो शू/वैदिक ग्रिड रीडिंग, नाम व मोबाइल के अनुसार, रुद्राक्ष व रत्न सुझाव (हर सवाल = {wallet.chat_price} क्रेडिट)</li>
+          <li>🔜 <b>जल्द आ रहा:</b> फेस रीडिंग, पाम रीडिंग, AI कॉल</li>
+        </ul>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
         {CREDIT_PACKS.map((p) => (
           <button
             key={p.price}
             onClick={() => buy(p.price)}
             disabled={busy !== null}
-            className={`p-3 rounded-xl text-left border transition-colors cursor-pointer disabled:opacity-60 ${
+            className={`p-2 rounded-xl text-left border transition-colors cursor-pointer disabled:opacity-60 ${
               p.popular ? 'border-amber-500 bg-amber-950/40' : 'border-stone-700 bg-stone-950 hover:border-amber-500'
             }`}
           >
