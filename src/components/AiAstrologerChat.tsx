@@ -4,6 +4,7 @@ import { KanhaLogo } from './KanhaLogo';
 import { KanhaAiChatIcon } from './AiIcons';
 import { AstroWalletModal, WalletChip, useAstroWallet } from './AstroWallet';
 import { askAstrologer, reasonText } from '../utils/kanhaApi';
+import { calculateGlobalReading } from '../utils/global';
 import { calculateNameNumerology, analyzeMobileNumber, calculateLoShuGrid, PLANET_MAP } from '../utils/numerology';
 import { 
   Send, 
@@ -41,7 +42,9 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
   onClose,
   onSelectProductByName,
 }) => {
-  const [activeMode, setActiveMode] = useState<'chat' | 'loshu' | 'mobile'>('chat');
+  const [activeMode, setActiveMode] = useState<'chat' | 'loshu' | 'mobile' | 'global'>('chat');
+  const [globalDob, setGlobalDob] = useState('');
+  const globalReading = globalDob ? calculateGlobalReading(globalDob) : null;
   const [messages, setMessages] = useState<AiChatMessage[]>([
     {
       id: 'msg-1',
@@ -264,6 +267,17 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
             >
               <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
               <span>मोबाइल नंबर जांच</span>
+            </button>
+            <button
+              onClick={() => setActiveMode('global')}
+              className={`flex-1 py-2.5 text-center font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+                activeMode === 'global'
+                  ? 'text-amber-400 border-b-2 border-amber-400 bg-stone-900/50'
+                  : 'text-stone-400 hover:text-stone-200'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>ग्लोबल रीडिंग</span>
             </button>
           </div>
 
@@ -651,6 +665,43 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
           )}
 
           {/* TAB 3: MOBILE NUMBER NUMEROLOGY ANALYZER */}
+          {activeMode === 'global' && (
+            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-stone-950">
+              <div className="p-4 bg-stone-900 border border-stone-800 rounded-xl space-y-3">
+                <label className="block text-xs font-semibold text-stone-300">जन्म तिथि (Date of Birth) *</label>
+                <input
+                  type="date"
+                  value={globalDob}
+                  onChange={(e) => setGlobalDob(e.target.value)}
+                  className="w-full px-3 py-2 bg-stone-950 border border-stone-700 rounded-lg text-xs text-stone-100 focus:outline-none focus:border-amber-400 font-mono"
+                />
+                <p className="text-[13px] text-stone-400">दुनिया के अलग-अलग सिस्टम से आपकी रीडिंग: Life Path (पश्चिम), Sun Sign, Chinese Zodiac, बर्मी जन्म-वार।</p>
+              </div>
+              {globalReading && (
+                <div className="space-y-3 text-xs">
+                  <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl">
+                    <p className="font-bold text-amber-400">Life Path Number: {globalReading.lifePath}</p>
+                    <p className="text-stone-200 mt-1">{globalReading.lifePathInfo.hi} ({globalReading.lifePathInfo.en})</p>
+                    <p className="text-amber-300 mt-1">सुझाया रुद्राक्ष: <strong>{globalReading.lifePathInfo.rudraksha}</strong></p>
+                  </div>
+                  <div className="p-3 bg-stone-900 border border-stone-800 rounded-xl">
+                    <p className="font-bold text-white">Western Sun Sign: {globalReading.sunSign.en} ({globalReading.sunSign.hi})</p>
+                  </div>
+                  <div className="p-3 bg-stone-900 border border-stone-800 rounded-xl">
+                    <p className="font-bold text-white">Chinese Zodiac: {globalReading.chinese.en} ({globalReading.chinese.hi})</p>
+                    <p className="text-stone-400 mt-1">नोट: जनवरी-फरवरी के जन्म में चीनी नव वर्ष के हिसाब से पिछला जानवर हो सकता है।</p>
+                  </div>
+                  <div className="p-3 bg-stone-900 border border-stone-800 rounded-xl">
+                    <p className="font-bold text-white">बर्मी जन्म-वार: {globalReading.burmese.day}</p>
+                    <p className="text-stone-200 mt-1">जानवर: {globalReading.burmese.animal}</p>
+                    <p className="text-stone-400 mt-1">ग्रह: {globalReading.burmese.planet} · दिशा: {globalReading.burmese.dir}</p>
+                  </div>
+                  <p className="text-[12px] text-stone-500">यह मार्गदर्शन व मनोरंजन के लिए है, कोई गारंटी नहीं।</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {activeMode === 'mobile' && (
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5 bg-stone-950">
               {/* Mobile numerology tool is free */}
