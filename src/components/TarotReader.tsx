@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DECK, TAROT_REV, REMEDY, calculateGlobalReading } from '../utils/global';
-import { askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
+import { askAstrologer, getToken, getWallet, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 
 const SPREADS = [
@@ -31,7 +31,7 @@ const Back: React.FC<{ picked?: boolean; onClick: () => void }> = ({ picked, onC
 );
 
 export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => void }> = ({ onBuy, onNeed }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(getWallet()?.name && getWallet()?.name !== 'guest' ? String(getWallet()?.name) : '');
   const [dob, setDob] = useState('');
   const [topic, setTopic] = useState(TOPICS[0]);
   const [question, setQuestion] = useState('');
@@ -135,7 +135,7 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
               </div>
             )}
             {busy && !ai && <p className="mt-2 text-amber-300">आपकी रीडिंग तैयार हो रही है…</p>}
-            {ai && <div className="mt-2 p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100">{ai}</div>}
+            {ai && <div className="mt-2 p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100 text-[15px] leading-7">{ai}</div>}
           </div>
           <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl space-y-1">
             <p className="font-bold text-amber-400">उपाय (क्रम से)</p>
