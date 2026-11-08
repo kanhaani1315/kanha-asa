@@ -74,7 +74,8 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
     const r = await askAstrologer(msg, []);
     setBusy(false);
     if (r.ok && r.answer) return setAi(String(r.answer));
-    if (r.reason === 'login_required' || r.reason === 'need_credits') return onNeed(r.reason);
+    if (r.reason === 'login_required') { setErr('रीडिंग पाने के लिए पहले मोबाइल नंबर से लॉगिन करें।'); return onNeed(r.reason); }
+    if (r.reason === 'need_credits') { setErr('आपका पहला फ्री सवाल हो चुका है। अपनी रीडिंग पाने के लिए वॉलेट में पैसे डालें (₹10 प्रति रीडिंग)।'); return onNeed(r.reason); }
     setErr(reasonText(r.reason));
   };
 
@@ -123,7 +124,16 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
           <div className={card}>
             <p className="text-stone-200">आपकी रीडिंग आपके नाम, जन्म तिथि, सवाल और इन कार्ड्स के आधार पर तैयार होती है।</p>
             <button onClick={() => deepReading()} disabled={busy} className="mt-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-bold rounded-lg cursor-pointer">{busy ? 'रीडिंग हो रही है…' : '🔄 रीडिंग दोबारा पाएँ'}</button>
-            {err && <p className="text-red-300 mt-2">{err}</p>}
+            {err && (
+              <div className="mt-2 p-3 rounded-lg bg-red-950/60 border border-red-700">
+                <p className="text-red-200 font-bold">{err}</p>
+                {(err.includes('वॉलेट') || err.includes('लॉगिन')) && (
+                  <button onClick={() => onNeed(err.includes('लॉगिन') ? 'login_required' : 'need_credits')} className="mt-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-lg cursor-pointer">
+                    {err.includes('लॉगिन') ? '📱 लॉगिन करें' : '💰 वॉलेट रिचार्ज करें'}
+                  </button>
+                )}
+              </div>
+            )}
             {busy && !ai && <p className="mt-2 text-amber-300">आपकी रीडिंग तैयार हो रही है…</p>}
             {ai && <div className="mt-2 p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100">{ai}</div>}
           </div>

@@ -72,7 +72,7 @@ const PhotoReader: React.FC<{ kind: 'hand' | 'face'; onNeed: (reason: string) =>
     const r = await readPhoto(kind, preview, mime, '');
     setBusy(false);
     if (r.ok && r.answer) return setAnswer(String(r.answer));
-    if (r.reason === 'login_required' || r.reason === 'need_credits') return onNeed(r.reason);
+    if (r.reason === 'login_required' || r.reason === 'need_credits') { setErr(r.reason === 'need_credits' ? 'आपका पहला फ्री सवाल हो चुका है। आगे के लिए वॉलेट में पैसे डालें (₹10 प्रति रीडिंग)।' : 'पहले मोबाइल नंबर से लॉगिन करें।'); return onNeed(r.reason); }
     setErr(reasonText(r.reason));
   };
 
@@ -150,7 +150,7 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
     const r = await askAstrologer(msg, []);
     setLoveBusy(false);
     if (r.ok && r.answer) return setLoveAi(String(r.answer));
-    if (r.reason === 'login_required' || r.reason === 'need_credits') return onNeed(r.reason);
+    if (r.reason === 'login_required' || r.reason === 'need_credits') { setLoveErr(r.reason === 'need_credits' ? 'आपका पहला फ्री सवाल हो चुका है। आगे के लिए वॉलेट में पैसे डालें (₹10 प्रति सवाल)।' : 'पहले मोबाइल नंबर से लॉगिन करें।'); return onNeed(r.reason); }
     setLoveErr(reasonText(r.reason));
   };
 
