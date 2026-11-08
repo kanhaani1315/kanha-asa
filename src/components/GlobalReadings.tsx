@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { calculateGlobalReading, nineStarKi, charmFor, BLOOD, TAROT, TAROT_REV, PALM, FACE, REMEDY, LOVE } from '../utils/global';
-import { readPhoto, getToken, reasonText } from '../utils/kanhaApi';
+import { calculateGlobalReading, nineStarKi, charmFor, BLOOD, PALM, FACE, REMEDY, LOVE } from '../utils/global';
+import { readPhoto, askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
+import { TarotReader } from './TarotReader';
 
 type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love';
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
@@ -108,19 +109,30 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState<'M' | 'F'>('M');
   const [blood, setBlood] = useState('');
-  const [draw, setDraw] = useState<{ i: number; rev: boolean }[] | null>(null);
   const [palm, setPalm] = useState<Record<string, string>>({});
   const [face, setFace] = useState('');
   const [love, setLove] = useState('');
+  const [loveStatus, setLoveStatus] = useState('');
+  const [loveText, setLoveText] = useState('');
+  const [loveAi, setLoveAi] = useState('');
+  const [loveBusy, setLoveBusy] = useState(false);
+  const [loveErr, setLoveErr] = useState('');
+  const askLove = async () => {
+    if (!getToken()) return onNeed('login_required');
+    setLoveBusy(true); setLoveErr(''); setLoveAi('');
+    const l = LOVE.find((x) => x.v === love);
+    const msg = `[LOVE-LIFE PROBLEM - recommend ONLY pujas (Mangal Gauri Puja first; also Gauri Shankar / Shukra Shanti / Guru Shanti as suitable). Do NOT recommend Rudraksha or gemstones for this.] Problem type: ${l?.hi || 'not selected'}. Relationship status: ${loveStatus || 'not told'}. Customer says: ${loveText}`;
+    const r = await askAstrologer(msg, []);
+    setLoveBusy(false);
+    if (r.ok && r.answer) return setLoveAi(String(r.answer));
+    if (r.reason === 'login_required' || r.reason === 'need_credits') return onNeed(r.reason);
+    setLoveErr(reasonText(r.reason));
+  };
 
   const g = dob ? calculateGlobalReading(dob) : null;
   const ki = dob ? nineStarKi(dob, gender) : null;
   const ch = g ? charmFor(g.lifePath) : undefined;
 
-  const shuffle = () => {
-    const idx = Array.from({ length: TAROT.length }, (_, i) => i).sort(() => Math.random() - 0.5).slice(0, 3);
-    setDraw(idx.map((i) => ({ i, rev: Math.random() < 0.3 })));
-  };
   const buy = () => {
     onClose();
     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
@@ -128,7 +140,6 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   const tab = (k: Sub, l: string) => (
     <button key={k} onClick={() => setSub(k)} className={`flex-1 px-2 py-1.5 rounded-lg border text-[13px] font-semibold cursor-pointer ${sub === k ? 'bg-amber-600 border-amber-500 text-white' : 'bg-stone-950 border-stone-700 text-stone-300'}`}>{l}</button>
   );
-  const pos = ['अतीत (Past)', 'वर्तमान (Present)', 'भविष्य (Future)'];
 
   const palmRemedy = () => {
     const R = palm.heart === 'chain' || palm.heart === 'curve' ? REMEDY.love : palm.fate === 'broken' || palm.fate === 'none' ? REMEDY.change : palm.head ? REMEDY.career : REMEDY.peace;
@@ -189,22 +200,7 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
         </div>
       )}
 
-      {sub === 'tarot' && (
-        <div className="space-y-3">
-          <div className={card}>
-            <p className="text-stone-300">अपने सवाल पर ध्यान लगाएँ और कार्ड चुनें: अतीत, वर्तमान और भविष्य।</p>
-            <button onClick={shuffle} className="mt-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-lg cursor-pointer">🔮 कार्ड खींचें</button>
-          </div>
-          {draw && draw.map((d, k) => (
-            <div key={k} className="p-3 bg-stone-900 border border-amber-800 rounded-xl">
-              <p className="text-amber-400 font-bold">{pos[k]}</p>
-              <p className="text-white font-bold mt-0.5">{TAROT[d.i].n} ({TAROT[d.i].hi}){d.rev ? ' · उल्टा' : ''}</p>
-              <p className="text-stone-300 mt-1">{d.rev ? TAROT_REV : TAROT[d.i].up}</p>
-            </div>
-          ))}
-          {draw && (() => { const R = REMEDY[TAROT[draw[1].i].t]; return <Remedy rudraksha={R.rudraksha} stone={R.stone} puja={R.puja} onBuy={buy} />; })()}
-        </div>
-      )}
+      {sub === 'tarot' && <TarotReader onBuy={buy} onNeed={onNeed} />}
 
       {sub === 'palm' && (
         <div className="space-y-3">
@@ -250,11 +246,23 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
       {sub === 'love' && (
         <div className="space-y-3">
           <p className="text-stone-400">अपनी लव लाइफ की समस्या चुनें। इसमें सिर्फ़ पूजा का सुझाव दिया जाता है।</p>
-          <div className={card}>
+          <div className={`${card} space-y-2`}>
             <select value={love} onChange={(e) => setLove(e.target.value)} className={sel}>
-              <option value="">समस्या चुनें</option>
+              <option value="">1. मुख्य समस्या चुनें</option>
               {LOVE.map((l) => <option key={l.v} value={l.v}>{l.hi}</option>)}
             </select>
+            <select value={loveStatus} onChange={(e) => setLoveStatus(e.target.value)} className={sel}>
+              <option value="">2. आपकी स्थिति</option>
+              <option>रिलेशनशिप में हूँ</option>
+              <option>विवाहित हूँ</option>
+              <option>सगाई / शादी तय है</option>
+              <option>ब्रेकअप हो चुका है</option>
+              <option>अभी कोई साथी नहीं, रिश्ता चाहिए</option>
+            </select>
+            <textarea value={loveText} onChange={(e) => setLoveText(e.target.value)} rows={3} className={sel} placeholder="3. अपनी समस्या अपने शब्दों में लिखें: क्या हो रहा है, कब से, क्या चाहते हैं?" />
+            <button onClick={askLove} disabled={loveBusy || (!love && !loveText.trim())} className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white font-bold rounded-lg cursor-pointer">{loveBusy ? 'देख रहे हैं…' : '💬 AI आचार्य से अपनी समस्या पर बात करें'}</button>
+            {loveErr && <p className="text-red-300">{loveErr}</p>}
+            {loveAi && <div className="p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100">{loveAi}</div>}
           </div>
           {love && (() => {
             const l = LOVE.find((x) => x.v === love)!;
