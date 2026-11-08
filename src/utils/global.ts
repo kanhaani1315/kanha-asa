@@ -95,19 +95,19 @@ export function nineStarKi(dateStr: string, gender: 'M' | 'F'): string | null {
 }
 
 // ---------- Chakra / Crystal / Charm by Life Path ----------
-const CHARM: Record<number, { chakra: string; crystal: string; charm: string }> = {
-  1: { chakra: 'सोलर प्लेक्सस', crystal: 'Citrine / माणिक', charm: 'मिस्र का Eye of Horus' },
-  2: { chakra: 'सैक्रल', crystal: 'Moonstone / मोती', charm: 'इटली का Cornicello (बुरी नज़र से बचाव)' },
-  3: { chakra: 'गला (Throat)', crystal: 'Yellow Sapphire / पुखराज', charm: 'मिस्र का Ankh' },
-  4: { chakra: 'मूलाधार (Root)', crystal: 'Hessonite / गोमेद', charm: 'मिस्र का Scarab' },
-  5: { chakra: 'गला (Throat)', crystal: 'Emerald / पन्ना', charm: 'Eye of Horus' },
-  6: { chakra: 'हृदय (Heart)', crystal: 'Rose Quartz / हीरा-ओपल', charm: 'Ankh' },
-  7: { chakra: 'सहस्रार / आज्ञा', crystal: "Cat's Eye / लहसुनिया", charm: 'Scarab' },
-  8: { chakra: 'मूलाधार (Root)', crystal: 'Blue Sapphire / नीलम', charm: 'Cornicello' },
-  9: { chakra: 'सोलर प्लेक्सस', crystal: 'Red Coral / मूंगा', charm: 'Eye of Horus' },
-  11: { chakra: 'आज्ञा (Third Eye)', crystal: 'Amethyst', charm: 'Eye of Horus' },
-  22: { chakra: 'मूलाधार (Root)', crystal: 'Hessonite / गोमेद', charm: 'Scarab' },
-  33: { chakra: 'हृदय (Heart)', crystal: 'Rose Quartz', charm: 'Ankh' },
+const CHARM: Record<number, { chakra: string; crystal: string; charm: string; puja: string }> = {
+  1: { chakra: 'सोलर प्लेक्सस', crystal: 'Citrine / माणिक', charm: 'मिस्र का Eye of Horus', puja: 'सूर्य ग्रह शांति पूजा' },
+  2: { chakra: 'सैक्रल', crystal: 'Moonstone / मोती', charm: 'इटली का Cornicello (बुरी नज़र से बचाव)', puja: 'गौरी शंकर पूजा' },
+  3: { chakra: 'गला (Throat)', crystal: 'Yellow Sapphire / पुखराज', charm: 'मिस्र का Ankh', puja: 'गुरु ग्रह शांति पूजा' },
+  4: { chakra: 'मूलाधार (Root)', crystal: 'Hessonite / गोमेद', charm: 'मिस्र का Scarab', puja: 'राहु शांति पूजा' },
+  5: { chakra: 'गला (Throat)', crystal: 'Emerald / पन्ना', charm: 'Eye of Horus', puja: 'बुध ग्रह शांति पूजा' },
+  6: { chakra: 'हृदय (Heart)', crystal: 'Rose Quartz / हीरा-ओपल', charm: 'Ankh', puja: 'शुक्र ग्रह शांति पूजा' },
+  7: { chakra: 'सहस्रार / आज्ञा', crystal: "Cat's Eye / लहसुनिया", charm: 'Scarab', puja: 'केतु शांति पूजा' },
+  8: { chakra: 'मूलाधार (Root)', crystal: 'Blue Sapphire / नीलम', charm: 'Cornicello', puja: 'शनि शांति पूजा' },
+  9: { chakra: 'सोलर प्लेक्सस', crystal: 'Red Coral / मूंगा', charm: 'Eye of Horus', puja: 'मंगल गौरी पूजा' },
+  11: { chakra: 'आज्ञा (Third Eye)', crystal: 'Amethyst', charm: 'Eye of Horus', puja: 'गौरी शंकर पूजा' },
+  22: { chakra: 'मूलाधार (Root)', crystal: 'Hessonite / गोमेद', charm: 'Scarab', puja: 'राहु शांति पूजा' },
+  33: { chakra: 'हृदय (Heart)', crystal: 'Rose Quartz', charm: 'Ankh', puja: 'शुक्र ग्रह शांति पूजा' },
 };
 export const charmFor = (lp: number) => CHARM[lp];
 
@@ -120,29 +120,29 @@ export const BLOOD: Record<string, string> = {
 };
 
 // ---------- Tarot (Major Arcana) ----------
-export const TAROT: { n: string; hi: string; up: string }[] = [
-  { n: 'The Fool', hi: 'मूर्ख', up: 'नई शुरुआत, भरोसे के साथ पहला कदम।' },
-  { n: 'The Magician', hi: 'जादूगर', up: 'आपके पास ज़रूरी साधन हैं, अब कर दिखाने का समय।' },
-  { n: 'The High Priestess', hi: 'महापुरोहिता', up: 'अंतर्ज्ञान पर भरोसा करें, जल्दबाज़ी न करें।' },
-  { n: 'The Empress', hi: 'सम्राज्ञी', up: 'प्रेम, समृद्धि और सृजन का समय।' },
-  { n: 'The Emperor', hi: 'सम्राट', up: 'अनुशासन, स्थिरता और मज़बूत नेतृत्व।' },
-  { n: 'The Hierophant', hi: 'गुरु', up: 'परंपरा, मार्गदर्शन और सीखना।' },
-  { n: 'The Lovers', hi: 'प्रेमी', up: 'रिश्तों में सही चुनाव और सामंजस्य।' },
-  { n: 'The Chariot', hi: 'रथ', up: 'दृढ़ इच्छाशक्ति से जीत।' },
-  { n: 'Strength', hi: 'शक्ति', up: 'धैर्य और भीतर का साहस।' },
-  { n: 'The Hermit', hi: 'साधु', up: 'एकांत में चिंतन, भीतर की रोशनी।' },
-  { n: 'Wheel of Fortune', hi: 'भाग्य चक्र', up: 'किस्मत का पलटना, बदलाव का समय।' },
-  { n: 'Justice', hi: 'न्याय', up: 'सच्चाई, संतुलन और सही निर्णय।' },
-  { n: 'The Hanged Man', hi: 'उल्टा लटका', up: 'रुककर नए नज़रिए से देखें।' },
-  { n: 'Death', hi: 'मृत्यु', up: 'डरने की बात नहीं, पुराने का अंत और नए का आरंभ।' },
-  { n: 'Temperance', hi: 'संयम', up: 'संतुलन, धैर्य और मेल-मिलाप।' },
-  { n: 'The Devil', hi: 'शैतान', up: 'किसी आदत या मोह में बंधे होने का संकेत; पहचानकर मुक्त हों।' },
-  { n: 'The Tower', hi: 'मीनार', up: 'अचानक बदलाव जो अंत में नींव मज़बूत करता है।' },
-  { n: 'The Star', hi: 'तारा', up: 'आशा, उपचार और सकारात्मक भविष्य।' },
-  { n: 'The Moon', hi: 'चंद्रमा', up: 'भ्रम या अनिश्चितता; सब कुछ साफ़ दिखने तक रुकें।' },
-  { n: 'The Sun', hi: 'सूर्य', up: 'सफलता, खुशी और ऊर्जा।' },
-  { n: 'Judgement', hi: 'निर्णय', up: 'आत्म-मूल्यांकन और नया अध्याय।' },
-  { n: 'The World', hi: 'संसार', up: 'पूर्णता और लक्ष्य की प्राप्ति।' },
+export const TAROT: { t: string; n: string; hi: string; up: string }[] = [
+  { t: 'change', n: 'The Fool', hi: 'मूर्ख', up: 'नई शुरुआत, भरोसे के साथ पहला कदम।' },
+  { t: 'career', n: 'The Magician', hi: 'जादूगर', up: 'आपके पास ज़रूरी साधन हैं, अब कर दिखाने का समय।' },
+  { t: 'peace', n: 'The High Priestess', hi: 'महापुरोहिता', up: 'अंतर्ज्ञान पर भरोसा करें, जल्दबाज़ी न करें।' },
+  { t: 'love', n: 'The Empress', hi: 'सम्राज्ञी', up: 'प्रेम, समृद्धि और सृजन का समय।' },
+  { t: 'career', n: 'The Emperor', hi: 'सम्राट', up: 'अनुशासन, स्थिरता और मज़बूत नेतृत्व।' },
+  { t: 'peace', n: 'The Hierophant', hi: 'गुरु', up: 'परंपरा, मार्गदर्शन और सीखना।' },
+  { t: 'love', n: 'The Lovers', hi: 'प्रेमी', up: 'रिश्तों में सही चुनाव और सामंजस्य।' },
+  { t: 'career', n: 'The Chariot', hi: 'रथ', up: 'दृढ़ इच्छाशक्ति से जीत।' },
+  { t: 'peace', n: 'Strength', hi: 'शक्ति', up: 'धैर्य और भीतर का साहस।' },
+  { t: 'peace', n: 'The Hermit', hi: 'साधु', up: 'एकांत में चिंतन, भीतर की रोशनी।' },
+  { t: 'luck', n: 'Wheel of Fortune', hi: 'भाग्य चक्र', up: 'किस्मत का पलटना, बदलाव का समय।' },
+  { t: 'career', n: 'Justice', hi: 'न्याय', up: 'सच्चाई, संतुलन और सही निर्णय।' },
+  { t: 'peace', n: 'The Hanged Man', hi: 'उल्टा लटका', up: 'रुककर नए नज़रिए से देखें।' },
+  { t: 'change', n: 'Death', hi: 'मृत्यु', up: 'डरने की बात नहीं, पुराने का अंत और नए का आरंभ।' },
+  { t: 'peace', n: 'Temperance', hi: 'संयम', up: 'संतुलन, धैर्य और मेल-मिलाप।' },
+  { t: 'change', n: 'The Devil', hi: 'शैतान', up: 'किसी आदत या मोह में बंधे होने का संकेत; पहचानकर मुक्त हों।' },
+  { t: 'change', n: 'The Tower', hi: 'मीनार', up: 'अचानक बदलाव जो अंत में नींव मज़बूत करता है।' },
+  { t: 'love', n: 'The Star', hi: 'तारा', up: 'आशा, उपचार और सकारात्मक भविष्य।' },
+  { t: 'peace', n: 'The Moon', hi: 'चंद्रमा', up: 'भ्रम या अनिश्चितता; सब कुछ साफ़ दिखने तक रुकें।' },
+  { t: 'luck', n: 'The Sun', hi: 'सूर्य', up: 'सफलता, खुशी और ऊर्जा।' },
+  { t: 'change', n: 'Judgement', hi: 'निर्णय', up: 'आत्म-मूल्यांकन और नया अध्याय।' },
+  { t: 'luck', n: 'The World', hi: 'संसार', up: 'पूर्णता और लक्ष्य की प्राप्ति।' },
 ];
 export const TAROT_REV = 'उल्टा होने पर: इस विषय में देरी या रुकावट, पहले अंदर झाँककर सुधार करें।';
 
@@ -171,10 +171,38 @@ export const PALM: { key: string; title: string; opts: { v: string; hi: string; 
 ];
 
 // ---------- Face reading (five-element shapes) ----------
-export const FACE: { v: string; hi: string; r: string; rudraksha: string }[] = [
-  { v: 'wood', hi: 'लंबा चेहरा (काष्ठ तत्व)', r: 'योजनाकार, बढ़ने की चाह, दृढ़ संकल्प।', rudraksha: '5 मुखी' },
-  { v: 'fire', hi: 'नुकीली ठुड्डी वाला (अग्नि तत्व)', r: 'ऊर्जावान, जोशीले, जल्दी निर्णय लेने वाले।', rudraksha: '3 मुखी' },
-  { v: 'earth', hi: 'चौकोर चेहरा (पृथ्वी तत्व)', r: 'भरोसेमंद, स्थिर, मेहनती।', rudraksha: '8 मुखी' },
-  { v: 'metal', hi: 'गोल चेहरा (धातु तत्व)', r: 'व्यवस्थित, अनुशासित, तर्कशील।', rudraksha: '6 मुखी' },
-  { v: 'water', hi: 'चौड़ा माथा, पतली ठुड्डी (जल तत्व)', r: 'चिंतनशील, अनुकूल, गहरी समझ।', rudraksha: '2 मुखी' },
+export const FACE: { rem: string; v: string; hi: string; r: string; rudraksha: string }[] = [
+  { rem: 'career', v: 'wood', hi: 'लंबा चेहरा (काष्ठ तत्व)', r: 'योजनाकार, बढ़ने की चाह, दृढ़ संकल्प।', rudraksha: '5 मुखी' },
+  { rem: 'change', v: 'fire', hi: 'नुकीली ठुड्डी वाला (अग्नि तत्व)', r: 'ऊर्जावान, जोशीले, जल्दी निर्णय लेने वाले।', rudraksha: '3 मुखी' },
+  { rem: 'career', v: 'earth', hi: 'चौकोर चेहरा (पृथ्वी तत्व)', r: 'भरोसेमंद, स्थिर, मेहनती।', rudraksha: '8 मुखी' },
+  { rem: 'luck', v: 'metal', hi: 'गोल चेहरा (धातु तत्व)', r: 'व्यवस्थित, अनुशासित, तर्कशील।', rudraksha: '6 मुखी' },
+  { rem: 'peace', v: 'water', hi: 'चौड़ा माथा, पतली ठुड्डी (जल तत्व)', r: 'चिंतनशील, अनुकूल, गहरी समझ।', rudraksha: '2 मुखी' },
+];
+
+// ---------- Remedies in priority order: Rudraksha -> Stone -> Puja ----------
+export const REMEDY: Record<string, { rudraksha: string; stone: string; puja: string }> = {
+  love: { rudraksha: '6 मुखी + गौरी शंकर रुद्राक्ष', stone: 'Opal / Rose Quartz / हीरा', puja: 'मंगल गौरी पूजा' },
+  career: { rudraksha: '7 मुखी / 8 मुखी', stone: 'पुखराज / नीलम', puja: 'नवग्रह शांति पूजा' },
+  peace: { rudraksha: '2 मुखी / 5 मुखी', stone: 'मोती (Pearl)', puja: 'रुद्राभिषेक' },
+  change: { rudraksha: '8 मुखी / 9 मुखी', stone: 'गोमेद / लहसुनिया', puja: 'राहु-केतु शांति पूजा' },
+  luck: { rudraksha: '7 मुखी (महालक्ष्मी)', stone: 'पन्ना / पुखराज', puja: 'लक्ष्मी-गणेश पूजा' },
+};
+
+// ---------- Love-life problems -> PUJA ONLY ----------
+export const LOVE: { v: string; hi: string; pujas: { name: string; why: string }[] }[] = [
+  { v: 'distance', hi: 'लॉन्ग डिस्टेंस रिलेशनशिप (दूरी)', pujas: [
+    { name: 'मंगल गौरी पूजा', why: 'रिश्ते में स्थिरता और मिलन के योग के लिए।' },
+    { name: 'शुक्र ग्रह शांति पूजा', why: 'प्रेम और आकर्षण के कारक शुक्र को मज़बूत करने के लिए।' } ] },
+  { v: 'third', hi: 'तीसरा व्यक्ति / थर्ड पार्टी जुड़ा है', pujas: [
+    { name: 'मंगल गौरी पूजा', why: 'रिश्ते में भटकाव दूर करने और भरोसा बढ़ाने के लिए।' },
+    { name: 'गौरी शंकर पूजा', why: 'दो लोगों के बीच संतुलन और एकता के लिए।' } ] },
+  { v: 'time', hi: 'पार्टनर समय नहीं दे पाता', pujas: [
+    { name: 'गौरी शंकर पूजा', why: 'आपसी जुड़ाव और समझ बढ़ाने के लिए।' },
+    { name: 'मंगल गौरी पूजा', why: 'प्रेम में प्राथमिकता और स्नेह के लिए।' } ] },
+  { v: 'notok', hi: 'रिश्ता ठीक नहीं चल रहा / बार-बार झगड़े', pujas: [
+    { name: 'गौरी शंकर पूजा', why: 'झगड़ों में शांति और सामंजस्य के लिए।' },
+    { name: 'शुक्र ग्रह शांति पूजा', why: 'प्रेम में कड़वाहट कम करने के लिए।' } ] },
+  { v: 'delay', hi: 'शादी में देरी / रिश्ता पक्का नहीं हो रहा', pujas: [
+    { name: 'मंगल गौरी पूजा', why: 'विवाह की बाधा और मंगल दोष की शांति के लिए।' },
+    { name: 'गुरु ग्रह शांति पूजा', why: 'विवाह के कारक गुरु को बल देने के लिए।' } ] },
 ];

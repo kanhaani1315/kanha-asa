@@ -153,3 +153,6 @@ export function buyCredits(price: number): Promise<ApiResult> {
     });
   });
 }
+
+export const readPhoto = (kind: 'hand' | 'face', image: string, mime: string, note: string) =>
+  post('ka-photo-reading', { token: getToken(), kind, image, mime, note });
