@@ -122,7 +122,6 @@ export const GlobalReadings: React.FC<{ onClose: () => void }> = ({ onClose }) =
           </div>
         </div>
       )}
-      <p className="text-[12px] text-stone-500">यह रीडिंग मार्गदर्शन व मनोरंजन के लिए है, कोई गारंटी नहीं।</p>
     </div>
   );
 };
