@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { TAROT, TAROT_REV, REMEDY } from '../utils/global';
+import { DECK, TAROT_REV, REMEDY, calculateGlobalReading } from '../utils/global';
 import { askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
-
-const SYM = ['🃏', '🪄', '🌙', '👑', '🏛️', '📿', '💞', '⚔️', '🦁', '🏮', '☸️', '⚖️', '🙃', '💀', '🏺', '⛓️', '🗼', '⭐', '🌕', '☀️', '📯', '🌍'];
-const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
 
 const SPREADS = [
   { v: 'three', hi: 'अतीत · वर्तमान · भविष्य (3 कार्ड)', pos: ['अतीत (Past)', 'वर्तमान (Present)', 'भविष्य (Future)'] },
@@ -14,17 +11,17 @@ const SPREADS = [
 ];
 const TOPICS = ['सामान्य', 'प्रेम / रिश्ता', 'करियर / नौकरी', 'धन / व्यापार', 'स्वास्थ्य / मन की शांति', 'शादी / परिवार'];
 
-const shuffled = () => Array.from({ length: TAROT.length }, (_, i) => i).sort(() => Math.random() - 0.5);
+const shuffled = () => Array.from({ length: DECK.length }, (_, i) => i).sort(() => Math.random() - 0.5);
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
 const sel = 'w-full px-3 py-2 bg-stone-950 border border-stone-700 rounded-lg text-xs text-stone-100 focus:outline-none focus:border-amber-400';
 
 const Face: React.FC<{ i: number; rev: boolean }> = ({ i, rev }) => (
   <div className={`w-28 h-44 rounded-xl border-2 border-amber-500 bg-gradient-to-b from-indigo-950 via-stone-900 to-purple-950 flex flex-col items-center justify-between py-2 shadow-lg ${rev ? 'rotate-180' : ''}`}>
-    <span className="text-amber-300 text-xs font-bold tracking-widest">{ROMAN[i]}</span>
-    <span className="text-5xl">{SYM[i]}</span>
+    <span className="text-amber-300 text-xs font-bold tracking-widest">{DECK[i].label}</span>
+    <span className="text-5xl">{DECK[i].sym}</span>
     <div className="text-center px-1">
-      <p className="text-amber-200 text-[11px] font-bold leading-tight">{TAROT[i].n}</p>
-      <p className="text-stone-300 text-[10px]">{TAROT[i].hi}</p>
+      <p className="text-amber-200 text-[11px] font-bold leading-tight">{DECK[i].n}</p>
+      <p className="text-stone-300 text-[10px]">{DECK[i].hi}</p>
     </div>
   </div>
 );
@@ -35,6 +32,7 @@ const Back: React.FC<{ picked?: boolean; onClick: () => void }> = ({ picked, onC
 
 export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => void }> = ({ onBuy, onNeed }) => {
   const [name, setName] = useState('');
+  const [dob, setDob] = useState('');
   const [topic, setTopic] = useState(TOPICS[0]);
   const [question, setQuestion] = useState('');
   const [spread, setSpread] = useState('three');
@@ -58,18 +56,21 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
     setPicked((p) => (p.includes(i) ? p.filter((x) => x !== i) : p.length < need ? [...p, i] : p));
   };
   const open = () => {
+    if (!getToken()) return onNeed('login_required');
     const r: Record<number, boolean> = {};
     picked.forEach((i) => { r[i] = Math.random() < 0.3; });
     setRev(r); setShown(true);
+    deepReading(r);
   };
   const last = picked.length ? picked[picked.length - 1] : 0;
-  const R = REMEDY[TAROT[last].t];
+  const R = REMEDY[DECK[last].t];
 
-  const deepReading = async () => {
+  const deepReading = async (rv: Record<number, boolean> = rev) => {
     if (!getToken()) return onNeed('login_required');
     setBusy(true); setErr(''); setAi('');
-    const cards = picked.map((i, k) => `${sp.pos[k]}: ${TAROT[i].n}${rev[i] ? ' (reversed)' : ''}`).join('; ');
-    const msg = `Tarot reading request. Name: ${name || 'ji'}. Topic: ${topic}. Question: ${question || 'general guidance'}. Cards drawn: ${cards}. Give a warm, practical reading of each card in its position tied to the question, then remedies in this order: Rudraksha first, gemstone second, puja third.`;
+    const g = dob ? calculateGlobalReading(dob) : null;
+    const cards = picked.map((i, k) => `${sp.pos[k]}: ${DECK[i].n}${rv[i] ? ' (reversed)' : ''}`).join('; ');
+    const msg = `[TAROT READING - speak like an experienced real tarot reader, directly to the person by name; this is a serious genuine reading, not entertainment.] Name: ${name || 'ji'}. Date of birth: ${dob || 'not given'}${g ? ` (Life Path ${g.lifePath}, Sun sign ${g.sunSign.en}, Chinese zodiac ${g.chinese.en})` : ''}. Topic: ${topic}. Question: ${question || 'general guidance'}. Cards drawn (${sp.v} spread): ${cards}. Explain each card in its position and tie it to the question and the person's numbers, say what is likely to unfold and when in general terms (no guarantees), then give remedies in this order: Rudraksha first, gemstone second, puja third. End with: for a detailed personal consultation WhatsApp Kanha Asa on +91 9131805622.`;
     const r = await askAstrologer(msg, []);
     setBusy(false);
     if (r.ok && r.answer) return setAi(String(r.answer));
@@ -81,6 +82,8 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
     <div className="space-y-3">
       <div className={`${card} space-y-2`}>
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="आपका नाम" className={sel} />
+        <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} className={`${sel} font-mono`} title="जन्म तिथि" />
+        <p className="text-[12px] text-stone-400">जन्म तिथि डालने से रीडिंग आपके अंक और ग्रहों के हिसाब से होती है।</p>
         <select value={topic} onChange={(e) => setTopic(e.target.value)} className={sel}>{TOPICS.map((t) => <option key={t}>{t}</option>)}</select>
         <textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="अपना सवाल या मन की बात लिखें (जैसे: मेरी नौकरी कब बदलेगी?)" rows={2} className={sel} />
         <select value={spread} onChange={(e) => { setSpread(e.target.value); reset(); }} className={sel}>{SPREADS.map((s) => <option key={s.v} value={s.v}>{s.hi}</option>)}</select>
@@ -88,7 +91,7 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
 
       {!shown && (
         <div className={card}>
-          <p className="text-stone-200 mb-2">अपने सवाल पर ध्यान लगाकर <strong>{need} कार्ड</strong> चुनें ({picked.length}/{need} चुने)</p>
+          <p className="text-stone-200 mb-2">अपने सवाल पर ध्यान लगाकर <strong>{need} कार्ड</strong> चुनें (78 कार्ड का डेक) ({picked.length}/{need} चुने)</p>
           <div className="flex gap-1.5 overflow-x-auto pb-3 pt-2">
             {deck.map((i) => <Back key={i} picked={picked.includes(i)} onClick={() => toggle(i)} />)}
           </div>
@@ -113,14 +116,15 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
           </div>
           {picked.map((i, k) => (
             <div key={i} className="p-3 bg-stone-900 border border-amber-800 rounded-xl">
-              <p className="text-amber-400 font-bold">{sp.pos[k]}: {TAROT[i].n} ({TAROT[i].hi}){rev[i] ? ' · उल्टा' : ''}</p>
-              <p className="text-stone-300 mt-1">{rev[i] ? TAROT_REV : TAROT[i].up}</p>
+              <p className="text-amber-400 font-bold">{sp.pos[k]}: {DECK[i].n} ({DECK[i].hi}){rev[i] ? ' · उल्टा' : ''}</p>
+              <p className="text-stone-300 mt-1">{rev[i] ? TAROT_REV : DECK[i].up}</p>
             </div>
           ))}
           <div className={card}>
-            <p className="text-stone-200">अपने सवाल पर गहरी और व्यक्तिगत रीडिंग चाहिए? AI ज्योतिषी आपके नाम, सवाल और इन कार्ड्स के आधार पर बताएगा।</p>
-            <button onClick={deepReading} disabled={busy} className="mt-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-bold rounded-lg cursor-pointer">{busy ? 'रीडिंग हो रही है…' : '✨ AI से गहरी रीडिंग पाएँ'}</button>
+            <p className="text-stone-200">आपकी रीडिंग आपके नाम, जन्म तिथि, सवाल और इन कार्ड्स के आधार पर तैयार होती है।</p>
+            <button onClick={() => deepReading()} disabled={busy} className="mt-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-bold rounded-lg cursor-pointer">{busy ? 'रीडिंग हो रही है…' : '🔄 रीडिंग दोबारा पाएँ'}</button>
             {err && <p className="text-red-300 mt-2">{err}</p>}
+            {busy && !ai && <p className="mt-2 text-amber-300">आपकी रीडिंग तैयार हो रही है…</p>}
             {ai && <div className="mt-2 p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100">{ai}</div>}
           </div>
           <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl space-y-1">
@@ -133,6 +137,7 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
               <a href={generateWhatsAppUrl('919131805622', `प्रणाम, मुझे ${R.puja} करानी है। कृपया जानकारी दें।`)} target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold">पूजा बुक करें (WhatsApp)</a>
             </div>
           </div>
+          <p className="text-stone-400">ज़्यादा जानकारी या विस्तृत परामर्श के लिए <a className="text-emerald-400 underline" href={generateWhatsAppUrl('919131805622', 'प्रणाम, मुझे अपनी टैरो रीडिंग के बारे में विस्तार से जानना है।')} target="_blank" rel="noreferrer">कान्हा असा को WhatsApp करें</a>। पहली रीडिंग फ्री है, उसके बाद लॉगिन करके वॉलेट में पैसे डालकर पूछ सकते हैं।</p>
           <button onClick={() => reset()} className="px-3 py-1.5 rounded bg-stone-800 hover:bg-stone-700 text-stone-100 font-bold cursor-pointer">🔁 नई रीडिंग</button>
         </div>
       )}

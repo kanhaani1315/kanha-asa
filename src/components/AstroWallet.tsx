@@ -57,7 +57,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
     setError(null);
     if (phone.replace(/\D/g, '').length < 10) return setError(reasonText('invalid_phone'));
     setBusy(true);
-    // WhatsApp OTP temporarily disabled -> direct guest login (3 free questions, then paid via Razorpay)
+    // WhatsApp OTP temporarily disabled -> direct guest login (1 free question, then paid via Razorpay)
     const r = await guestLogin(phone, name);
     setBusy(false);
     if (r.ok) onDone();
@@ -79,7 +79,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
       <div>
         <h4 className="text-base font-bold text-white">मोबाइल नंबर से लॉगिन करें</h4>
         <p className="text-xs text-stone-400 mt-1">
-          पहले 3 सवाल बिल्कुल फ्री। उसके बाद Razorpay से पेमेंट करके आगे पूछ सकते हैं।
+          पहला सवाल बिल्कुल फ्री। उसके बाद Razorpay से पेमेंट करके आगे पूछ सकते हैं।
         </p>
       </div>
       {step === 'phone' ? (
@@ -106,7 +106,7 @@ const LoginForm: React.FC<{ onDone: () => void }> = ({ onDone }) => {
             className="w-full py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
           >
             {busy && <Loader2 className="w-4 h-4 animate-spin" />}
-            आगे बढ़ें (3 सवाल फ्री)
+            आगे बढ़ें (पहला सवाल फ्री)
           </button>
         </form>
       ) : (
@@ -174,7 +174,7 @@ const RechargePanel: React.FC<{ wallet: Wallet; reason?: string | null; onDone: 
       <div className="rounded-xl border border-stone-800 bg-stone-950 p-3 space-y-1.5">
         <p className="text-xs font-bold text-amber-300">इस वॉलेट से क्या-क्या मिलेगा</p>
         <ul className="text-[12px] text-stone-300 space-y-1">
-          <li>🆓 <b>फ्री:</b> लो शू ग्रिड, वैदिक ग्रिड, नाम व मोबाइल न्यूमरोलॉजी कैलकुलेटर + पहले 3 सवाल</li>
+          <li>🆓 <b>फ्री:</b> लो शू ग्रिड, वैदिक ग्रिड, नाम व मोबाइल न्यूमरोलॉजी कैलकुलेटर + पहला सवाल</li>
           <li>💬 <b>AI आचार्य से सवाल-जवाब:</b> अंक ज्योतिष, लो शू/वैदिक ग्रिड रीडिंग, नाम व मोबाइल के अनुसार, रुद्राक्ष व रत्न सुझाव (हर सवाल = {wallet.chat_price} क्रेडिट)</li>
           <li>🔜 <b>जल्द आ रहा:</b> फेस रीडिंग, पाम रीडिंग, AI कॉल</li>
         </ul>

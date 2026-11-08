@@ -47,7 +47,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
     {
       id: 'msg-1',
       sender: 'ai',
-      text: 'प्रणाम! 🕉️ मैं कान्हा एआई ज्योतिषाचार्य हूँ। रुद्राक्ष चयन, रत्न, राशि, मूलांक-भाग्यांक, लो-शू ग्रिड या मोबाइल नंबर के बारे में कुछ भी पूछिए।\n\n✨ पहले 3 सवाल बिल्कुल फ्री। उसके बाद हर सवाल ₹10 (क्रेडिट्स से)। मोबाइल नंबर से लॉगिन करके शुरू करें।',
+      text: 'प्रणाम! 🕉️ मैं कान्हा एआई ज्योतिषाचार्य हूँ। रुद्राक्ष चयन, रत्न, राशि, मूलांक-भाग्यांक, लो-शू ग्रिड या मोबाइल नंबर के बारे में कुछ भी पूछिए।\n\n✨ पहला सवाल बिल्कुल फ्री। उसके बाद हर सवाल ₹10 (क्रेडिट्स से)। मोबाइल नंबर से लॉगिन करके शुरू करें।',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -326,7 +326,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                 {(!wallet || needCredits) && (
                   <div className="p-3 bg-amber-950/60 border border-amber-500 rounded-xl text-xs text-amber-200 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-lg">
                     <span className="font-semibold">
-                      {!wallet ? 'सवाल पूछने के लिए मोबाइल नंबर से लॉगिन करें — पहले 3 सवाल फ्री।' : 'आपके फ्री सवाल और क्रेडिट्स खत्म हो गए। हर सवाल ₹10 — रिचार्ज करें।'}
+                      {!wallet ? 'सवाल पूछने के लिए मोबाइल नंबर से लॉगिन करें — पहला सवाल फ्री।' : 'आपके फ्री सवाल और क्रेडिट्स खत्म हो गए। हर सवाल ₹10 — रिचार्ज करें।'}
                     </span>
                     <button
                       onClick={() => { setWalletReason(!wallet ? 'login_required' : 'need_credits'); setShowCreditModal(true); }}
@@ -373,7 +373,7 @@ export const AiAstrologerChat: React.FC<AiAstrologerChatProps> = ({
                   type="text"
                   placeholder={
                     !wallet
-                      ? 'लॉगिन करके सवाल पूछें (पहले 3 सवाल फ्री)...'
+                      ? 'लॉगिन करके सवाल पूछें (पहला सवाल फ्री)...'
                       : wallet.free_questions_left > 0
                         ? `प्रश्न पूछें (${wallet.free_questions_left} फ्री सवाल बाकी)... रुद्राक्ष, रत्न, राशि, न्यूमरोलॉजी`
                         : `प्रश्न पूछें (₹10/सवाल, बैलेंस ₹${wallet.balance})...`

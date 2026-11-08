@@ -206,3 +206,35 @@ export const LOVE: { v: string; hi: string; pujas: { name: string; why: string }
     { name: 'मंगल गौरी पूजा', why: 'विवाह की बाधा और मंगल दोष की शांति के लिए।' },
     { name: 'गुरु ग्रह शांति पूजा', why: 'विवाह के कारक गुरु को बल देने के लिए।' } ] },
 ];
+
+// ---------- Full 78-card tarot deck (22 Major + 56 Minor) ----------
+export interface TarotCard { id: number; n: string; hi: string; up: string; sym: string; label: string; t: string }
+const MAJOR_SYM = ['🃏', '🪄', '🌙', '👑', '🏛️', '📿', '💞', '🏇', '🦁', '🏮', '☸️', '⚖️', '🙃', '💀', '🏺', '⛓️', '🗼', '⭐', '🌕', '☀️', '📯', '🌍'];
+const ROMAN = ['0', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
+const SUITS = [
+  { k: 'Wands', hi: 'दंड', sym: '🔥', theme: 'करियर, ऊर्जा और नई पहल', t: 'career' },
+  { k: 'Cups', hi: 'प्याले', sym: '🏆', theme: 'प्रेम, भावनाएँ और रिश्ते', t: 'love' },
+  { k: 'Swords', hi: 'तलवारें', sym: '⚔️', theme: 'सोच, निर्णय और टकराव', t: 'change' },
+  { k: 'Pentacles', hi: 'सिक्के', sym: '🪙', theme: 'धन, काम और स्वास्थ्य', t: 'luck' },
+];
+const RANKS = [
+  ['Ace', 'इक्का', 'नई शुरुआत और नया अवसर'], ['Two', 'दो', 'संतुलन, चुनाव और साझेदारी'],
+  ['Three', 'तीन', 'विकास, सहयोग और शुरुआती सफलता'], ['Four', 'चार', 'ठहराव, स्थिरता और विश्राम'],
+  ['Five', 'पाँच', 'चुनौती, टकराव और बदलाव'], ['Six', 'छह', 'सुधार, मदद और आगे बढ़ना'],
+  ['Seven', 'सात', 'परीक्षा, धैर्य और रणनीति'], ['Eight', 'आठ', 'गति, मेहनत और प्रगति'],
+  ['Nine', 'नौ', 'लगभग पूर्णता, दृढ़ता और अनुभव'], ['Ten', 'दस', 'चक्र की पूर्णता या ज़िम्मेदारी का बोझ'],
+  ['Page', 'पेज', 'नई सीख और शुभ समाचार'], ['Knight', 'नाइट', 'तेज़ कदम, जोश और गति'],
+  ['Queen', 'रानी', 'परिपक्वता, समझ और देखभाल'], ['King', 'राजा', 'नेतृत्व, अधिकार और स्थिरता'],
+];
+export const DECK: TarotCard[] = [
+  ...TAROT.map((c, i) => ({ id: i, n: c.n, hi: c.hi, up: c.up, sym: MAJOR_SYM[i], label: ROMAN[i], t: c.t })),
+  ...SUITS.flatMap((s, si) => RANKS.map((r, ri) => ({
+    id: 22 + si * 14 + ri,
+    n: `${r[0]} of ${s.k}`,
+    hi: `${s.hi} का ${r[1]}`,
+    up: `${s.theme} में: ${r[2]}।`,
+    sym: s.sym,
+    label: ri < 10 ? String(ri + 1) : r[0][0],
+    t: s.t,
+  }))),
+];
