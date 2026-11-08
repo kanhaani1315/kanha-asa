@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { BusinessRemedy, BUSINESS, BUSINESS_AI_RULES } from './BusinessRemedy';
 import { calculateGlobalReading, nineStarKi, charmFor, BLOOD, PALM, FACE, REMEDY, LOVE } from '../utils/global';
 import { readPhoto, askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { TarotReader } from './TarotReader';
 import { buildChart, analyzeSeventh, geocode, SIGNS, PHI, Analysis, Chart } from '../utils/kundli';
 
-type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love';
+type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love' | 'business';
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
 const sel = 'w-full px-3 py-2 bg-stone-950 border border-stone-700 rounded-lg text-xs text-stone-100 focus:outline-none focus:border-amber-400';
 const WA = '919131805622';
@@ -142,6 +143,22 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   const [loveAi, setLoveAi] = useState('');
   const [loveBusy, setLoveBusy] = useState(false);
   const [loveErr, setLoveErr] = useState('');
+  const [biz, setBiz] = useState('');
+  const [bizText, setBizText] = useState('');
+  const [bizAi, setBizAi] = useState('');
+  const [bizBusy, setBizBusy] = useState(false);
+  const [bizErr, setBizErr] = useState('');
+  const askBiz = async () => {
+    if (!getToken()) return onNeed('login_required');
+    setBizBusy(true); setBizErr(''); setBizAi('');
+    const b = BUSINESS.find((x) => x.v === biz);
+    const msg = `[BUSINESS PROBLEM - answer in very simple Hindi, up to 230 words, address the person warmly, first explain in plain words what may be going on and what to do practically, then remedies. ${BUSINESS_AI_RULES} End with exactly: और विस्तार से जानना है तो कान्हा असा को WhatsApp करें +91 9131805622, या वेबसाइट पर वॉलेट में क्रेडिट डालकर अगला सवाल पूछें।] Problem type: ${b?.hi || 'not selected'}. Customer says: ${bizText}`;
+    const r = await askAstrologer(msg, []);
+    setBizBusy(false);
+    if (r.ok && r.answer) return setBizAi(String(r.answer));
+    if (r.reason === 'login_required' || r.reason === 'need_credits') { setBizErr(r.reason === 'need_credits' ? 'आपका पहला फ्री सवाल हो चुका है। आगे के लिए वॉलेट में पैसे डालें (₹10 प्रति सवाल)।' : 'पहले मोबाइल नंबर से लॉगिन करें।'); return onNeed(r.reason); }
+    setBizErr(reasonText(r.reason));
+  };
   const askLove = async () => {
     if (!getToken()) return onNeed('login_required');
     setLoveBusy(true); setLoveErr(''); setLoveAi('');
@@ -174,7 +191,7 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-stone-950 text-xs">
       <div className="flex gap-2 flex-wrap">
-        {tab('dob', 'जन्म तिथि')}{tab('tarot', 'टैरो कार्ड')}{tab('palm', 'हस्त रेखा')}{tab('face', 'चेहरा')}{tab('love', 'लव लाइफ')}
+        {tab('dob', 'जन्म तिथि')}{tab('tarot', 'टैरो कार्ड')}{tab('palm', 'हस्त रेखा')}{tab('face', 'चेहरा')}{tab('business', 'बिज़नेस')}{tab('love', 'लव लाइफ')}
       </div>
 
       {sub === 'dob' && (
@@ -268,6 +285,23 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
         </div>
       )}
 
+      {sub === 'business' && (
+        <div className="space-y-3">
+          <div className={`${card} space-y-2`}>
+            <p className="font-bold text-amber-400">बिज़नेस / व्यापार की समस्या</p>
+            <p className="text-stone-300 text-[13px]">अपनी स्थिति चुनें और लिखें। नीचे आपको सही पूजा, पोटली और श्री यंत्र के उपाय मिलेंगे।</p>
+            <select value={biz} onChange={(e) => setBiz(e.target.value)} className={sel}>
+              <option value="">1. समस्या चुनें</option>
+              {BUSINESS.map((x) => <option key={x.v} value={x.v}>{x.hi}</option>)}
+            </select>
+            <textarea value={bizText} onChange={(e) => setBizText(e.target.value)} rows={3} className={sel} placeholder="2. अपने व्यापार के बारे में लिखें: क्या काम है, क्या दिक्कत है, कब से?" />
+            <button onClick={askBiz} disabled={bizBusy || (!biz && !bizText.trim())} className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white font-bold rounded-lg cursor-pointer">{bizBusy ? 'देख रहे हैं…' : '💬 AI आचार्य से बात करें'}</button>
+            {bizErr && <p className="text-red-300">{bizErr}</p>}
+            {bizAi && <div className="p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100 text-[15px] leading-7">{bizAi}</div>}
+          </div>
+          <BusinessRemedy note={BUSINESS.find((x) => x.v === biz)?.hi} />
+        </div>
+      )}
       {sub === 'love' && (
         <div className="space-y-3">
           <div className={`${card} space-y-2`}>
