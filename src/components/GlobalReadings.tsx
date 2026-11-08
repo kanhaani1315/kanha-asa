@@ -3,6 +3,7 @@ import { calculateGlobalReading, nineStarKi, charmFor, BLOOD, PALM, FACE, REMEDY
 import { readPhoto, askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { TarotReader } from './TarotReader';
+import { buildChart, analyzeSeventh, geocode, SIGNS, PHI, Analysis, Chart } from '../utils/kundli';
 
 type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love';
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
@@ -112,6 +113,30 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   const [palm, setPalm] = useState<Record<string, string>>({});
   const [face, setFace] = useState('');
   const [love, setLove] = useState('');
+  const [kName, setKName] = useState('');
+  const [kDob, setKDob] = useState('');
+  const [kTime, setKTime] = useState('');
+  const [kPlace, setKPlace] = useState('');
+  const [kTz, setKTz] = useState(5.5);
+  const [kBusy, setKBusy] = useState(false);
+  const [kErr, setKErr] = useState('');
+  const [kRes, setKRes] = useState<{ chart: Chart; a: Analysis; place: string } | null>(null);
+  const runKundli = async () => {
+    setKErr(''); setKRes(null);
+    if (!kDob) return setKErr('जन्म तिथि डालें।');
+    let lat = 23.18, lon = 79.95, pl = '';
+    if (kTime) {
+      if (!kPlace.trim()) return setKErr('सही लग्न के लिए जन्म स्थान (शहर) लिखें।');
+      setKBusy(true);
+      const g = await geocode(kPlace);
+      setKBusy(false);
+      if (!g) return setKErr('यह जगह नहीं मिली। नज़दीकी बड़े शहर का नाम लिखें (जैसे Rewa, Madhya Pradesh)।');
+      lat = g.lat; lon = g.lon; pl = g.name;
+    }
+    const chart = buildChart(kDob, kTime || null, kTz, lat, lon);
+    if (!chart) return setKErr('जन्म तिथि सही नहीं है।');
+    setKRes({ chart, a: analyzeSeventh(chart), place: pl });
+  };
   const [loveStatus, setLoveStatus] = useState('');
   const [loveText, setLoveText] = useState('');
   const [loveAi, setLoveAi] = useState('');
@@ -121,7 +146,7 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
     if (!getToken()) return onNeed('login_required');
     setLoveBusy(true); setLoveErr(''); setLoveAi('');
     const l = LOVE.find((x) => x.v === love);
-    const msg = `[LOVE-LIFE PROBLEM - recommend ONLY pujas (Mangal Gauri Puja first; also Gauri Shankar / Shukra Shanti / Guru Shanti as suitable). Do NOT recommend Rudraksha or gemstones for this.] Problem type: ${l?.hi || 'not selected'}. Relationship status: ${loveStatus || 'not told'}. Customer says: ${loveText}`;
+    const msg = `[LOVE-LIFE PROBLEM - recommend pujas (Mangal Gauri Puja first; Manglik Dosh Shanti, Krur Graha Shanti, Saptam Bhav Puja, Navam Bhav Puja as suitable) plus the mandatory combination: Gauri Shankar Rudraksha thumb ring and Kamiya Sindoor applied continuously for 6 months (given after puja), and mantra jaap. Do NOT recommend other Rudraksha or gemstones. Mention that Vedic suggestions are sent on WhatsApp after the puja.] Problem type: ${l?.hi || 'not selected'}. Relationship status: ${loveStatus || 'not told'}. Customer says: ${loveText}`;
     const r = await askAstrologer(msg, []);
     setLoveBusy(false);
     if (r.ok && r.answer) return setLoveAi(String(r.answer));
@@ -245,7 +270,57 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
 
       {sub === 'love' && (
         <div className="space-y-3">
-          <p className="text-stone-400">अपनी लव लाइफ की समस्या चुनें। इसमें सिर्फ़ पूजा का सुझाव दिया जाता है।</p>
+          <div className={`${card} space-y-2`}>
+            <p className="font-bold text-white">💞 कुंडली से सप्तम भाव (विवाह/प्रेम) की जाँच</p>
+            <p className="text-stone-400">आपकी जन्म तिथि, समय और स्थान से लग्न व ग्रहों की स्थिति निकालकर सप्तम भाव, मंगल दोष और शनि-राहु-केतु का प्रभाव देखा जाता है।</p>
+            <input value={kName} onChange={(e) => setKName(e.target.value)} placeholder="आपका नाम" className={sel} />
+            <input type="date" value={kDob} onChange={(e) => setKDob(e.target.value)} className={`${sel} font-mono`} />
+            <div className="grid grid-cols-2 gap-2">
+              <input type="time" value={kTime} onChange={(e) => setKTime(e.target.value)} className={`${sel} font-mono`} />
+              <select value={kTz} onChange={(e) => setKTz(Number(e.target.value))} className={sel}>
+                <option value={5.5}>भारत (IST)</option>
+                <option value={0}>UK (UTC)</option>
+                <option value={-5}>अमेरिका (पूर्व, UTC-5)</option>
+                <option value={-8}>अमेरिका (पश्चिम, UTC-8)</option>
+                <option value={4}>दुबई (UTC+4)</option>
+                <option value={8}>सिंगापुर/चीन (UTC+8)</option>
+              </select>
+            </div>
+            <input value={kPlace} onChange={(e) => setKPlace(e.target.value)} placeholder="जन्म स्थान (शहर, राज्य)" className={sel} />
+            <p className="text-[12px] text-stone-500">जन्म समय न पता हो तो खाली छोड़ें। तब चंद्र कुंडली से देखा जाएगा।</p>
+            <button onClick={runKundli} disabled={kBusy} className="px-4 py-2 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-stone-950 font-bold rounded-lg cursor-pointer">{kBusy ? 'गणना हो रही है…' : '🔍 सप्तम भाव जाँचें'}</button>
+            {kErr && <p className="text-red-300">{kErr}</p>}
+          </div>
+          {kRes && (
+            <div className="space-y-3">
+              <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl">
+                <p className="font-bold text-amber-400">{kName ? `${kName} जी, ` : ''}आपकी कुंडली ({kRes.chart.usingMoon ? 'चंद्र कुंडली' : `लग्न ${SIGNS[kRes.chart.lagnaSign]}`})</p>
+                <div className="grid grid-cols-3 gap-1 mt-2 text-[12px] text-stone-300">
+                  {Object.entries(kRes.chart.planets).map(([k, v]) => (
+                    <div key={k} className="px-2 py-1 bg-stone-950 rounded border border-stone-800">{PHI[k]}: {SIGNS[v.sign]} · भाव {v.house}</div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-3 bg-stone-900 border border-stone-800 rounded-xl space-y-2">
+                <p className="font-bold text-white">सप्तम भाव की स्थिति</p>
+                {kRes.a.findings.map((x, i) => <p key={i} className={x.ok ? 'text-emerald-300' : 'text-red-300'}>{x.ok ? '✓' : '⚠'} {x.text}</p>)}
+              </div>
+              <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl space-y-2">
+                <p className="font-bold text-amber-400">आपके लिए सुझाई गई पूजाएँ</p>
+                {kRes.a.pujas.map((p, i) => <div key={p.name}><p className="text-stone-100">{i + 1}. <strong>{p.name}</strong></p><p className="text-stone-400 pl-4">{p.why}</p></div>)}
+                <p className="font-bold text-amber-400 pt-2">अनिवार्य कॉम्बिनेशन (पूजा के साथ)</p>
+                <p className="text-stone-100">• <strong>गौरी शंकर रुद्राक्ष थंब रिंग</strong> (अंगूठे की अंगूठी): <strong>₹5,500</strong></p>
+                <p className="text-stone-100">• <strong>कामिया सिंदूर (1 ग्राम): ₹3,500।</strong> पूजा के बाद दिया जाएगा, इसे लगातार 6 महीने तक लगाना है।</p>
+                <p className="font-bold text-amber-400 pt-2">मंत्र जाप (रोज़ 108 बार)</p>
+                <p className="text-stone-200">• ॐ गौरी शंकराय नमः</p>
+                <p className="text-stone-200">• कात्यायनि महामाये महायोगिन्यधीश्वरि। नन्दगोपसुतं देवि पतिं मे कुरु ते नमः॥</p>
+                {kRes.a.manglik && <p className="text-stone-200">• मंगल के लिए: ॐ क्रां क्रीं क्रौं सः भौमाय नमः</p>}
+                <p className="text-stone-400 pt-1">पूजा के बाद आपको कुछ वैदिक सुझाव WhatsApp पर भेजे जाएँगे। कामिया सिंदूर और अंगूठी के लिए कान्हा असा से संपर्क करें।</p>
+                <a href={generateWhatsAppUrl(WA, `प्रणाम, मैंने कुंडली जाँच की है। नाम: ${kName || '-'}, जन्म: ${kDob} ${kTime || ''} ${kPlace}। सप्तम भाव: ${SIGNS[kRes.a.seventhSign]} (स्वामी ${PHI[kRes.a.seventhLord]}, ${kRes.a.lordHouse}वें भाव में)${kRes.a.manglik ? ', मांगलिक दोष' : ''}। मुझे ${kRes.a.pujas.map((p) => p.name).join(', ')}, गौरी शंकर रुद्राक्ष थंब रिंग (₹5,500) और कामिया सिंदूर 1 ग्राम (₹3,500) के बारे में जानकारी चाहिए।`)} target="_blank" rel="noreferrer" className="inline-block mt-1 px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold">पूजा बुक करें (WhatsApp)</a>
+              </div>
+            </div>
+          )}
+          <p className="text-stone-400 pt-1">या सिर्फ़ अपनी समस्या चुनकर/लिखकर पूजा का सुझाव पाएँ:</p>
           <div className={`${card} space-y-2`}>
             <select value={love} onChange={(e) => setLove(e.target.value)} className={sel}>
               <option value="">1. मुख्य समस्या चुनें</option>
