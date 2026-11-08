@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { LegalRemedy, LEGAL, LEGAL_AI_RULES } from './LegalRemedy';
 import { BusinessRemedy, BUSINESS, BUSINESS_AI_RULES } from './BusinessRemedy';
 import { calculateGlobalReading, nineStarKi, charmFor, BLOOD, PALM, FACE, REMEDY, LOVE } from '../utils/global';
 import { readPhoto, askAstrologer, getToken, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
 import { TarotReader } from './TarotReader';
-import { buildChart, analyzeSeventh, geocode, SIGNS, PHI, Analysis, Chart } from '../utils/kundli';
+import { buildChart, analyzeSeventh, analyzeLegal, geocode, SIGNS, PHI, Analysis, Chart, LegalAnalysis } from '../utils/kundli';
 
-type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love' | 'business';
+type Sub = 'dob' | 'tarot' | 'palm' | 'face' | 'love' | 'business' | 'legal';
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
 const sel = 'w-full px-3 py-2 bg-stone-950 border border-stone-700 rounded-lg text-xs text-stone-100 focus:outline-none focus:border-amber-400';
 const WA = '919131805622';
@@ -143,6 +144,41 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   const [loveAi, setLoveAi] = useState('');
   const [loveBusy, setLoveBusy] = useState(false);
   const [loveErr, setLoveErr] = useState('');
+  const [leg, setLeg] = useState('');
+  const [legText, setLegText] = useState('');
+  const [legAi, setLegAi] = useState('');
+  const [legBusy, setLegBusy] = useState(false);
+  const [legErr, setLegErr] = useState('');
+  const [legRes, setLegRes] = useState<{ a: LegalAnalysis; place: string; usingMoon: boolean } | null>(null);
+  const [legKBusy, setLegKBusy] = useState(false);
+  const runLegal = async () => {
+    setLegErr(''); setLegRes(null);
+    if (!kDob) return setLegErr('जन्म तिथि डालें।');
+    let lat = 23.18, lon = 79.95, pl = '';
+    if (kTime) {
+      if (!kPlace.trim()) return setLegErr('सही लग्न के लिए जन्म स्थान (शहर) लिखें।');
+      setLegKBusy(true);
+      const g = await geocode(kPlace);
+      setLegKBusy(false);
+      if (!g) return setLegErr('यह जगह नहीं मिली। नज़दीकी बड़े शहर का नाम लिखें (जैसे Rewa, Madhya Pradesh)।');
+      lat = g.lat; lon = g.lon; pl = g.name;
+    }
+    const chart = buildChart(kDob, kTime || null, kTz, lat, lon);
+    if (!chart) return setLegErr('जन्म तिथि सही नहीं है।');
+    setLegRes({ a: analyzeLegal(chart), place: pl, usingMoon: chart.usingMoon });
+  };
+  const askLegal = async () => {
+    if (!getToken()) return onNeed('login_required');
+    setLegBusy(true); setLegErr(''); setLegAi('');
+    const l = LEGAL.find((x) => x.v === leg);
+    const vedic = legRes ? ` Kundli findings (Vedic): ${legRes.a.findings.map((f) => f.text).join(' ')}` : '';
+    const msg = `[LEGAL PROBLEM - answer in very simple Hindi, up to 240 words, warm and respectful. First say in plain words what the Vedic chart (if given) and the situation indicate, with a practical tip, then remedies. ${LEGAL_AI_RULES} End with exactly: और विस्तार से जानना है तो कान्हा असा को WhatsApp करें +91 9131805622, या वेबसाइट पर वॉलेट में क्रेडिट डालकर अगला सवाल पूछें।] Problem type: ${l?.hi || 'not selected'}. Customer says: ${legText}.${vedic}`;
+    const r = await askAstrologer(msg, []);
+    setLegBusy(false);
+    if (r.ok && r.answer) return setLegAi(String(r.answer));
+    if (r.reason === 'login_required' || r.reason === 'need_credits') { setLegErr(r.reason === 'need_credits' ? 'आपका पहला फ्री सवाल हो चुका है। आगे के लिए वॉलेट में पैसे डालें (₹10 प्रति सवाल)।' : 'पहले मोबाइल नंबर से लॉगिन करें।'); return onNeed(r.reason); }
+    setLegErr(reasonText(r.reason));
+  };
   const [biz, setBiz] = useState('');
   const [bizText, setBizText] = useState('');
   const [bizAi, setBizAi] = useState('');
@@ -191,7 +227,7 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
   return (
     <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-stone-950 text-xs">
       <div className="flex gap-2 flex-wrap">
-        {tab('dob', 'जन्म तिथि')}{tab('tarot', 'टैरो कार्ड')}{tab('palm', 'हस्त रेखा')}{tab('face', 'चेहरा')}{tab('business', 'बिज़नेस')}{tab('love', 'लव लाइफ')}
+        {tab('dob', 'जन्म तिथि')}{tab('tarot', 'टैरो कार्ड')}{tab('palm', 'हस्त रेखा')}{tab('face', 'चेहरा')}{tab('business', 'बिज़नेस')}{tab('legal', 'कोर्ट / केस')}{tab('love', 'लव लाइफ')}
       </div>
 
       {sub === 'dob' && (
@@ -285,6 +321,48 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
         </div>
       )}
 
+      {sub === 'legal' && (
+        <div className="space-y-3">
+          <div className={`${card} space-y-2`}>
+            <p className="font-bold text-amber-400">⚖️ कोर्ट / कानूनी समस्या</p>
+            <p className="text-stone-300 text-[13px]">कोर्ट-कचहरी, ज़मीन विवाद, तलाक, पत्नी का घर छोड़ना या कोई भी मुकदमा। वैदिक कुंडली के षष्ठ, सप्तम और अष्टम भाव से देखकर उपाय बताए जाएँगे।</p>
+            <select value={leg} onChange={(e) => setLeg(e.target.value)} className={sel}>
+              <option value="">1. समस्या चुनें</option>
+              {LEGAL.map((x) => <option key={x.v} value={x.v}>{x.hi}</option>)}
+            </select>
+            <textarea value={legText} onChange={(e) => setLegText(e.target.value)} rows={3} className={sel} placeholder="2. अपनी समस्या लिखें: क्या मामला है, कब से चल रहा है, अभी क्या स्थिति है?" />
+            <p className="font-bold text-white pt-1">3. कुंडली से जाँच (सही जवाब के लिए)</p>
+            <input value={kName} onChange={(e) => setKName(e.target.value)} placeholder="आपका नाम" className={sel} />
+            <input type="date" value={kDob} onChange={(e) => setKDob(e.target.value)} className={`${sel} font-mono`} />
+            <div className="grid grid-cols-2 gap-2">
+              <input type="time" value={kTime} onChange={(e) => setKTime(e.target.value)} className={`${sel} font-mono`} />
+              <select value={kTz} onChange={(e) => setKTz(Number(e.target.value))} className={sel}>
+                <option value={5.5}>भारत (IST)</option>
+                <option value={0}>UK (UTC)</option>
+                <option value={-5}>अमेरिका (पूर्व, UTC-5)</option>
+                <option value={-8}>अमेरिका (पश्चिम, UTC-8)</option>
+                <option value={4}>दुबई (UTC+4)</option>
+                <option value={8}>सिंगापुर/चीन (UTC+8)</option>
+              </select>
+            </div>
+            <input value={kPlace} onChange={(e) => setKPlace(e.target.value)} placeholder="जन्म स्थान (शहर, राज्य)" className={sel} />
+            <p className="text-[12px] text-stone-500">जन्म समय न पता हो तो खाली छोड़ें। तब चंद्र कुंडली से देखा जाएगा।</p>
+            <div className="flex gap-2 flex-wrap">
+              <button onClick={runLegal} disabled={legKBusy} className="px-4 py-2 bg-amber-500 hover:bg-amber-400 disabled:opacity-60 text-stone-950 font-bold rounded-lg cursor-pointer">{legKBusy ? 'गणना हो रही है…' : '🔮 कुंडली से जाँच करें'}</button>
+              <button onClick={askLegal} disabled={legBusy || (!leg && !legText.trim())} className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white font-bold rounded-lg cursor-pointer">{legBusy ? 'देख रहे हैं…' : '💬 AI आचार्य से बात करें'}</button>
+            </div>
+            {legErr && <p className="text-red-300">{legErr}</p>}
+          </div>
+          {legRes && (
+            <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl space-y-1.5">
+              <p className="font-bold text-amber-400">आपकी कुंडली के अनुसार{legRes.usingMoon ? ' (चंद्र कुंडली)' : ''}</p>
+              {legRes.a.findings.map((f, i) => <p key={i} className={f.ok ? 'text-emerald-300' : 'text-red-300'}>{f.ok ? '✓' : '⚠'} {f.text}</p>)}
+            </div>
+          )}
+          {legAi && <div className="p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100 text-[15px] leading-7">{legAi}</div>}
+          <LegalRemedy note={LEGAL.find((x) => x.v === leg)?.hi} pujas={legRes?.a.pujas} />
+        </div>
+      )}
       {sub === 'business' && (
         <div className="space-y-3">
           <div className={`${card} space-y-2`}>

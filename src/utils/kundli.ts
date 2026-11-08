@@ -149,3 +149,70 @@ export async function geocode(place: string): Promise<{ lat: number; lon: number
     return null;
   }
 }
+
+export interface LegalAnalysis {
+  sixthSign: number; sixthLord: string; lordHouse: number;
+  findings: Finding[]; pujas: { name: string; why: string }[];
+}
+
+// Vedic view of litigation / disputes: 6th house (court, opponents), 7th (spouse/partner disputes), 8th & 12th (delay, expense), Saturn/Rahu/Mars.
+export function analyzeLegal(c: Chart): LegalAnalysis {
+  const p = c.planets;
+  const sign6 = mod(c.lagnaSign + 5, 12);
+  const lord = LORD[sign6];
+  const lordH = p[lord].house;
+  const ref = c.usingMoon ? 'चंद्र' : 'लग्न';
+  const f: Finding[] = [];
+  const pujas: { name: string; why: string }[] = [];
+
+  f.push({ ok: true, text: `षष्ठ भाव (कोर्ट-कचहरी, विरोधी, मुकदमा) ${SIGNS[sign6]} राशि का है, इसके स्वामी ${PHI[lord]} हैं।` });
+
+  if ([6, 1, 3, 10, 11].includes(lordH)) {
+    f.push({ ok: true, text: `षष्ठेश ${PHI[lord]} ${lordH}वें भाव में है। यह विरोधियों के सामने टिके रहने की ताकत देता है।` });
+  } else if ([8, 12].includes(lordH)) {
+    f.push({ ok: false, text: `षष्ठेश ${PHI[lord]} ${lordH}वें भाव में है। इससे केस लंबा खिंचने, खर्च बढ़ने और बार-बार रुकावट के योग बनते हैं।` });
+  } else {
+    f.push({ ok: true, text: `षष्ठेश ${PHI[lord]} ${lordH}वें भाव में है। नतीजा आपके प्रयास, सही कागज़ात और समय पर निर्भर रहेगा।` });
+  }
+
+  const inSixth = Object.keys(p).filter((k) => p[k].house === 6);
+  if (inSixth.length) {
+    const mal = inSixth.filter((k) => MALEFIC.includes(k));
+    if (mal.length) f.push({ ok: true, text: `षष्ठ भाव में ${mal.map((k) => PHI[k]).join(', ')} बैठे हैं। यह विरोधी पर भारी पड़ने की शक्ति देता है, पर संघर्ष कड़ा रहता है।` });
+    const ben = inSixth.filter((k) => !MALEFIC.includes(k));
+    if (ben.length) f.push({ ok: false, text: `षष्ठ भाव में ${ben.map((k) => PHI[k]).join(', ')} बैठे हैं। इससे विरोधी हावी होने या नरमी में फँसने का खतरा रहता है।` });
+  }
+
+  const sat = p.Saturn;
+  if ([6, 8, 12].includes(sat.house) || aspects('Saturn', sat.house, 6) || p[lord].sign === sat.sign) {
+    f.push({ ok: false, text: 'शनि का संबंध षष्ठ भाव/षष्ठेश से है। कोर्ट में "तारीख पर तारीख", देरी और धीमी कार्यवाही का मुख्य कारण यही माना जाता है।' });
+    pujas.push({ name: 'शनि ग्रह शांति पूजा', why: 'केस की देरी और रुकावट कम करने के लिए।' });
+  }
+  const rahu = p.Rahu;
+  if ([6, 8, 12].includes(rahu.house) || aspects('Rahu', rahu.house, 6) || p[lord].sign === rahu.sign) {
+    f.push({ ok: false, text: 'राहु का प्रभाव षष्ठ भाव/षष्ठेश पर है। इससे उलझन, कागज़ी पेच, झूठे आरोप या भ्रम की स्थिति बन सकती है।' });
+    pujas.push({ name: 'राहु ग्रह शांति पूजा', why: 'उलझन, झूठे आरोप और कागज़ी पेच शांत करने के लिए।' });
+  }
+  const mars = p.Mars;
+  if ([6, 8, 12].includes(mars.house) || aspects('Mars', mars.house, 6)) {
+    f.push({ ok: false, text: `मंगल ${ref} से ${mars.house}वें भाव में है और विवाद/टकराव को भड़काता है। ज़मीन-जायदाद या आपसी झगड़ों में गुस्से से मामला बिगड़ सकता है।` });
+  }
+
+  // Marital / partner disputes via 7th house
+  const sign7 = mod(c.lagnaSign + 6, 12);
+  const lord7 = LORD[sign7];
+  const h7 = p[lord7].house;
+  const aff7 = Object.keys(p).filter((k) => MALEFIC.includes(k) && (p[k].house === 7 || aspects(k, p[k].house, 7)));
+  if ([6, 8, 12].includes(h7) || aff7.length) {
+    f.push({ ok: false, text: `सप्तम भाव (पति/पत्नी, साझेदारी) पर दबाव है${[6, 8, 12].includes(h7) ? `: सप्तमेश ${PHI[lord7]} ${h7}वें भाव में` : ''}${aff7.length ? `, ${aff7.map((k) => PHI[k]).join(', ')} का प्रभाव` : ''}। इससे वैवाहिक विवाद, अलगाव या तलाक जैसे मामलों में खींचतान के योग बनते हैं।` });
+  }
+
+  // 8th / 12th malefics: expense & delay
+  const h8 = Object.keys(p).filter((k) => MALEFIC.includes(k) && (p[k].house === 8 || p[k].house === 12));
+  if (h8.length) f.push({ ok: false, text: `अष्टम/द्वादश भाव में ${h8.map((k) => PHI[k]).join(', ')} होने से मुकदमे में खर्च, मानसिक तनाव और अनचाही देरी का संकेत है।` });
+
+  pujas.unshift({ name: 'बगलामुखी माता की पूजा', why: 'शत्रु बाधा, कोर्ट-कचहरी और मुकदमे में स्थिरता और विजय के लिए मुख्य पूजा।' });
+  const seen = new Set<string>();
+  const uniq = pujas.filter((x) => (seen.has(x.name) ? false : (seen.add(x.name), true)));
+  return { sixthSign: sign6, sixthLord: lord, lordHouse: lordH, findings: f, pujas: uniq };
+}

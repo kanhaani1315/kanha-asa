@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DECK, TAROT_REV, REMEDY, calculateGlobalReading } from '../utils/global';
 import { askAstrologer, getToken, getWallet, reasonText } from '../utils/kanhaApi';
 import { generateWhatsAppUrl } from '../utils/whatsapp';
+import { LegalRemedy, LEGAL_AI_RULES, isLegalTopic } from './LegalRemedy';
 import { BusinessRemedy, BUSINESS_AI_RULES, isBusinessTopic } from './BusinessRemedy';
 
 const SPREADS = [
@@ -10,7 +11,7 @@ const SPREADS = [
   { v: 'past', hi: 'सिर्फ़ अतीत (1 कार्ड)', pos: ['अतीत (Past)'] },
   { v: 'future', hi: 'सिर्फ़ भविष्य (1 कार्ड)', pos: ['भविष्य (Future)'] },
 ];
-const TOPICS = ['सामान्य', 'प्रेम / रिश्ता', 'करियर / नौकरी', 'धन / व्यापार', 'बिज़नेस ग्रोथ', 'बिज़नेस डाउन / घाटा', 'स्वास्थ्य / मन की शांति', 'शादी / परिवार'];
+const TOPICS = ['सामान्य', 'प्रेम / रिश्ता', 'करियर / नौकरी', 'धन / व्यापार', 'बिज़नेस ग्रोथ', 'बिज़नेस डाउन / घाटा', 'कोर्ट / कानूनी केस', 'ज़मीन / प्रॉपर्टी विवाद', 'तलाक / वैवाहिक विवाद', 'स्वास्थ्य / मन की शांति', 'शादी / परिवार'];
 
 const shuffled = () => Array.from({ length: DECK.length }, (_, i) => i).sort(() => Math.random() - 0.5);
 const card = 'p-3 bg-stone-900 border border-stone-800 rounded-xl';
@@ -71,7 +72,7 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
     setBusy(true); setErr(''); setAi('');
     const g = dob ? calculateGlobalReading(dob) : null;
     const cards = picked.map((i, k) => `${sp.pos[k]}: ${DECK[i].n}${rv[i] ? ' (reversed)' : ''}`).join('; ');
-    const msg = `[TAROT READING - speak like an experienced real tarot reader, directly to the person by name; this is a serious genuine reading, not entertainment.] Name: ${name || 'ji'}. Date of birth: ${dob || 'not given'}${g ? ` (Life Path ${g.lifePath}, Sun sign ${g.sunSign.en}, Chinese zodiac ${g.chinese.en})` : ''}. Topic: ${topic}. Question: ${question || 'general guidance'}. Cards drawn (${sp.v} spread): ${cards}. Explain each card in its position and tie it to the question and the person's numbers, say what is likely to unfold and when in general terms (no guarantees), then give remedies in this order: ${isBusinessTopic(topic) ? BUSINESS_AI_RULES : 'Rudraksha first, gemstone second, puja third.'} End with: for a detailed personal consultation WhatsApp Kanha Asa on +91 9131805622.`;
+    const msg = `[TAROT READING - speak like an experienced real tarot reader, directly to the person by name; this is a serious genuine reading, not entertainment.] Name: ${name || 'ji'}. Date of birth: ${dob || 'not given'}${g ? ` (Life Path ${g.lifePath}, Sun sign ${g.sunSign.en}, Chinese zodiac ${g.chinese.en})` : ''}. Topic: ${topic}. Question: ${question || 'general guidance'}. Cards drawn (${sp.v} spread): ${cards}. Explain each card in its position and tie it to the question and the person's numbers, say what is likely to unfold and when in general terms (no guarantees), then give remedies in this order: ${isLegalTopic(topic) ? LEGAL_AI_RULES : isBusinessTopic(topic) ? BUSINESS_AI_RULES : 'Rudraksha first, gemstone second, puja third.'} End with: for a detailed personal consultation WhatsApp Kanha Asa on +91 9131805622.`;
     const r = await askAstrologer(msg, []);
     setBusy(false);
     if (r.ok && r.answer) return setAi(String(r.answer));
@@ -138,7 +139,7 @@ export const TarotReader: React.FC<{ onBuy: () => void; onNeed: (r: string) => v
             {busy && !ai && <p className="mt-2 text-amber-300">आपकी रीडिंग तैयार हो रही है…</p>}
             {ai && <div className="mt-2 p-3 bg-stone-950 border border-amber-800 rounded-lg whitespace-pre-line text-stone-100 text-[15px] leading-7">{ai}</div>}
           </div>
-          {isBusinessTopic(topic) ? <BusinessRemedy note={topic} /> : (
+          {isLegalTopic(topic) ? <LegalRemedy note={topic} /> : isBusinessTopic(topic) ? <BusinessRemedy note={topic} /> : (
           <div className="p-3 bg-stone-900 border border-amber-700 rounded-xl space-y-1">
             <p className="font-bold text-amber-400">उपाय (क्रम से)</p>
             <p className="text-stone-100">1. रुद्राक्ष पहनें: <strong>{R.rudraksha}</strong></p>
