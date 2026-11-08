@@ -309,14 +309,15 @@ export const GlobalReadings: React.FC<{ onClose: () => void; onNeed: (reason: st
                 <p className="font-bold text-amber-400">आपके लिए सुझाई गई पूजाएँ</p>
                 {kRes.a.pujas.map((p, i) => <div key={p.name}><p className="text-stone-100">{i + 1}. <strong>{p.name}</strong></p><p className="text-stone-400 pl-4">{p.why}</p></div>)}
                 <p className="font-bold text-amber-400 pt-2">अनिवार्य कॉम्बिनेशन (पूजा के साथ)</p>
-                <p className="text-stone-100">• <strong>गौरी शंकर रुद्राक्ष थंब रिंग</strong> (अंगूठे की अंगूठी): <strong>₹3,500 से शुरू</strong> (साइज़ के अनुसार)</p>
+                <p className="text-stone-100">• <strong>गौरी शंकर रुद्राक्ष: ₹3,500</strong></p>
+                <p className="text-stone-100">• <strong>गौरी शंकर रुद्राक्ष थंब रिंग</strong> (अंगूठे की अंगूठी): <strong>₹5,500</strong></p>
                 <p className="text-stone-100">• <strong>कामिया सिंदूर (1 ग्राम): ₹5,500।</strong> पूजा के बाद दिया जाएगा, इसे लगातार 6 महीने तक लगाना है।</p>
                 <p className="font-bold text-amber-400 pt-2">मंत्र जाप (रोज़ 108 बार)</p>
                 <p className="text-stone-200">• ॐ गौरी शंकराय नमः</p>
                 <p className="text-stone-200">• कात्यायनि महामाये महायोगिन्यधीश्वरि। नन्दगोपसुतं देवि पतिं मे कुरु ते नमः॥</p>
                 {kRes.a.manglik && <p className="text-stone-200">• मंगल के लिए: ॐ क्रां क्रीं क्रौं सः भौमाय नमः</p>}
                 <p className="text-stone-400 pt-1">पूजा के बाद आपको कुछ वैदिक सुझाव WhatsApp पर भेजे जाएँगे। कामिया सिंदूर और अंगूठी के लिए कान्हा असा से संपर्क करें।</p>
-                <a href={generateWhatsAppUrl(WA, `प्रणाम, मैंने कुंडली जाँच की है। नाम: ${kName || '-'}, जन्म: ${kDob} ${kTime || ''} ${kPlace}। सप्तम भाव: ${SIGNS[kRes.a.seventhSign]} (स्वामी ${PHI[kRes.a.seventhLord]}, ${kRes.a.lordHouse}वें भाव में)${kRes.a.manglik ? ', मांगलिक दोष' : ''}। मुझे ${kRes.a.pujas.map((p) => p.name).join(', ')}, गौरी शंकर रुद्राक्ष थंब रिंग (₹3,500 से, साइज़ के अनुसार) और कामिया सिंदूर 1 ग्राम (₹5,500) के बारे में जानकारी चाहिए।`)} target="_blank" rel="noreferrer" className="inline-block mt-1 px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold">पूजा बुक करें (WhatsApp)</a>
+                <a href={generateWhatsAppUrl(WA, `प्रणाम, मैंने कुंडली जाँच की है। नाम: ${kName || '-'}, जन्म: ${kDob} ${kTime || ''} ${kPlace}। सप्तम भाव: ${SIGNS[kRes.a.seventhSign]} (स्वामी ${PHI[kRes.a.seventhLord]}, ${kRes.a.lordHouse}वें भाव में)${kRes.a.manglik ? ', मांगलिक दोष' : ''}। मुझे ${kRes.a.pujas.map((p) => p.name).join(', ')}, गौरी शंकर रुद्राक्ष (₹3,500), गौरी शंकर रुद्राक्ष थंब रिंग (₹5,500) और कामिया सिंदूर 1 ग्राम (₹5,500) के बारे में जानकारी चाहिए।`)} target="_blank" rel="noreferrer" className="inline-block mt-1 px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold">पूजा बुक करें (WhatsApp)</a>
               </div>
             </div>
           )}
