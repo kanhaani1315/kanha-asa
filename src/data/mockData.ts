@@ -838,7 +838,7 @@ export const PRODUCTS: Product[] = [
     primaryBenefit: 'Career growth, relief from Shani dosha, discipline and quick results',
     mantra: 'Om Pram Preem Proum Sah Shanaischaraya Namah',
     description: 'Natural blue sapphire (Neelam). A powerful stone: wear only after Kundli consultation and trial.',
-    image: '/images/gems/neelam.svg',
+    image: '/images/gems/neelam-sapphire.jpg',
     certified: false,
     inStock: true,
     wearDay: 'Saturday evening in Shukla Paksha',
