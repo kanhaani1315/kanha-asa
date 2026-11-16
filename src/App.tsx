@@ -20,6 +20,7 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { QuickLeadModal } from './components/QuickLeadModal';
 import { MetaEventToast } from './components/MetaEventToast';
 import { Footer } from './components/Footer';
+import { SeoSchema } from './components/SeoSchema';
 import { AiAstrologerChat } from './components/AiAstrologerChat';
 import { AiCallingModal } from './components/AiCallingModal';
 import { trackMetaEvent, subscribeToMetaEvents, getMetaEventHistory } from './utils/metaTracker';
@@ -153,6 +154,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans selection:bg-amber-500 selection:text-stone-950">
+      <SeoSchema />
       {/* Real-time Meta Pixel Notification Toast */}
       {activeView === 'meta-hub' && <MetaEventToast />}
 

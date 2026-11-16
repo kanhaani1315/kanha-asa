@@ -215,6 +215,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                   <img
                     src={product.image}
                     alt={product.name}
+                    loading="lazy"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
