@@ -859,7 +859,7 @@ export const PRODUCTS: Product[] = [
     primaryBenefit: 'Reduces Rahu dosha, confusion and sudden obstacles',
     mantra: 'Om Bhram Bhreem Bhroum Sah Rahave Namah',
     description: 'Natural hessonite garnet (Gomed) honey-brown stone for Rahu. Consult Kundli before wearing.',
-    image: '/images/gems/gomed.svg',
+    image: '/images/gems/gomed-hessonite.jpg',
     certified: false,
     inStock: true,
     wearDay: 'Saturday evening',
